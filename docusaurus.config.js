@@ -163,11 +163,11 @@ const config = {
 						items: [
 							{
 								label: "GitHub",
-								href: "https://github.com/angoti/mentorias-frontend",
+								href: "https://github.com/Uberhub-Mentorias",
 							},
 							{
 								label: "IFTM",
-								href: "https://iftm.edu.br/",
+								href: "https://iftm.edu.br/cursos/uberlandiacentro/tecnologo/sistemas-para-internet/",
 							},
 						],
 					},
