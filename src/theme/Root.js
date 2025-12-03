@@ -1,6 +1,5 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-import SidebarToggle from '../components/SidebarToggle';
 
 // Root component que será carregado em todas as páginas
 export default function Root({children}) {
@@ -73,7 +72,6 @@ export default function Root({children}) {
         // Renderizar o componente React
         try {
           const root = createRoot(container);
-          root.render(React.createElement(SidebarToggle));
           console.log('[Root] ✅ Botão injetado com sucesso!');
           
           // Forçar visibilidade após um pequeno delay

@@ -7,6 +7,8 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
+import BackToTopButton from "@theme/BackToTopButton";
+
 // Homepage component with header and features sections
 
 function HomepageHeader() {
@@ -33,13 +35,14 @@ function HomepageHeader() {
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <Layout
-      title="Portal de Documentação"
-      description="Portal de Documentação do Sistema de Mentorias UberHub - IFTM">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
-    </Layout>
-  );
+		<Layout
+			title="Portal de Documentação"
+			description="Portal de Documentação do Sistema de Mentorias UberHub - IFTM">
+			<HomepageHeader />
+			<main>
+				<HomepageFeatures />
+				<BackToTopButton />
+			</main>
+		</Layout>
+	);
 }

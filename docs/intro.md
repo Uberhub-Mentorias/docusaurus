@@ -8,11 +8,9 @@ sidebar_position: 1
 
 import Link from '@docusaurus/Link';
 
-# 🎯 Portal de Documentação - UberHub Mentorias
+# Portal de Documentação - UberHub Mentorias
 
-> **Sistema de Mentorias que conecta profissionais experientes (Mentores) a pessoas que buscam orientação e desenvolvimento (Mentorados).**
-
----
+Sistema de Mentorias que conecta profissionais experientes (Mentores) a pessoas que buscam orientação e desenvolvimento (Mentorados).
 
 ## 🗺️ Escolha seu Caminho
 

@@ -71,6 +71,9 @@ const config = {
 		],
 	],
 
+	themes: ["@docusaurus/theme-mermaid"],
+	markdown: { mermaid: true },
+
 	themeConfig:
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
@@ -80,6 +83,11 @@ const config = {
 				defaultMode: "light",
 				respectPrefersColorScheme: false,
 				disableSwitch: false,
+			},
+			docs: {
+				sidebar: {
+					hideable: true,
+				},
 			},
 			navbar: {
 				title: "UberHub Mentorias",

@@ -17,6 +17,7 @@
 	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 	/* Garantir navbar branca no modo claro */
 	--ifm-navbar-background-color: #ffffff;
+
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -29,56 +30,6 @@
 	--ifm-color-primary-lighter: #32d8b4;
 	--ifm-color-primary-lightest: #4fddbf;
 	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-}
-
-/* Sidebar Toggle Functionality - Por padrão, sidebar começa recolhido */
-@media (min-width: 997px) {
-	/* Sidebar escondido por padrão - esconder apenas o container do sidebar */
-	body:not(.sidebar-expanded) .theme-doc-sidebar-container,
-	body.sidebar-collapsed .theme-doc-sidebar-container {
-		display: none !important;
-		width: 0 !important;
-		min-width: 0 !important;
-	}
-
-	/* Remover margem esquerda do main-wrapper quando sidebar está escondido */
-	body:not(.sidebar-expanded) .main-wrapper,
-	body.sidebar-collapsed .main-wrapper {
-		margin-left: 0 !important;
-	}
-
-	body:not(.sidebar-expanded) .navbar-sidebar,
-	body.sidebar-collapsed .navbar-sidebar {
-		display: none !important;
-	}
-
-	/* Expandir o conteúdo principal quando sidebar está escondido */
-	body:not(.sidebar-expanded) .main-wrapper .container,
-	body.sidebar-collapsed .main-wrapper .container {
-		max-width: 100% !important;
-		padding-left: var(--ifm-spacing-horizontal) !important;
-		padding-right: var(--ifm-spacing-horizontal) !important;
-	}
-
-	/* Garantir que a row ocupe todo o espaço */
-	body:not(.sidebar-expanded) .main-wrapper .row,
-	body.sidebar-collapsed .main-wrapper .row {
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-	}
-
-	/* Expandir todas as colunas para ocupar o espaço */
-	body:not(.sidebar-expanded) .main-wrapper .row .col,
-	body.sidebar-collapsed .main-wrapper .row .col {
-		flex: 1 1 auto !important;
-	}
-
-	/* A coluna do conteúdo principal deve ocupar todo o espaço disponível */
-	body:not(.sidebar-expanded) .main-wrapper .row .col:last-child,
-	body.sidebar-collapsed .main-wrapper .row .col:last-child {
-		flex: 1 1 100% !important;
-		max-width: 100% !important;
-	}
 }
 
 /* Estilos para o wrapper do botão na sidebar */
