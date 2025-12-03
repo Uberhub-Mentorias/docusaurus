@@ -4,8 +4,8 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: '🎓 Guias Rápidos',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Guias Rápidos',
+    Svg: require('@site/static/img/guias-rapidos.svg').default,
     description: (
       <>
         Comece rapidamente com guias personalizados para Mentorados, Mentores, 
@@ -14,8 +14,8 @@ const FeatureList = [
     ),
   },
   {
-    title: '🗺️ Mapa do Conhecimento',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Mapa do Conhecimento',
+    Svg: require('@site/static/img/mapa-conhecimento.svg').default,
     description: (
       <>
         Navegue pela documentação com um mapa visual estilo "metrô" que conecta 
@@ -24,7 +24,7 @@ const FeatureList = [
     ),
   },
   {
-    title: '📖 Roteiro de Estudos',
+    title: 'Roteiro de Estudos',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
