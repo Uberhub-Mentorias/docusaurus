@@ -5,6 +5,8 @@ sidebar_label: 📖 Roteiro de Estudos
 sidebar_position: 4
 ---
 
+import Link from '@docusaurus/Link';
+
 # 📖 Roteiro de Estudos
 
 > O backlog do projeto transformado em uma trilha prática de aprendizado
@@ -26,7 +28,7 @@ Antes de começar, identifique seu objetivo principal:
         <strong>Tempo: ~40h</strong>
       </div>
       <div className="card__footer">
-        <a href="#trilha-iniciante">Ver Trilha →</a>
+        <Link to="#trilha-iniciante">Ver Trilha →</Link>
       </div>
     </div>
   </div>
@@ -40,7 +42,7 @@ Antes de começar, identifique seu objetivo principal:
         <strong>Tempo: ~25h</strong>
       </div>
       <div className="card__footer">
-        <a href="#trilha-intermediario">Ver Trilha →</a>
+        <Link to="#trilha-intermediario">Ver Trilha →</Link>
       </div>
     </div>
   </div>
@@ -54,7 +56,7 @@ Antes de começar, identifique seu objetivo principal:
         <strong>Tempo: ~15h</strong>
       </div>
       <div className="card__footer">
-        <a href="#trilha-avancado">Ver Trilha →</a>
+        <Link to="#trilha-avancado">Ver Trilha →</Link>
       </div>
     </div>
   </div>

@@ -6,6 +6,8 @@ slug: /
 sidebar_position: 1
 ---
 
+import Link from '@docusaurus/Link';
+
 # 🎯 Portal de Documentação - UberHub Mentorias
 
 > **Sistema de Mentorias que conecta profissionais experientes (Mentores) a pessoas que buscam orientação e desenvolvimento (Mentorados).**
@@ -28,7 +30,7 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
         <p>Busco orientação profissional através de mentorias.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--primary button--block" href="/docs/guias-rapidos/mentorado">Começar como Mentorado</a>
+        <Link className="button button--primary button--block" to="/docs/guias-rapidos/mentorado">Começar como Mentorado</Link>
       </div>
     </div>
   </div>
@@ -41,7 +43,7 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
         <p>Quero compartilhar minha experiência ajudando outros profissionais.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--primary button--block" href="/docs/guias-rapidos/mentor">Começar como Mentor</a>
+        <Link className="button button--primary button--block" to="/docs/guias-rapidos/mentor">Começar como Mentor</Link>
       </div>
     </div>
   </div>
@@ -57,7 +59,7 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
         <p>Gerencio o programa de mentorias, vouchers e usuários.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/guias-rapidos/admin">Guia do Admin</a>
+        <Link className="button button--secondary button--block" to="/docs/guias-rapidos/admin">Guia do Admin</Link>
       </div>
     </div>
   </div>
@@ -70,7 +72,7 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
         <p>Quero entender a arquitetura e contribuir com o código.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/guias-rapidos/desenvolvedor">Guia do Dev</a>
+        <Link className="button button--secondary button--block" to="/docs/guias-rapidos/desenvolvedor">Guia do Dev</Link>
       </div>
     </div>
   </div>

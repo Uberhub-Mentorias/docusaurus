@@ -5,6 +5,8 @@ sidebar_label: 🚀 Início
 sidebar_position: 1
 ---
 
+import Link from '@docusaurus/Link';
+
 # 🚀 Guias de Início Rápido
 
 > Escolha seu perfil e comece em minutos!
@@ -28,7 +30,7 @@ sidebar_position: 1
         </ul>
       </div>
       <div className="card__footer">
-        <a className="button button--primary button--block" href="mentorado">Ver Guia →</a>
+        <Link className="button button--primary button--block" to="/docs/guias-rapidos/mentorado">Ver Guia →</Link>
       </div>
     </div>
   </div>
@@ -46,7 +48,7 @@ sidebar_position: 1
         </ul>
       </div>
       <div className="card__footer">
-        <a className="button button--primary button--block" href="mentor">Ver Guia →</a>
+        <Link className="button button--primary button--block" to="/docs/guias-rapidos/mentor">Ver Guia →</Link>
       </div>
     </div>
   </div>
@@ -67,7 +69,7 @@ sidebar_position: 1
         </ul>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="admin">Ver Guia →</a>
+        <Link className="button button--secondary button--block" to="/docs/guias-rapidos/admin">Ver Guia →</Link>
       </div>
     </div>
   </div>
@@ -85,7 +87,7 @@ sidebar_position: 1
         </ul>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="desenvolvedor">Ver Guia →</a>
+        <Link className="button button--secondary button--block" to="/docs/guias-rapidos/desenvolvedor">Ver Guia →</Link>
       </div>
     </div>
   </div>
