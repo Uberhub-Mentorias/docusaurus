@@ -167,7 +167,7 @@ const config = {
 							},
 							{
 								label: "IFTM",
-								href: "https://iftm.edu.br/cursos/uberlandiacentro/tecnologo/sistemas-para-internet/",
+								href: "https://iftm.edu.br/cursos/uberlandiacentro/tecnologo/sistemas-para-internet",
 							},
 						],
 					},
