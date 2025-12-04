@@ -87,6 +87,13 @@ Escolhemos **Docusaurus** pelos seguintes motivos:
 
 </details>
 
+
+<details>
+<summary>**ADR (Architecture Decision Record)**</summary>
+
+é um documento que registra uma decisão arquitetônica significativa em um projeto de software, detalhando o contexto, as opções consideradas, a decisão tomada e suas consequências. Ele serve como um histórico para que a equipe entenda o porquê de certas escolhas, facilitando a comunicação, a integração de novos membros e a manutenção da arquitetura ao longo do tempo.
+</details>
+
 ---
 
 ## 🤝 Contribuindo
