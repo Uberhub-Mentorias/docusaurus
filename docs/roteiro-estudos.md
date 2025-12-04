@@ -240,8 +240,15 @@ Acompanhe seu progresso marcando os badges:
 
 ### Cursos Gratuitos
 - [React - Rocketseat](https://www.rocketseat.com.br/discover)
-- [Firebase - Google Codelabs](https://firebase.google.com/codelabs)
-
+- Firebase - Google Codelabs
+  - [Começar a usar o Firebase Studio](https://firebase.google.com/codelabs/firebase-studio-intro?hl=pt-br#0) 
+  - [Codelab do Cloud Firestore para Android](https://firebase.google.com/codelabs/firestore-android?hl=pt-br#0)
+  - [Codelab do Firebase para Android:crie o Friendly Chat](https://firebase.google.com/codelabs/firebase-android?hl=pt-br#0)
+  - [Codelab da Web do Cloud Firestore](https://firebase.google.com/codelabs/firestore-web?hl=pt-br#0)
+  - [Introdução ao Firebase para Web](https://firebase.google.com/codelabs/firebase-get-to-know-web?hl=pt-br#0)
+  - [Usar o FCM e as Mensagens no app para enviar mensagens aos usuários](https://firebase.google.com/codelabs/fcm-and-fiam?hl=pt-br#0)
+  - [Codelabs do FCM](https://firebase.google.com/docs/cloud-messaging/codelab?hl=pt-br)
+  
 ### Comunidade
 - [GitHub Issues do Projeto](https://github.com/uberhub-mentorias/docusaurus/issues)
 - Discord do IFTM (se disponível)
