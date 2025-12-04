@@ -44,6 +44,68 @@ function getPageInfo() {
 }
 
 /**
+ * Obtém o IP do usuário usando uma API externa
+ * O IP é cacheado na sessão para evitar múltiplas chamadas
+ */
+let ipCache = null;
+let ipPromise = null;
+
+async function getIpAddress() {
+  // Retornar IP em cache se já foi obtido
+  if (ipCache) {
+    return ipCache;
+  }
+
+  // Se já existe uma requisição em andamento, aguardar ela
+  if (ipPromise) {
+    return ipPromise;
+  }
+
+  // Tentar obter do cache da sessão primeiro
+  const cachedIp = sessionStorage.getItem('docusaurus_ip_address');
+  if (cachedIp) {
+    ipCache = cachedIp;
+    return cachedIp;
+  }
+
+  // Fazer requisição para obter o IP
+  ipPromise = fetch('https://api.ipify.org?format=json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao obter IP');
+      }
+      return response.json();
+    })
+    .then(data => {
+      const ip = data.ip;
+      ipCache = ip;
+      // Cachear na sessão para reutilizar
+      sessionStorage.setItem('docusaurus_ip_address', ip);
+      ipPromise = null;
+      return ip;
+    })
+    .catch(error => {
+      console.warn('[Tracking] Erro ao obter IP:', error);
+      ipPromise = null;
+      // Tentar API alternativa
+      return fetch('https://api64.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          const ip = data.ip;
+          ipCache = ip;
+          sessionStorage.setItem('docusaurus_ip_address', ip);
+          return ip;
+        })
+        .catch(() => {
+          // Se falhar, retornar null
+          return null;
+        });
+    });
+
+  return ipPromise;
+}
+
+/**
  * Registra um acesso no Firebase
  * @param {string} eventType - Tipo de evento (page_view, page_exit, etc.)
  * @param {Object} additionalData - Dados adicionais opcionais
@@ -53,6 +115,14 @@ export async function trackAccess(eventType = 'page_view', additionalData = {}) 
     const sessionId = getSessionId();
     const browserInfo = getBrowserInfo();
     const pageInfo = getPageInfo();
+    
+    // Obter IP (não bloqueia se falhar)
+    let ipAddress = null;
+    try {
+      ipAddress = await getIpAddress();
+    } catch (error) {
+      console.warn('[Tracking] Não foi possível obter IP:', error);
+    }
 
     const accessData = {
       sessionId,
@@ -61,6 +131,7 @@ export async function trackAccess(eventType = 'page_view', additionalData = {}) 
       clientTimestamp: new Date().toISOString(),
       page: pageInfo,
       browser: browserInfo,
+      ...(ipAddress && { ipAddress }), // Incluir IP apenas se foi obtido com sucesso
       ...additionalData,
     };
 
@@ -71,6 +142,7 @@ export async function trackAccess(eventType = 'page_view', additionalData = {}) 
       eventType,
       pathname: pageInfo.pathname,
       sessionId,
+      ipAddress: ipAddress || 'não disponível',
     });
   } catch (error) {
     console.error('[Tracking] Erro ao registrar acesso:', error);
