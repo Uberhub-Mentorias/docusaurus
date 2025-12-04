@@ -80,30 +80,33 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
 
 ## 📚 Navegação Rápida
 
-| Área | Descrição | Link |
-|------|-----------|------|
-| 🚀 **Quick Start** | Guias de início rápido por perfil | [Ir →](/docs/guias-rapidos/inicio) |
-| 🗺️ **Mapa do Conhecimento** | Visualização estilo "metrô" dos conteúdos | [Ir →](/docs/mapa-conhecimento) |
-| 📖 **Roteiro de Estudos** | Backlog transformado em trilha de aprendizado | [Ir →](/docs/roteiro-estudos) |
-| 🏗️ **Arquitetura** | Microsserviços, endpoints e fluxos | [Ir →](/docs/arquitetura/visao-geral) |
-| 🔐 **Autenticação** | Firebase Auth, OAuth, JWT | [Ir →](/docs/autenticacao/firebase-auth-flow) |
-| ⚙️ **DevOps** | CI/CD, GitHub Actions, padrões | [Ir →](/docs/devops/ci-cd-guia) |
+| Área                        | Descrição                                     | Link                                          |
+| --------------------------- | --------------------------------------------- | --------------------------------------------- |
+| 🚀 **Quick Start**          | Guias de início rápido por perfil             | [Ir →](/docs/guias-rapidos/inicio)            |
+| 🗺️ **Mapa do Conhecimento** | Visualização estilo "metrô" dos conteúdos     | [Ir →](/docs/mapa-conhecimento)               |
+| 📖 **Roteiro de Estudos**   | Backlog transformado em trilha de aprendizado | [Ir →](/docs/roteiro-estudos)                 |
+| 🏗️ **Arquitetura**          | Microsserviços, endpoints e fluxos            | [Ir →](/docs/arquitetura/visao-geral)         |
+| 🔐 **Autenticação**         | Firebase Auth, OAuth, JWT                     | [Ir →](/docs/autenticacao/firebase-auth-flow) |
+| ⚙️ **DevOps**               | CI/CD, GitHub Actions, padrões                | [Ir →](/docs/devops/ci-cd-guia)               |
 
 ---
 
 ## 🎬 O que você vai encontrar aqui
 
 ### 📋 Documentação Completa
+
 - **Requisitos Funcionais** e Casos de Uso detalhados
 - **Especificação de Endpoints** da API
 - **Fluxos e Jornadas** dos usuários
 
 ### 🎓 Material de Aprendizado
+
 - **Aulas** sobre Firebase Authentication
 - **Guias** de configuração passo a passo
 - **Padrões de código** e boas práticas
 
 ### 🛠️ Recursos Práticos
+
 - **Backlog** organizado em épicos e sprints
 - **Checklists** de implementação
 - **Troubleshooting** comum
@@ -112,13 +115,13 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
 
 ## 📊 Status do Projeto
 
-| Componente | Status |
-|------------|--------|
-| 📱 App Mentorado | Em desenvolvimento |
-| 📱 App Mentor | Em desenvolvimento |
-| 🖥️ Painel Admin (Web) | Em desenvolvimento |
+| Componente                  | Status             |
+| --------------------------- | ------------------ |
+| 📱 App Mentorado            | Em desenvolvimento |
+| 📱 App Mentor               | Em desenvolvimento |
+| 🖥️ Painel Admin (Web)       | Em desenvolvimento |
 | 🔧 Backend (Microsserviços) | Em desenvolvimento |
-| 📚 Documentação | ✅ Atualizada |
+| 📚 Documentação             | ✅ Atualizada      |
 
 ---
 
@@ -128,11 +131,11 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
 
 ### Tecnologias Utilizadas
 
-| Frontend | Backend | Infraestrutura |
-|----------|---------|----------------|
-| React (Web) | Spring Boot | MongoDB Atlas |
-| React Native (Mobile) | Java 17+ | Firebase Auth |
-| Expo | Microsserviços | Docker |
+| Frontend              | Backend        | Infraestrutura |
+| --------------------- | -------------- | -------------- |
+| React (Web)           | Spring Boot    | MongoDB Atlas  |
+| React Native (Mobile) | Java 17+       | Firebase Auth  |
+| Expo                  | Microsserviços | Docker         |
 
 ---
 
@@ -140,10 +143,13 @@ Comece pelos **[Guias Rápidos](/docs/guias-rapidos/inicio)** - escolha seu perf
 <summary>💡 <strong>Decisão de Arquitetura (ADR-001)</strong>: Por que Docusaurus?</summary>
 
 ### Contexto
+
 Precisávamos de uma solução para organizar e apresentar toda a documentação do projeto de forma profissional e navegável.
 
 ### Decisão
+
 Escolhemos **Docusaurus** pelos seguintes motivos:
+
 - ✅ Suporte nativo a Markdown
 - ✅ Navegação automática com sidebars
 - ✅ Busca integrada
@@ -152,6 +158,7 @@ Escolhemos **Docusaurus** pelos seguintes motivos:
 - ✅ Temas dark/light
 
 ### Consequências
+
 - Positivas: Documentação profissional, fácil manutenção
 - Negativas: Dependência de Node.js para build
 
@@ -161,6 +168,7 @@ Escolhemos **Docusaurus** pelos seguintes motivos:
 
 ## 🤝 Contribuindo
 
-Encontrou um erro ou quer sugerir melhorias? 
-- [Abra uma Issue no GitHub](https://github.com/angoti/mentorias-frontend/issues)
+Encontrou um erro ou quer sugerir melhorias?
+
+- [Abra uma Issue no GitHub](https://github.com/uberhub-mentorias/docusaurus/issues)
 - [Consulte o guia de contribuição](/docs/devops/padroes-codigo)

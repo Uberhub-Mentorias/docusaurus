@@ -273,7 +273,7 @@ Acompanhe seu progresso marcando os badges:
 - [Firebase - Google Codelabs](https://firebase.google.com/codelabs)
 
 ### Comunidade
-- [GitHub Issues do Projeto](https://github.com/angoti/mentorias-frontend/issues)
+- [GitHub Issues do Projeto](https://github.com/uberhub-mentorias/docusaurus/issues)
 - Discord do IFTM (se disponível)
 
 ---

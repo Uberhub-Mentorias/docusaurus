@@ -48,7 +48,7 @@ const config = {
 			({
 				docs: {
 					sidebarPath: "./sidebars.js",
-					editUrl: "https://github.com/angoti/mentorias-frontend/tree/main/docusaurus/",
+					editUrl: "https://github.com/uberhub-mentorias/docusaurus/tree/main/",
 				},
 				blog: false, // Disable blog
 				theme: {
@@ -66,7 +66,7 @@ const config = {
 				path: "docs-originais",
 				routeBasePath: "docs-originais",
 				sidebarPath: "./sidebarsOriginais.js",
-				editUrl: "https://github.com/angoti/mentorias-frontend/tree/main/docusaurus/",
+				editUrl: "https://github.com/uberhub-mentorias/docusaurus/tree/main/",
 			},
 		],
 	],
@@ -123,7 +123,7 @@ const config = {
 						position: "left",
 					},
 					{
-						href: "https://github.com/angoti/mentorias-frontend",
+						href: "https://github.com/uberhub-mentorias/docusaurus",
 						label: "GitHub",
 						position: "right",
 					},

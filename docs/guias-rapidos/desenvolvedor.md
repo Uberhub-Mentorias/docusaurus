@@ -28,10 +28,10 @@ Antes de começar, instale:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/angoti/mentorias-frontend.git
+git clone https://github.com/uberhub-mentorias/docusaurus.git
 
 # Entre na pasta
-cd mentorias-frontend
+cd docusaurus
 ```
 
 ---
@@ -39,26 +39,26 @@ cd mentorias-frontend
 ## 🗂️ Estrutura do Projeto
 
 ```
-mentorias-frontend/
-├── web/                    # 🖥️ Aplicação web React + Vite
-│   ├── src/               # Código fonte React
-│   ├── package.json       # Dependências e scripts
-│   ├── vite.config.js     # Configuração do Vite
-│   └── eslint.config.js   # Configuração do ESLint
-├── mentorApp/              # 📱 App mobile (Expo) - Mentor
-│   ├── App.js             # Componente principal
-│   ├── package.json       # Dependências e scripts
-│   └── app.json           # Configuração do Expo
-├── mentoradoApp/           # 📱 App mobile (Expo) - Mentorado
-│   ├── App.js             # Componente principal
-│   ├── package.json       # Dependências e scripts
-│   └── app.json           # Configuração do Expo
-├── docusaurus/             # 📚 Portal de documentação
-│   └── docs/              # Arquivos Markdown da documentação
-├── docs/                   # 📄 Documentação original
+docusaurus/
+├── docs/                   # 📚 Documentação principal
+│   ├── arquitetura/       # Documentação de arquitetura
+│   ├── autenticacao/      # Documentação de autenticação
+│   ├── guias-rapidos/     # Guias rápidos por perfil
+│   └── ...                # Outras seções
+├── docs-originais/        # 📄 Documentação original
 │   ├── auth/              # Docs de autenticação
 │   └── projeto/           # Docs do projeto
-└── scripts/                # 🔧 Scripts de automação
+├── src/                   # 💻 Código fonte do Docusaurus
+│   ├── components/        # Componentes React
+│   ├── css/               # Estilos customizados
+│   ├── lib/               # Bibliotecas e utilitários
+│   ├── pages/             # Páginas customizadas
+│   └── theme/             # Customizações do tema
+├── static/                # 📁 Arquivos estáticos
+│   └── img/               # Imagens
+├── docusaurus.config.js   # ⚙️ Configuração principal
+├── sidebars.js            # 📋 Configuração da sidebar
+└── package.json           # 📦 Dependências e scripts
 ```
 
 ---
