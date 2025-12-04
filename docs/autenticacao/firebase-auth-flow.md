@@ -94,7 +94,7 @@ Usuário → Clica no botão → Frontend inicia processo
 
 - Frontend chama `signInWithPopup(auth, googleProvider)` (Web)
 - Ou usa `@react-native-google-signin` (Mobile)
-- Firebase abre popup/tela do Google
+- Exibide popup/tela do Google
 - Usuário seleciona conta e autoriza
 
 ### Passo 2: Firebase Retorna ID Token
