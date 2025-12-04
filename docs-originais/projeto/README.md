@@ -1,4 +1,4 @@
-# 🎓 UberHub Mentorias
+# UberHub Mentorias
 
 > Plataforma mobile de mentorias conectando profissionais experientes (Mentores) a pessoas que buscam orientação e desenvolvimento profissional (Mentorados), dentro do ecossistema do UberHub.
 
@@ -11,7 +11,7 @@
 
 ---
 
-## 📋 Índice
+## Índice
 
 - [Sobre o Projeto](#-sobre-o-projeto)
 - [Características Principais](#-características-principais)
@@ -34,17 +34,17 @@
 
 ---
 
-## 🚀 Sobre o Projeto
+## Sobre o Projeto
 
 O **UberHub Mentorias** é uma plataforma completa de mentorias desenvolvida como projeto acadêmico do IFTM Campus Uberlândia Centro. O sistema facilita a conexão entre mentores e mentorados através de matchmaking inteligente, automatiza processos administrativos e fornece ferramentas para gestão completa do ciclo de vida de mentorias.
 
 ### Objetivos
 
-- 🎯 Democratizar o acesso à mentoria de qualidade
-- 🤝 Facilitar o encontro entre mentorados e mentores compatíveis
-- 🔄 Automatizar processos administrativos relacionados a mentorias
-- 📊 Fornecer analytics e métricas para gestão do programa
-- 📱 Garantir uma experiência fluida em dispositivos móveis
+- Democratizar o acesso à mentoria de qualidade
+- Facilitar o encontro entre mentorados e mentores compatíveis
+- Automatizar processos administrativos relacionados a mentorias
+- Fornecer analytics e métricas para gestão do programa
+- Garantir uma experiência fluida em dispositivos móveis
 
 ---
 
@@ -52,29 +52,29 @@ O **UberHub Mentorias** é uma plataforma completa de mentorias desenvolvida com
 
 ### Para Mentorados
 
-- ✅ Sistema de vouchers para ativação de conta
-- 🎯 Matchmaking inteligente baseado em áreas de interesse
-- 👤 Visualização de perfil de mentores
-- 📅 Acompanhamento de mentorias agendadas
-- ⭐ Sistema de avaliação pós-mentoria
-- 🔄 Solicitação de troca de mentor (com aprovação administrativa)
+- Sistema de vouchers para ativação de conta
+- Matchmaking inteligente baseado em áreas de interesse
+- Visualização de perfil de mentores
+- Acompanhamento de mentorias agendadas
+- Sistema de avaliação pós-mentoria
+- Solicitação de troca de mentor (com aprovação administrativa)
 
 ### Para Mentores
 
-- 📝 Criação e gerenciamento de perfil profissional
-- 📊 Dashboard de mentorias ativas e pendentes
-- 📆 Registro de agendamentos via ferramentas externas (Calendly, Google Agenda)
-- 💬 Sistema de feedback pós-mentoria
-- 🏆 Histórico completo de mentorias realizadas
+- Criação e gerenciamento de perfil profissional
+- Dashboard de mentorias ativas e pendentes
+- Registro de agendamentos via ferramentas externas (Calendly, Google Agenda)
+- Sistema de feedback pós-mentoria
+- Histórico completo de mentorias realizadas
 
 ### Para Administradores
 
-- 👥 Aprovação de cadastros de mentores
-- 🎫 Gerenciamento de vouchers (criação, validação, resgate)
-- 🏷️ Gestão de tags e áreas de especialização
-- 📈 Dashboard com métricas e analytics
-- 🔄 Aprovação de solicitações de troca de mentor
-- 🛡️ Suspensão/reativação de usuários
+- Aprovação de cadastros de mentores
+- Gerenciamento de vouchers (criação, validação, resgate)
+- Gestão de tags e áreas de especialização
+- Dashboard com métricas e analytics
+- Aprovação de solicitações de troca de mentor
+- Suspensão/reativação de usuários
 
 ---
 
@@ -163,17 +163,17 @@ O sistema utiliza uma **arquitetura de microsserviços** com as seguintes caract
 
 ### Para Backend
 
-- ☕ **Java 21** ([Download Temurin](https://adoptium.net/))
-- 🐳 **Docker** e **Docker Compose** ([Download](https://www.docker.com/))
-- 🍃 **MongoDB 7.0+** (ou use Docker Compose)
-- 📦 **Maven** (incluído no wrapper `mvnw`)
+- **Java 21** ([Download Temurin](https://adoptium.net/))
+- **Docker** e **Docker Compose** ([Download](https://www.docker.com/))
+- **MongoDB 7.0+** (ou use Docker Compose)
+- **Maven** (incluído no wrapper `mvnw`)
 
 ### Para Mobile
 
-- 📱 **Node.js 18+** ([Download](https://nodejs.org/))
-- 📲 **Expo CLI**: `npm install -g @expo/cli`
-- 🤖 **Android Studio** (para emulador Android) ou **Xcode** (para iOS)
-- 📱 **Expo Go** (app para testes em dispositivo físico)
+- **Node.js 18+** ([Download](https://nodejs.org/))
+- **Expo CLI**: `npm install -g @expo/cli`
+- **Android Studio** (para emulador Android) ou **Xcode** (para iOS)
+- **Expo Go** (app para testes em dispositivo físico)
 
 ---
 

@@ -1,18 +1,18 @@
-# ![logo iftm](./logo%20udicentro.png) Instituto Federal do Triângulo Mineiro
 
-**Especificação Funcional**
+# Especificação Funcional
 
-**Versão 2.0**
 
-**Responsáveis:**
+## Versão 2.0
 
-\[Nome do responsável – e-mail\]
+### Responsáveis
 
 \[Nome do responsável – e-mail\]
 
 \[Nome do responsável – e-mail\]
 
-**Cliente:**
+\[Nome do responsável – e-mail\]
+
+### Cliente
 
 UberHub
 
@@ -20,7 +20,7 @@ Att.: \[Nome do responsável do cliente\]
 
 Setor / Área: Tecnologia e Inovação
 
-**Projeto:**
+### Projeto
 
 Aplicativo de Mentorias UberHub
 
@@ -31,7 +31,7 @@ Aplicativo de Mentorias UberHub
 | 1.0    | 2025-01-15 | Versão inicial do documento                                 | Equipe de Desenvolvimento |
 | 2.0    | 2025-11-20 | Completados todos os casos de uso e adicionado diagrama UML | Equipe de Desenvolvimento |
 
-**Sumário**
+### Sumário
 
 [**1\. Introdução**](#1.-introdu%C3%A7%C3%A3o)
 

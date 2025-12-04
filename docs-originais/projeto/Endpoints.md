@@ -1,4 +1,4 @@
-# 📋 Especificação de Endpoints - UberHub Mentorias
+# Especificação de Endpoints 
 
 **Projeto:** Aplicativo de Mentorias UberHub  
 **Data de Atualização:** 20 de Novembro de 2025  

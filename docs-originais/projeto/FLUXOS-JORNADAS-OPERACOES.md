@@ -1,4 +1,4 @@
-# Fluxos (Jornadas) de Operações - Aplicativo de Mentorias UberHub
+# Fluxos de Operações 
 
 Este documento contém os fluxos de operações (jornadas do usuário) extraídos do documento de projeto.
 

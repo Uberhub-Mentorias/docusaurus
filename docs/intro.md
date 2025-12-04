@@ -14,7 +14,7 @@ Sistema de Mentorias que conecta profissionais experientes (Mentores) a pessoas 
 
 ---
 
-## 🎬 O que você vai encontrar aqui
+## O que você vai encontrar aqui
 
 ### 📋 Documentação Completa
 
@@ -36,7 +36,7 @@ Sistema de Mentorias que conecta profissionais experientes (Mentores) a pessoas 
 
 ---
 
-## 📊 Status do Projeto
+## Status do Projeto
 
 | Componente                  | Status             |
 | --------------------------- | ------------------ |

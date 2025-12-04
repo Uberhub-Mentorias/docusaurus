@@ -1,4 +1,4 @@
-# 🏗️ Arquitetura do Sistema - UberHub Mentorias
+# Arquitetura do Sistema 
 
 **Projeto:** Aplicativo de Mentorias UberHub  
 **Instituição:** IFTM Campus Uberlândia Centro  
