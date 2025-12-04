@@ -135,7 +135,6 @@ Access Token expira → Usa Refresh Token → Obtém novo Access Token
 
 O **Observer Pattern** permite que objetos observem mudanças em outro objeto.
 
-**No Firebase**:
 
 ```javascript
 // Registra um observer

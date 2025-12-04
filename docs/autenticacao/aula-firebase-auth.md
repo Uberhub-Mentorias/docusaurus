@@ -39,7 +39,7 @@ sidebar_position: 2
 | **Access Token** | Nosso backend | 15min-1h | Acessar APIs |
 | **Refresh Token** | Nosso backend | 7-30 dias | Renovar access token |
 
-### Padrão Observer do Firebase
+### Padrão Observer
 
 ```javascript
 // Registra um observer que dispara quando token muda

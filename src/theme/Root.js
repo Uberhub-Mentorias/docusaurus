@@ -1,8 +1,69 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
+import { trackPageView, resetPageTracking } from '../lib/tracking';
 
 // Root component que será carregado em todas as páginas
 export default function Root({children}) {
+  // Rastreamento de acessos
+  React.useEffect(() => {
+    console.log('[Tracking] Inicializando rastreamento de acessos');
+    
+    // Rastrear visualização inicial da página
+    trackPageView();
+    
+    // Rastrear mudanças de rota (SPA navigation)
+    let currentPath = window.location.pathname;
+    
+    const handleRouteChange = () => {
+      const newPath = window.location.pathname;
+      if (newPath !== currentPath) {
+        console.log('[Tracking] Mudança de rota detectada:', currentPath, '->', newPath);
+        resetPageTracking();
+        trackPageView();
+        currentPath = newPath;
+      }
+    };
+    
+    // Observar mudanças no histórico do navegador
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+    
+    history.pushState = function(...args) {
+      originalPushState.apply(history, args);
+      setTimeout(handleRouteChange, 100);
+    };
+    
+    history.replaceState = function(...args) {
+      originalReplaceState.apply(history, args);
+      setTimeout(handleRouteChange, 100);
+    };
+    
+    // Escutar eventos de popstate (voltar/avançar no navegador)
+    window.addEventListener('popstate', handleRouteChange);
+    
+    // Observar mudanças no DOM que podem indicar mudança de rota
+    const routeObserver = new MutationObserver(() => {
+      const newPath = window.location.pathname;
+      if (newPath !== currentPath) {
+        handleRouteChange();
+      }
+    });
+    
+    if (document.body) {
+      routeObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
+    
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      routeObserver.disconnect();
+      history.pushState = originalPushState;
+      history.replaceState = originalReplaceState;
+    };
+  }, []);
+
   React.useEffect(() => {
     console.log('[Root] Componente Root carregado');
     
