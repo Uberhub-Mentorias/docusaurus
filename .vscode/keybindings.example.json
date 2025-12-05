@@ -1,0 +1,21 @@
+[
+  // Atalho para abrir o painel de Source Control (Controle de Versão)
+  {
+    "key": "ctrl+shift+g",
+    "command": "workbench.view.scm",
+    "when": "!scmRepository"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "workbench.view.scm",
+    "when": "scmRepository"
+  },
+  
+  // Atalho alternativo: Ctrl+Shift+S (se preferir)
+  // Descomente as linhas abaixo e comente as de cima se quiser usar este atalho
+  // {
+  //   "key": "ctrl+shift+s",
+  //   "command": "workbench.view.scm"
+  // }
+]
+

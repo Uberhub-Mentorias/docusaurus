@@ -69,9 +69,6 @@ graph TB
 
 ---
 
-<details>
-<summary>📄 Fundamentos Teóricos</summary>
-
 ## 1. Fundamentos Teóricos
 
 ### 1.1 O que é Autenticação?
@@ -135,12 +132,11 @@ Access Token expira → Usa Refresh Token → Obtém novo Access Token
 
 O **Observer Pattern** permite que objetos observem mudanças em outro objeto.
 
-
 ```javascript
 // Registra um observer
 const unsubscribe = onIdTokenChanged(auth, user => {
-  // Este callback é executado sempre que o token muda
-  console.log("Token mudou!", user);
+	// Este callback é executado sempre que o token muda
+	console.log("Token mudou!", user);
 });
 
 // Remove o observer
@@ -161,9 +157,9 @@ unsubscribe();
 
 ```javascript
 api.interceptors.request.use(config => {
-  // Adiciona token em todas as requisições
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
+	// Adiciona token em todas as requisições
+	config.headers.Authorization = `Bearer ${token}`;
+	return config;
 });
 ```
 
@@ -171,19 +167,15 @@ api.interceptors.request.use(config => {
 
 ```javascript
 api.interceptors.response.use(
-  response => response,
-  error => {
-    // Trata erros 401 automaticamente
-    if (error.response?.status === 401) {
-      // Renova token
-    }
-  }
+	response => response,
+	error => {
+		// Trata erros 401 automaticamente
+		if (error.response?.status === 401) {
+			// Renova token
+		}
+	}
 );
 ```
-
-</details>
-<details>
-<summary>📄 Arquitetura do Sistema</summary>
 
 ## 2. Arquitetura do Sistema
 
@@ -243,11 +235,6 @@ api.interceptors.response.use(
 1. **Camada 1 - Identidade**: ID Token do Firebase valida quem é o usuário
 2. **Camada 2 - Autorização**: JWT próprio controla o que o usuário pode fazer
 3. **Camada 3 - Renovação**: Refresh tokens permitem renovação sem reautenticação
-
-</details>
-
-<details>
-<summary>📄 Fluxo de Autenticação Explicado</summary>
 
 ## 3. Fluxo de Autenticação Explicado
 
@@ -358,11 +345,11 @@ Frontend → Adiciona token no header → Backend valida → Retorna dados
 ```javascript
 // Quando Firebase renova ID token automaticamente
 onIdTokenChanged(auth, async user => {
-  if (user) {
-    const idToken = await user.getIdToken();
-    // Renova JWT usando novo ID token
-    await authService.login(idToken);
-  }
+	if (user) {
+		const idToken = await user.getIdToken();
+		// Renova JWT usando novo ID token
+		await authService.login(idToken);
+	}
 });
 ```
 
@@ -371,13 +358,13 @@ onIdTokenChanged(auth, async user => {
 ```javascript
 // Quando recebe erro 401
 api.interceptors.response.use(
-  response => response,
-  async error => {
-    if (error.response?.status === 401) {
-      // Tenta renovar com refreshToken
-      // Se falhar, tenta com Firebase Auth
-    }
-  }
+	response => response,
+	async error => {
+		if (error.response?.status === 401) {
+			// Tenta renovar com refreshToken
+			// Se falhar, tenta com Firebase Auth
+		}
+	}
 );
 ```
 
@@ -416,7 +403,7 @@ api.interceptors.response.use(
    ```javascript
    const storedUser = localStorage.getItem("user");
    if (storedUser) {
-     setUser(JSON.parse(storedUser));
+   	setUser(JSON.parse(storedUser));
    }
    ```
 
@@ -429,8 +416,8 @@ api.interceptors.response.use(
 
    ```javascript
    onIdTokenChanged(auth, async user => {
-     // Dispara quando sessão é restaurada
-     // Renova tokens JWT automaticamente
+   	// Dispara quando sessão é restaurada
+   	// Renova tokens JWT automaticamente
    });
    ```
 
@@ -438,11 +425,6 @@ api.interceptors.response.use(
    - Usa novo ID token para obter novos JWT
    - Atualiza localStorage
    - Usuário continua autenticado
-
-</details>
-
-<details>
-<summary>📄 Plano de Implementação - React Web</summary>
 
 ## 4. Plano de Implementação - React Web
 
@@ -486,12 +468,12 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Inicializa Firebase
@@ -503,7 +485,7 @@ export const auth = getAuth(app);
 // Configura Google Provider
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
-  prompt: "select_account", // Força seleção de conta
+	prompt: "select_account", // Força seleção de conta
 });
 ```
 
@@ -537,10 +519,10 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080
 
 // Cria instância do Axios
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+	baseURL: API_BASE_URL,
+	headers: {
+		"Content-Type": "application/json",
+	},
 });
 
 // ============================================
@@ -548,16 +530,16 @@ const api = axios.create({
 // ============================================
 // Adiciona token em todas as requisições
 api.interceptors.request.use(
-  config => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
+	config => {
+		const token = localStorage.getItem("token");
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
+		return config;
+	},
+	error => {
+		return Promise.reject(error);
+	}
 );
 
 // ============================================
@@ -565,148 +547,148 @@ api.interceptors.request.use(
 // ============================================
 // Trata erros 401 automaticamente
 api.interceptors.response.use(
-  response => response,
-  async error => {
-    const originalRequest = error.config;
+	response => response,
+	async error => {
+		const originalRequest = error.config;
 
-    // Se receber 401 e não for uma tentativa de refresh
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+		// Se receber 401 e não for uma tentativa de refresh
+		if (error.response?.status === 401 && !originalRequest._retry) {
+			originalRequest._retry = true;
 
-      // Estratégia 1: Tenta renovar com refreshToken
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (refreshToken) {
-        try {
-          const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
-            refreshToken,
-          });
+			// Estratégia 1: Tenta renovar com refreshToken
+			const refreshToken = localStorage.getItem("refreshToken");
+			if (refreshToken) {
+				try {
+					const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
+						refreshToken,
+					});
 
-          if (response.data.accessToken) {
-            // Salva novos tokens
-            localStorage.setItem("token", response.data.accessToken);
-            localStorage.setItem("refreshToken", response.data.refreshToken);
+					if (response.data.accessToken) {
+						// Salva novos tokens
+						localStorage.setItem("token", response.data.accessToken);
+						localStorage.setItem("refreshToken", response.data.refreshToken);
 
-            // Busca dados atualizados do usuário
-            const userResponse = await api.get(`${API_BASE_URL}/users/me`);
-            localStorage.setItem("user", JSON.stringify(userResponse.data));
+						// Busca dados atualizados do usuário
+						const userResponse = await api.get(`${API_BASE_URL}/users/me`);
+						localStorage.setItem("user", JSON.stringify(userResponse.data));
 
-            // Repete requisição original
-            originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
-            return api(originalRequest);
-          }
-        } catch (refreshError) {
-          // Estratégia 2: Se refreshToken falhar, tenta com Firebase
-          // (continua abaixo)
-        }
-      }
+						// Repete requisição original
+						originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
+						return api(originalRequest);
+					}
+				} catch (refreshError) {
+					// Estratégia 2: Se refreshToken falhar, tenta com Firebase
+					// (continua abaixo)
+				}
+			}
 
-      // Estratégia 2: Aguarda Firebase Auth restaurar sessão
-      try {
-        const { auth } = await import("../config/firebase.js");
-        let currentUser = auth.currentUser;
+			// Estratégia 2: Aguarda Firebase Auth restaurar sessão
+			try {
+				const { auth } = await import("../config/firebase.js");
+				let currentUser = auth.currentUser;
 
-        // Aguarda até 3 segundos para Firebase restaurar sessão
-        if (!currentUser) {
-          const maxWait = 3000; // 3 segundos
-          const checkInterval = 100; // 100ms
-          let waited = 0;
+				// Aguarda até 3 segundos para Firebase restaurar sessão
+				if (!currentUser) {
+					const maxWait = 3000; // 3 segundos
+					const checkInterval = 100; // 100ms
+					let waited = 0;
 
-          while (!currentUser && waited < maxWait) {
-            await new Promise(resolve => setTimeout(resolve, checkInterval));
-            currentUser = auth.currentUser;
-            waited += checkInterval;
-          }
-        }
+					while (!currentUser && waited < maxWait) {
+						await new Promise(resolve => setTimeout(resolve, checkInterval));
+						currentUser = auth.currentUser;
+						waited += checkInterval;
+					}
+				}
 
-        if (currentUser) {
-          // Obtém novo ID token
-          const newIdToken = await currentUser.getIdToken(true);
+				if (currentUser) {
+					// Obtém novo ID token
+					const newIdToken = await currentUser.getIdToken(true);
 
-          // Faz login novamente
-          const loginResponse = await axios.post(`${API_BASE_URL}/auth/login`, {
-            idToken: newIdToken,
-          });
+					// Faz login novamente
+					const loginResponse = await axios.post(`${API_BASE_URL}/auth/login`, {
+						idToken: newIdToken,
+					});
 
-          if (loginResponse.data.accessToken) {
-            // Salva novos tokens
-            localStorage.setItem("token", loginResponse.data.accessToken);
-            localStorage.setItem("refreshToken", loginResponse.data.refreshToken);
+					if (loginResponse.data.accessToken) {
+						// Salva novos tokens
+						localStorage.setItem("token", loginResponse.data.accessToken);
+						localStorage.setItem("refreshToken", loginResponse.data.refreshToken);
 
-            // Busca dados atualizados do usuário
-            const userResponse = await api.get(`${API_BASE_URL}/users/me`);
-            localStorage.setItem("user", JSON.stringify(userResponse.data));
+						// Busca dados atualizados do usuário
+						const userResponse = await api.get(`${API_BASE_URL}/users/me`);
+						localStorage.setItem("user", JSON.stringify(userResponse.data));
 
-            // Repete requisição original
-            originalRequest.headers.Authorization = `Bearer ${loginResponse.data.accessToken}`;
-            return api(originalRequest);
-          }
-        }
-      } catch (firebaseError) {
-        // Todas as estratégias falharam
-      }
+						// Repete requisição original
+						originalRequest.headers.Authorization = `Bearer ${loginResponse.data.accessToken}`;
+						return api(originalRequest);
+					}
+				}
+			} catch (firebaseError) {
+				// Todas as estratégias falharam
+			}
 
-      // Se todas as estratégias falharam, limpa tokens e redireciona
-      localStorage.removeItem("token");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("user");
-      window.location.href = "/login";
-    }
+			// Se todas as estratégias falharam, limpa tokens e redireciona
+			localStorage.removeItem("token");
+			localStorage.removeItem("refreshToken");
+			localStorage.removeItem("user");
+			window.location.href = "/login";
+		}
 
-    return Promise.reject(error);
-  }
+		return Promise.reject(error);
+	}
 );
 
 // ============================================
 // SERVIÇO DE AUTENTICAÇÃO
 // ============================================
 export const authService = {
-  // Login com ID token do Firebase
-  login: async idToken => {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-      idToken,
-    });
+	// Login com ID token do Firebase
+	login: async idToken => {
+		const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+			idToken,
+		});
 
-    // Salva tokens
-    localStorage.setItem("token", response.data.accessToken);
-    localStorage.setItem("refreshToken", response.data.refreshToken);
+		// Salva tokens
+		localStorage.setItem("token", response.data.accessToken);
+		localStorage.setItem("refreshToken", response.data.refreshToken);
 
-    // Busca dados do usuário
-    const userResponse = await api.get(`${API_BASE_URL}/users/me`);
-    localStorage.setItem("user", JSON.stringify(userResponse.data));
+		// Busca dados do usuário
+		const userResponse = await api.get(`${API_BASE_URL}/users/me`);
+		localStorage.setItem("user", JSON.stringify(userResponse.data));
 
-    return userResponse.data;
-  },
+		return userResponse.data;
+	},
 
-  // Logout
-  logout: async () => {
-    // Limpa localStorage
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("user");
+	// Logout
+	logout: async () => {
+		// Limpa localStorage
+		localStorage.removeItem("token");
+		localStorage.removeItem("refreshToken");
+		localStorage.removeItem("user");
 
-    // Faz logout do Firebase
-    const { auth } = await import("../config/firebase.js");
-    await auth.signOut();
+		// Faz logout do Firebase
+		const { auth } = await import("../config/firebase.js");
+		await auth.signOut();
 
-    // Pequeno delay para garantir processamento
-    await new Promise(resolve => setTimeout(resolve, 100));
-  },
+		// Pequeno delay para garantir processamento
+		await new Promise(resolve => setTimeout(resolve, 100));
+	},
 
-  // Verifica se está autenticado
-  isAuthenticated: () => {
-    return !!localStorage.getItem("token");
-  },
+	// Verifica se está autenticado
+	isAuthenticated: () => {
+		return !!localStorage.getItem("token");
+	},
 
-  // Obtém token
-  getToken: () => {
-    return localStorage.getItem("token");
-  },
+	// Obtém token
+	getToken: () => {
+		return localStorage.getItem("token");
+	},
 
-  // Obtém dados do usuário
-  getUser: () => {
-    const user = localStorage.getItem("user");
-    return user ? JSON.parse(user) : null;
-  },
+	// Obtém dados do usuário
+	getUser: () => {
+		const user = localStorage.getItem("user");
+		return user ? JSON.parse(user) : null;
+	},
 };
 
 export default api;
@@ -732,124 +714,124 @@ const AuthContext = createContext(null);
 
 // Provider component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [firebaseUser, setFirebaseUser] = useState(null);
+	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [firebaseUser, setFirebaseUser] = useState(null);
 
-  useEffect(() => {
-    let isInitialLoad = true;
+	useEffect(() => {
+		let isInitialLoad = true;
 
-    // Restaura estado do localStorage imediatamente (para hot reload)
-    const storedUser = authService.getUser();
-    const hasToken = authService.isAuthenticated();
+		// Restaura estado do localStorage imediatamente (para hot reload)
+		const storedUser = authService.getUser();
+		const hasToken = authService.isAuthenticated();
 
-    if (storedUser && hasToken) {
-      setUser(storedUser);
-    }
+		if (storedUser && hasToken) {
+			setUser(storedUser);
+		}
 
-    // Observer do Firebase - dispara quando ID token muda
-    const unsubscribe = onIdTokenChanged(auth, async firebaseUser => {
-      setFirebaseUser(firebaseUser);
+		// Observer do Firebase - dispara quando ID token muda
+		const unsubscribe = onIdTokenChanged(auth, async firebaseUser => {
+			setFirebaseUser(firebaseUser);
 
-      if (firebaseUser) {
-        try {
-          // Obtém ID token
-          const idToken = await firebaseUser.getIdToken();
+			if (firebaseUser) {
+				try {
+					// Obtém ID token
+					const idToken = await firebaseUser.getIdToken();
 
-          // Renova tokens JWT
-          await authService.login(idToken);
+					// Renova tokens JWT
+					await authService.login(idToken);
 
-          // Atualiza estado do usuário
-          const updatedUser = authService.getUser();
-          if (updatedUser) {
-            setUser(updatedUser);
-          }
-        } catch (error) {
-          console.error("Erro ao renovar token:", error);
+					// Atualiza estado do usuário
+					const updatedUser = authService.getUser();
+					if (updatedUser) {
+						setUser(updatedUser);
+					}
+				} catch (error) {
+					console.error("Erro ao renovar token:", error);
 
-          // Se erro 401/403, faz logout
-          if (error.response?.status === 401 || error.response?.status === 403) {
-            await authService.logout();
-            setUser(null);
-          }
-        }
-      } else {
-        // Firebase logout - limpa tudo
-        await authService.logout();
-        setUser(null);
-      }
+					// Se erro 401/403, faz logout
+					if (error.response?.status === 401 || error.response?.status === 403) {
+						await authService.logout();
+						setUser(null);
+					}
+				}
+			} else {
+				// Firebase logout - limpa tudo
+				await authService.logout();
+				setUser(null);
+			}
 
-      // Finaliza loading após primeira execução
-      if (isInitialLoad) {
-        isInitialLoad = false;
-        setLoading(false);
-      }
-    });
+			// Finaliza loading após primeira execução
+			if (isInitialLoad) {
+				isInitialLoad = false;
+				setLoading(false);
+			}
+		});
 
-    // Cleanup: remove observer quando componente desmonta
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+		// Cleanup: remove observer quando componente desmonta
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
-  // Função de login
-  const login = async idToken => {
-    try {
-      const userData = await authService.login(idToken);
+	// Função de login
+	const login = async idToken => {
+		try {
+			const userData = await authService.login(idToken);
 
-      // Verifica se é admin
-      if (!userData?.role) {
-        await logout();
-        return { success: false, error: "Usuário não possui permissões" };
-      }
+			// Verifica se é admin
+			if (!userData?.role) {
+				await logout();
+				return { success: false, error: "Usuário não possui permissões" };
+			}
 
-      const roles = Array.isArray(userData.role) ? userData.role : [userData.role];
-      const isAdmin = roles.includes("ADMIN");
+			const roles = Array.isArray(userData.role) ? userData.role : [userData.role];
+			const isAdmin = roles.includes("ADMIN");
 
-      if (!isAdmin) {
-        await logout();
-        return { success: false, error: "Apenas administradores podem acessar" };
-      }
+			if (!isAdmin) {
+				await logout();
+				return { success: false, error: "Apenas administradores podem acessar" };
+			}
 
-      setUser(userData);
-      return { success: true };
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      return { success: false, error: error.message };
-    }
-  };
+			setUser(userData);
+			return { success: true };
+		} catch (error) {
+			console.error("Erro ao fazer login:", error);
+			return { success: false, error: error.message };
+		}
+	};
 
-  // Função de logout
-  const logout = async () => {
-    setUser(null);
-    setFirebaseUser(null);
-    await authService.logout();
-  };
+	// Função de logout
+	const logout = async () => {
+		setUser(null);
+		setFirebaseUser(null);
+		await authService.logout();
+	};
 
-  // Verifica se está autenticado
-  const isAuthenticated = () => {
-    return !!(user && authService.isAuthenticated());
-  };
+	// Verifica se está autenticado
+	const isAuthenticated = () => {
+		return !!(user && authService.isAuthenticated());
+	};
 
-  const value = {
-    user,
-    loading,
-    firebaseUser,
-    login,
-    logout,
-    isAuthenticated,
-  };
+	const value = {
+		user,
+		loading,
+		firebaseUser,
+		login,
+		logout,
+		isAuthenticated,
+	};
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 // Custom hook
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth deve ser usado dentro de AuthProvider");
-  }
-  return context;
+	const context = useContext(AuthContext);
+	if (!context) {
+		throw new Error("useAuth deve ser usado dentro de AuthProvider");
+	}
+	return context;
 };
 ```
 
@@ -870,62 +852,62 @@ import { auth, googleProvider } from "../config/firebase";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const { login } = useAuth();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+	const navigate = useNavigate();
+	const { login } = useAuth();
 
-  const handleGoogleSignIn = async () => {
-    setError("");
-    setLoading(true);
+	const handleGoogleSignIn = async () => {
+		setError("");
+		setLoading(true);
 
-    try {
-      // Garante logout anterior (força seleção de conta)
-      if (auth.currentUser) {
-        await auth.signOut();
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
+		try {
+			// Garante logout anterior (força seleção de conta)
+			if (auth.currentUser) {
+				await auth.signOut();
+				await new Promise(resolve => setTimeout(resolve, 100));
+			}
 
-      // Faz login com Google
-      const result = await signInWithPopup(auth, googleProvider);
-      const idToken = await result.user.getIdToken();
+			// Faz login com Google
+			const result = await signInWithPopup(auth, googleProvider);
+			const idToken = await result.user.getIdToken();
 
-      // Envia para AuthContext
-      const loginResult = await login(idToken);
+			// Envia para AuthContext
+			const loginResult = await login(idToken);
 
-      if (loginResult.success) {
-        navigate("/");
-      } else {
-        setError(loginResult.error || "Erro ao fazer login");
-      }
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      setError("Erro ao fazer login. Tente novamente.");
-    } finally {
-      setLoading(false);
-    }
-  };
+			if (loginResult.success) {
+				navigate("/");
+			} else {
+				setError(loginResult.error || "Erro ao fazer login");
+			}
+		} catch (error) {
+			console.error("Erro ao fazer login:", error);
+			setError("Erro ao fazer login. Tente novamente.");
+		} finally {
+			setLoading(false);
+		}
+	};
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Entrar na sua conta
-          </h2>
-        </div>
-        <div>
-          <button
-            onClick={handleGoogleSignIn}
-            disabled={loading}
-            className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50">
-            {loading ? "Carregando..." : "Entrar com Google"}
-          </button>
-          {error && <p className="mt-2 text-sm text-red-600 text-center">{error}</p>}
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="min-h-screen flex items-center justify-center bg-gray-50">
+			<div className="max-w-md w-full space-y-8">
+				<div>
+					<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+						Entrar na sua conta
+					</h2>
+				</div>
+				<div>
+					<button
+						onClick={handleGoogleSignIn}
+						disabled={loading}
+						className="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50">
+						{loading ? "Carregando..." : "Entrar com Google"}
+					</button>
+					{error && <p className="mt-2 text-sm text-red-600 text-center">{error}</p>}
+				</div>
+			</div>
+		</div>
+	);
 }
 ```
 
@@ -943,25 +925,25 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function ProtectedRoute({ children }) {
-  const { isAuthenticated, loading, user } = useAuth();
+	const { isAuthenticated, loading, user } = useAuth();
 
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
+	if (loading) {
+		return <div>Carregando...</div>;
+	}
 
-  if (!isAuthenticated()) {
-    return <Navigate to="/login" replace />;
-  }
+	if (!isAuthenticated()) {
+		return <Navigate to="/login" replace />;
+	}
 
-  // Verifica se é admin
-  const roles = Array.isArray(user?.role) ? user.role : [user?.role];
-  const isAdmin = roles.includes("ADMIN");
+	// Verifica se é admin
+	const roles = Array.isArray(user?.role) ? user.role : [user?.role];
+	const isAdmin = roles.includes("ADMIN");
 
-  if (!isAdmin) {
-    return <Navigate to="/login?error=admin_required" replace />;
-  }
+	if (!isAdmin) {
+		return <Navigate to="/login?error=admin_required" replace />;
+	}
 
-  return children;
+	return children;
 }
 ```
 
@@ -982,24 +964,24 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
-  return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
-  );
+	return (
+		<AuthProvider>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/login" element={<Login />} />
+					<Route
+						path="/"
+						element={
+							<ProtectedRoute>
+								<Dashboard />
+							</ProtectedRoute>
+						}
+					/>
+					<Route path="*" element={<Navigate to="/" replace />} />
+				</Routes>
+			</BrowserRouter>
+		</AuthProvider>
+	);
 }
 
 export default App;
@@ -1033,11 +1015,6 @@ export default App;
    - Feche o navegador
    - Reabra o navegador
    - Deve continuar autenticado
-
-</details>
-
-<details>
-<summary>📄 Plano de Implementação - React Native</summary>
 
 ## 5. Plano de Implementação - React Native
 
@@ -1101,24 +1078,24 @@ Crie ou atualize `/app.json`:
 
 ```json
 {
-  "expo": {
-    "plugins": ["@react-native-google-signin/google-signin"],
-    "name": "seu-app",
-    "slug": "seu-app",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "android": {
-      "googleServicesFile": "./google-services.json",
-      "package": "-------------- INSIRA O PACKAGE AQUI -----------------------",
-      "edgeToEdgeEnabled": true
-    },
-    "ios": {
-      "supportsTablet": true
-    }
-  }
+	"expo": {
+		"plugins": ["@react-native-google-signin/google-signin"],
+		"name": "seu-app",
+		"slug": "seu-app",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"userInterfaceStyle": "light",
+		"newArchEnabled": true,
+		"android": {
+			"googleServicesFile": "./google-services.json",
+			"package": "-------------- INSIRA O PACKAGE AQUI -----------------------",
+			"edgeToEdgeEnabled": true
+		},
+		"ios": {
+			"supportsTablet": true
+		}
+	}
 }
 ```
 
@@ -1141,15 +1118,15 @@ O arquivo `babel.config.js` configura quais transformações o Babel deve aplica
 
 ```javascript
 module.exports = function babelConfig(api) {
-  // api.cache(true) habilita cache do Babel para melhorar performance
-  // O cache armazena resultados de transformações anteriores
-  api.cache(true);
+	// api.cache(true) habilita cache do Babel para melhorar performance
+	// O cache armazena resultados de transformações anteriores
+	api.cache(true);
 
-  return {
-    // presets são conjuntos pré-configurados de plugins do Babel
-    // "babel-preset-expo" inclui todas as transformações necessárias para Expo
-    presets: ["babel-preset-expo"],
-  };
+	return {
+		// presets são conjuntos pré-configurados de plugins do Babel
+		// "babel-preset-expo" inclui todas as transformações necessárias para Expo
+		presets: ["babel-preset-expo"],
+	};
 };
 ```
 
@@ -1177,10 +1154,10 @@ Crie ou atualize `/babel.config.js`:
 
 ```javascript
 module.exports = function babelConfig(api) {
-  api.cache(true);
-  return {
-    presets: ["babel-preset-expo"],
-  };
+	api.cache(true);
+	return {
+		presets: ["babel-preset-expo"],
+	};
 };
 ```
 
@@ -1214,23 +1191,23 @@ Crie `/src/config/firebase.js`:
 ```javascript
 import { initializeApp } from "firebase/app";
 import {
-  initializeAuth,
-  getReactNativePersistence,
-  signInWithCredential,
-  GoogleAuthProvider,
-  signOut as firebaseSignOut,
+	initializeAuth,
+	getReactNativePersistence,
+	signInWithCredential,
+	GoogleAuthProvider,
+	signOut as firebaseSignOut,
 } from "firebase/auth";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+	apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+	authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Inicializar Firebase
@@ -1243,12 +1220,12 @@ const auth = initializeAuth(app, { persistence: getReactNativePersistence(AsyncS
  * @param {string} webClientId - Web Client ID do Google OAuth
  */
 const configureGoogleSignIn = webClientId => {
-  if (webClientId) {
-    GoogleSignin.configure({
-      webClientId: webClientId,
-      offlineAccess: true,
-    });
-  }
+	if (webClientId) {
+		GoogleSignin.configure({
+			webClientId: webClientId,
+			offlineAccess: true,
+		});
+	}
 };
 
 /**
@@ -1258,12 +1235,12 @@ const configureGoogleSignIn = webClientId => {
  * @throws {Error} Se a autenticação falhar
  */
 const signInWithGoogleToken = async idToken => {
-  if (!idToken || typeof idToken !== "string") {
-    throw new Error("idToken inválido ou não fornecido");
-  }
+	if (!idToken || typeof idToken !== "string") {
+		throw new Error("idToken inválido ou não fornecido");
+	}
 
-  const googleCredential = GoogleAuthProvider.credential(idToken);
-  await signInWithCredential(auth, googleCredential);
+	const googleCredential = GoogleAuthProvider.credential(idToken);
+	await signInWithCredential(auth, googleCredential);
 };
 
 /**
@@ -1272,7 +1249,7 @@ const signInWithGoogleToken = async idToken => {
  * @returns {boolean} True se o erro tem propriedade code
  */
 const isErrorWithCode = error => {
-  return error && typeof error === "object" && "code" in error;
+	return error && typeof error === "object" && "code" in error;
 };
 
 /**
@@ -1282,50 +1259,50 @@ const isErrorWithCode = error => {
  * @throws {Error} Se o login falhar
  */
 const signInWithGoogle = async () => {
-  try {
-    // 1. Verificar Play Services (Android)
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+	try {
+		// 1. Verificar Play Services (Android)
+		await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
 
-    // 2. Fazer login com Google Sign-In
-    const response = await GoogleSignin.signIn();
+		// 2. Fazer login com Google Sign-In
+		const response = await GoogleSignin.signIn();
 
-    // 3. Obter o idToken do Google
-    // Se o idToken não vier na resposta inicial, tentar obter diretamente
-    let idToken = response?.data?.idToken;
+		// 3. Obter o idToken do Google
+		// Se o idToken não vier na resposta inicial, tentar obter diretamente
+		let idToken = response?.data?.idToken;
 
-    // Se o idToken não estiver disponível, tentar obter usando getTokens()
-    if (!idToken) {
-      const tokens = await GoogleSignin.getTokens();
-      idToken = tokens.idToken;
-    }
+		// Se o idToken não estiver disponível, tentar obter usando getTokens()
+		if (!idToken) {
+			const tokens = await GoogleSignin.getTokens();
+			idToken = tokens.idToken;
+		}
 
-    // Validar se o idToken foi obtido
-    if (!idToken) {
-      throw new Error(
-        "idToken não encontrado. Verifique se o webClientId está configurado corretamente."
-      );
-    }
+		// Validar se o idToken foi obtido
+		if (!idToken) {
+			throw new Error(
+				"idToken não encontrado. Verifique se o webClientId está configurado corretamente."
+			);
+		}
 
-    // 4. Autenticar no Firebase usando o idToken
-    // O listener onIdTokenChanged será acionado automaticamente com o firebaseUser
-    await signInWithGoogleToken(idToken);
-  } catch (error) {
-    // Tratar erros específicos do Google Sign-In
-    if (isErrorWithCode(error)) {
-      switch (error.code) {
-        case statusCodes.SIGN_IN_CANCELLED:
-          throw new Error("Login cancelado pelo usuário");
-        case statusCodes.IN_PROGRESS:
-          throw new Error("Login já em progresso");
-        case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-          throw new Error("Play Services não disponível ou desatualizado");
-        default:
-          throw new Error("Erro no Google Sign-In: " + error.message);
-      }
-    }
-    // Re-lançar outros erros
-    throw error;
-  }
+		// 4. Autenticar no Firebase usando o idToken
+		// O listener onIdTokenChanged será acionado automaticamente com o firebaseUser
+		await signInWithGoogleToken(idToken);
+	} catch (error) {
+		// Tratar erros específicos do Google Sign-In
+		if (isErrorWithCode(error)) {
+			switch (error.code) {
+				case statusCodes.SIGN_IN_CANCELLED:
+					throw new Error("Login cancelado pelo usuário");
+				case statusCodes.IN_PROGRESS:
+					throw new Error("Login já em progresso");
+				case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+					throw new Error("Play Services não disponível ou desatualizado");
+				default:
+					throw new Error("Erro no Google Sign-In: " + error.message);
+			}
+		}
+		// Re-lançar outros erros
+		throw error;
+	}
 };
 
 /**
@@ -1334,8 +1311,8 @@ const signInWithGoogle = async () => {
  * @throws {Error} Se o logout falhar
  */
 const signOutUser = async () => {
-  await firebaseSignOut(auth);
-  await GoogleSignin.signOut();
+	await firebaseSignOut(auth);
+	await GoogleSignin.signOut();
 };
 
 // Exportar funções e objetos necessários
@@ -1359,210 +1336,210 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, ActivityIndicator, Image } from "react-native";
 import { Button, PaperProvider, Snackbar } from "react-native-paper";
 import {
-  auth,
-  configureGoogleSignIn,
-  signInWithGoogle,
-  signOutUser,
-  onIdTokenChanged,
+	auth,
+	configureGoogleSignIn,
+	signInWithGoogle,
+	signOutUser,
+	onIdTokenChanged,
 } from "./src/config/firebase";
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [signingIn, setSigningIn] = useState(false);
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [signingIn, setSigningIn] = useState(false);
+	const [user, setUser] = useState(null);
+	const [error, setError] = useState(null);
+	const [snackbarVisible, setSnackbarVisible] = useState(false);
 
-  useEffect(() => {
-    // Configurar Google Sign-In usando variável de ambiente do Expo
-    configureGoogleSignIn(process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID);
+	useEffect(() => {
+		// Configurar Google Sign-In usando variável de ambiente do Expo
+		configureGoogleSignIn(process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID);
 
-    // Monitorar mudanças no token de autenticação do Firebase
-    const unsubscribe = onIdTokenChanged(auth, firebaseUser => {
-      if (firebaseUser) {
-        setUser(firebaseUser);
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
-    });
+		// Monitorar mudanças no token de autenticação do Firebase
+		const unsubscribe = onIdTokenChanged(auth, firebaseUser => {
+			if (firebaseUser) {
+				setUser(firebaseUser);
+			} else {
+				setUser(null);
+			}
+			setLoading(false);
+		});
 
-    // Cleanup
-    return () => unsubscribe();
-  }, []);
+		// Cleanup
+		return () => unsubscribe();
+	}, []);
 
-  const signIn = async () => {
-    setSigningIn(true);
-    setError(null);
-    try {
-      await signInWithGoogle();
-    } catch (error) {
-      const errorMessage = error?.message || "Erro ao fazer login. Tente novamente.";
-      setError(errorMessage);
-      setSnackbarVisible(true);
-    } finally {
-      setSigningIn(false);
-    }
-  };
+	const signIn = async () => {
+		setSigningIn(true);
+		setError(null);
+		try {
+			await signInWithGoogle();
+		} catch (error) {
+			const errorMessage = error?.message || "Erro ao fazer login. Tente novamente.";
+			setError(errorMessage);
+			setSnackbarVisible(true);
+		} finally {
+			setSigningIn(false);
+		}
+	};
 
-  const handleSignOut = async () => {
-    try {
-      await signOutUser();
-      setUser(null);
-    } catch (error) {
-      const errorMessage = error?.message || "Erro ao fazer logout. Tente novamente.";
-      setError(errorMessage);
-      setSnackbarVisible(true);
-    }
-  };
+	const handleSignOut = async () => {
+		try {
+			await signOutUser();
+			setUser(null);
+		} catch (error) {
+			const errorMessage = error?.message || "Erro ao fazer logout. Tente novamente.";
+			setError(errorMessage);
+			setSnackbarVisible(true);
+		}
+	};
 
-  return (
-    <PaperProvider>
-      <View style={styles.container}>
-        {loading ? (
-          <>
-            <ActivityIndicator size="large" color="#4285f4" />
-            <Text style={styles.loadingText}>Carregando...</Text>
-          </>
-        ) : (
-          <>
-            <Text style={styles.title}>Firebase Auth</Text>
-            {user ? (
-              <View style={styles.userContainer}>
-                <Text style={styles.welcomeText}>Bem-vindo!</Text>
-                <Text style={styles.emailText}>{user.email}</Text>
-                <Text style={styles.nameText}>
-                  {user.displayName || user.email?.split("@")[0] || "Usuário"}
-                </Text>
-                {user.photoURL && (
-                  <Image
-                    source={{ uri: user.photoURL }}
-                    style={styles.userPhoto}
-                    resizeMode="cover"
-                  />
-                )}
-                <View style={styles.buttonContainer}>
-                  <Button
-                    mode="contained"
-                    buttonColor="#d32f2f"
-                    onPress={handleSignOut}
-                    style={styles.logoutButton}>
-                    Sair
-                  </Button>
-                </View>
-              </View>
-            ) : (
-              <View style={styles.loginContainer}>
-                <Text style={styles.loginText}>Faça login com sua conta Google</Text>
-                {signingIn ? (
-                  <View style={styles.signingInContainer}>
-                    <ActivityIndicator size="large" color="#4285f4" />
-                    <Text style={styles.signingInText}>Abrindo navegador...</Text>
-                  </View>
-                ) : (
-                  <Button
-                    mode="contained"
-                    buttonColor="#1976d2"
-                    onPress={signIn}
-                    style={styles.loginButton}>
-                    Entrar com Google
-                  </Button>
-                )}
-              </View>
-            )}
-          </>
-        )}
-        <StatusBar style="auto" />
-        <Snackbar
-          visible={snackbarVisible}
-          onDismiss={() => setSnackbarVisible(false)}
-          duration={Snackbar.DURATION_LONG}
-          action={{
-            label: "Fechar",
-            onPress: () => setSnackbarVisible(false),
-          }}>
-          {error || "Erro ao fazer login"}
-        </Snackbar>
-      </View>
-    </PaperProvider>
-  );
+	return (
+		<PaperProvider>
+			<View style={styles.container}>
+				{loading ? (
+					<>
+						<ActivityIndicator size="large" color="#4285f4" />
+						<Text style={styles.loadingText}>Carregando...</Text>
+					</>
+				) : (
+					<>
+						<Text style={styles.title}>Firebase Auth</Text>
+						{user ? (
+							<View style={styles.userContainer}>
+								<Text style={styles.welcomeText}>Bem-vindo!</Text>
+								<Text style={styles.emailText}>{user.email}</Text>
+								<Text style={styles.nameText}>
+									{user.displayName || user.email?.split("@")[0] || "Usuário"}
+								</Text>
+								{user.photoURL && (
+									<Image
+										source={{ uri: user.photoURL }}
+										style={styles.userPhoto}
+										resizeMode="cover"
+									/>
+								)}
+								<View style={styles.buttonContainer}>
+									<Button
+										mode="contained"
+										buttonColor="#d32f2f"
+										onPress={handleSignOut}
+										style={styles.logoutButton}>
+										Sair
+									</Button>
+								</View>
+							</View>
+						) : (
+							<View style={styles.loginContainer}>
+								<Text style={styles.loginText}>Faça login com sua conta Google</Text>
+								{signingIn ? (
+									<View style={styles.signingInContainer}>
+										<ActivityIndicator size="large" color="#4285f4" />
+										<Text style={styles.signingInText}>Abrindo navegador...</Text>
+									</View>
+								) : (
+									<Button
+										mode="contained"
+										buttonColor="#1976d2"
+										onPress={signIn}
+										style={styles.loginButton}>
+										Entrar com Google
+									</Button>
+								)}
+							</View>
+						)}
+					</>
+				)}
+				<StatusBar style="auto" />
+				<Snackbar
+					visible={snackbarVisible}
+					onDismiss={() => setSnackbarVisible(false)}
+					duration={Snackbar.DURATION_LONG}
+					action={{
+						label: "Fechar",
+						onPress: () => setSnackbarVisible(false),
+					}}>
+					{error || "Erro ao fazer login"}
+				</Snackbar>
+			</View>
+		</PaperProvider>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 40,
-    color: "#333",
-  },
-  loadingText: {
-    marginTop: 10,
-    fontSize: 16,
-    color: "#666",
-  },
-  userContainer: {
-    alignItems: "center",
-    width: "100%",
-  },
-  welcomeText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#333",
-  },
-  emailText: {
-    fontSize: 16,
-    color: "#666",
-    marginBottom: 5,
-  },
-  nameText: {
-    fontSize: 18,
-    color: "#4285f4",
-    marginBottom: 30,
-    fontWeight: "600",
-  },
-  loginContainer: {
-    alignItems: "center",
-    width: "100%",
-  },
-  loginText: {
-    fontSize: 18,
-    color: "#666",
-    marginBottom: 30,
-    textAlign: "center",
-  },
-  signingInContainer: {
-    alignItems: "center",
-  },
-  signingInText: {
-    marginTop: 10,
-    fontSize: 16,
-    color: "#666",
-  },
-  userPhoto: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 20,
-  },
-  buttonContainer: {
-    marginTop: 40,
-    width: "100%",
-    alignItems: "center",
-  },
-  logoutButton: {
-    minWidth: 120,
-  },
-  loginButton: {
-    minWidth: 200,
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#fff",
+		alignItems: "center",
+		justifyContent: "center",
+		padding: 20,
+	},
+	title: {
+		fontSize: 28,
+		fontWeight: "bold",
+		marginBottom: 40,
+		color: "#333",
+	},
+	loadingText: {
+		marginTop: 10,
+		fontSize: 16,
+		color: "#666",
+	},
+	userContainer: {
+		alignItems: "center",
+		width: "100%",
+	},
+	welcomeText: {
+		fontSize: 24,
+		fontWeight: "bold",
+		marginBottom: 10,
+		color: "#333",
+	},
+	emailText: {
+		fontSize: 16,
+		color: "#666",
+		marginBottom: 5,
+	},
+	nameText: {
+		fontSize: 18,
+		color: "#4285f4",
+		marginBottom: 30,
+		fontWeight: "600",
+	},
+	loginContainer: {
+		alignItems: "center",
+		width: "100%",
+	},
+	loginText: {
+		fontSize: 18,
+		color: "#666",
+		marginBottom: 30,
+		textAlign: "center",
+	},
+	signingInContainer: {
+		alignItems: "center",
+	},
+	signingInText: {
+		marginTop: 10,
+		fontSize: 16,
+		color: "#666",
+	},
+	userPhoto: {
+		width: 100,
+		height: 100,
+		borderRadius: 50,
+		marginBottom: 20,
+	},
+	buttonContainer: {
+		marginTop: 40,
+		width: "100%",
+		alignItems: "center",
+	},
+	logoutButton: {
+		minWidth: 120,
+	},
+	loginButton: {
+		minWidth: 200,
+	},
 });
 ```
 
@@ -1671,125 +1648,125 @@ import auth from "@react-native-firebase/auth";
 const API_BASE_URL = "https://sua-api.com/api/v1";
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+	baseURL: API_BASE_URL,
+	headers: {
+		"Content-Type": "application/json",
+	},
 });
 
 // REQUEST INTERCEPTOR
 api.interceptors.request.use(
-  async config => {
-    const token = await AsyncStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
+	async config => {
+		const token = await AsyncStorage.getItem("token");
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
+		return config;
+	},
+	error => {
+		return Promise.reject(error);
+	}
 );
 
 // RESPONSE INTERCEPTOR
 api.interceptors.response.use(
-  response => response,
-  async error => {
-    const originalRequest = error.config;
+	response => response,
+	async error => {
+		const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+		if (error.response?.status === 401 && !originalRequest._retry) {
+			originalRequest._retry = true;
 
-      // Estratégia 1: Refresh Token
-      const refreshToken = await AsyncStorage.getItem("refreshToken");
-      if (refreshToken) {
-        try {
-          const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
-            refreshToken,
-          });
+			// Estratégia 1: Refresh Token
+			const refreshToken = await AsyncStorage.getItem("refreshToken");
+			if (refreshToken) {
+				try {
+					const response = await axios.post(`${API_BASE_URL}/auth/refresh`, {
+						refreshToken,
+					});
 
-          if (response.data.accessToken) {
-            await AsyncStorage.setItem("token", response.data.accessToken);
-            await AsyncStorage.setItem("refreshToken", response.data.refreshToken);
+					if (response.data.accessToken) {
+						await AsyncStorage.setItem("token", response.data.accessToken);
+						await AsyncStorage.setItem("refreshToken", response.data.refreshToken);
 
-            const userResponse = await api.get(`${API_BASE_URL}/users/me`);
-            await AsyncStorage.setItem("user", JSON.stringify(userResponse.data));
+						const userResponse = await api.get(`${API_BASE_URL}/users/me`);
+						await AsyncStorage.setItem("user", JSON.stringify(userResponse.data));
 
-            originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
-            return api(originalRequest);
-          }
-        } catch (refreshError) {
-          // Continua para estratégia 2
-        }
-      }
+						originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
+						return api(originalRequest);
+					}
+				} catch (refreshError) {
+					// Continua para estratégia 2
+				}
+			}
 
-      // Estratégia 2: Firebase Auth
-      try {
-        const currentUser = auth().currentUser;
+			// Estratégia 2: Firebase Auth
+			try {
+				const currentUser = auth().currentUser;
 
-        if (currentUser) {
-          const idToken = await currentUser.getIdToken(true);
-          const loginResponse = await axios.post(`${API_BASE_URL}/auth/login`, {
-            idToken,
-          });
+				if (currentUser) {
+					const idToken = await currentUser.getIdToken(true);
+					const loginResponse = await axios.post(`${API_BASE_URL}/auth/login`, {
+						idToken,
+					});
 
-          if (loginResponse.data.accessToken) {
-            await AsyncStorage.setItem("token", loginResponse.data.accessToken);
-            await AsyncStorage.setItem("refreshToken", loginResponse.data.refreshToken);
+					if (loginResponse.data.accessToken) {
+						await AsyncStorage.setItem("token", loginResponse.data.accessToken);
+						await AsyncStorage.setItem("refreshToken", loginResponse.data.refreshToken);
 
-            const userResponse = await api.get(`${API_BASE_URL}/users/me`);
-            await AsyncStorage.setItem("user", JSON.stringify(userResponse.data));
+						const userResponse = await api.get(`${API_BASE_URL}/users/me`);
+						await AsyncStorage.setItem("user", JSON.stringify(userResponse.data));
 
-            originalRequest.headers.Authorization = `Bearer ${loginResponse.data.accessToken}`;
-            return api(originalRequest);
-          }
-        }
-      } catch (firebaseError) {
-        // Todas estratégias falharam
-      }
+						originalRequest.headers.Authorization = `Bearer ${loginResponse.data.accessToken}`;
+						return api(originalRequest);
+					}
+				}
+			} catch (firebaseError) {
+				// Todas estratégias falharam
+			}
 
-      // Limpa tokens e redireciona
-      await AsyncStorage.multiRemove(["token", "refreshToken", "user"]);
-      // Navegação será tratada no componente
-    }
+			// Limpa tokens e redireciona
+			await AsyncStorage.multiRemove(["token", "refreshToken", "user"]);
+			// Navegação será tratada no componente
+		}
 
-    return Promise.reject(error);
-  }
+		return Promise.reject(error);
+	}
 );
 
 export const authService = {
-  login: async idToken => {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-      idToken,
-    });
+	login: async idToken => {
+		const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+			idToken,
+		});
 
-    await AsyncStorage.setItem("token", response.data.accessToken);
-    await AsyncStorage.setItem("refreshToken", response.data.refreshToken);
+		await AsyncStorage.setItem("token", response.data.accessToken);
+		await AsyncStorage.setItem("refreshToken", response.data.refreshToken);
 
-    const userResponse = await api.get(`${API_BASE_URL}/users/me`);
-    await AsyncStorage.setItem("user", JSON.stringify(userResponse.data));
+		const userResponse = await api.get(`${API_BASE_URL}/users/me`);
+		await AsyncStorage.setItem("user", JSON.stringify(userResponse.data));
 
-    return userResponse.data;
-  },
+		return userResponse.data;
+	},
 
-  logout: async () => {
-    await AsyncStorage.multiRemove(["token", "refreshToken", "user"]);
-    await auth().signOut();
-  },
+	logout: async () => {
+		await AsyncStorage.multiRemove(["token", "refreshToken", "user"]);
+		await auth().signOut();
+	},
 
-  isAuthenticated: async () => {
-    const token = await AsyncStorage.getItem("token");
-    return !!token;
-  },
+	isAuthenticated: async () => {
+		const token = await AsyncStorage.getItem("token");
+		return !!token;
+	},
 
-  getToken: async () => {
-    return await AsyncStorage.getItem("token");
-  },
+	getToken: async () => {
+		return await AsyncStorage.getItem("token");
+	},
 
-  getUser: async () => {
-    const user = await AsyncStorage.getItem("user");
-    return user ? JSON.parse(user) : null;
-  },
+	getUser: async () => {
+		const user = await AsyncStorage.getItem("user");
+		return user ? JSON.parse(user) : null;
+	},
 };
 
 export default api;
@@ -1837,12 +1814,12 @@ O `AuthContext` é um **gerenciador de estado global de autenticação** que uti
 import { useAuth } from "../context/AuthContext";
 
 function MeuComponente() {
-  const { user, loading, login, logout, isAuthenticated } = useAuth();
+	const { user, loading, login, logout, isAuthenticated } = useAuth();
 
-  if (loading) return <Loading />;
-  if (!user) return <LoginButton onPress={login} />;
+	if (loading) return <Loading />;
+	if (!user) return <LoginButton onPress={login} />;
 
-  return <Dashboard user={user} onLogout={logout} />;
+	return <Dashboard user={user} onLogout={logout} />;
 }
 ```
 
@@ -1859,115 +1836,115 @@ import { authService } from "../services/api";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [firebaseUser, setFirebaseUser] = useState(null);
+	const [user, setUser] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [firebaseUser, setFirebaseUser] = useState(null);
 
-  useEffect(() => {
-    let isInitialLoad = true;
+	useEffect(() => {
+		let isInitialLoad = true;
 
-    // Restaura estado
-    const restoreState = async () => {
-      const storedUser = await authService.getUser();
-      const hasToken = await authService.isAuthenticated();
+		// Restaura estado
+		const restoreState = async () => {
+			const storedUser = await authService.getUser();
+			const hasToken = await authService.isAuthenticated();
 
-      if (storedUser && hasToken) {
-        setUser(storedUser);
-      }
-    };
+			if (storedUser && hasToken) {
+				setUser(storedUser);
+			}
+		};
 
-    restoreState();
+		restoreState();
 
-    // Observer do Firebase
-    // Nota: onIdTokenChanged está disponível no @react-native-firebase/auth v6+
-    // Se não estiver disponível, use onAuthStateChanged e chame getIdToken() manualmente
-    const unsubscribe = auth().onIdTokenChanged(async firebaseUser => {
-      setFirebaseUser(firebaseUser);
+		// Observer do Firebase
+		// Nota: onIdTokenChanged está disponível no @react-native-firebase/auth v6+
+		// Se não estiver disponível, use onAuthStateChanged e chame getIdToken() manualmente
+		const unsubscribe = auth().onIdTokenChanged(async firebaseUser => {
+			setFirebaseUser(firebaseUser);
 
-      if (firebaseUser) {
-        try {
-          const idToken = await firebaseUser.getIdToken();
-          await authService.login(idToken);
+			if (firebaseUser) {
+				try {
+					const idToken = await firebaseUser.getIdToken();
+					await authService.login(idToken);
 
-          const updatedUser = await authService.getUser();
-          if (updatedUser) {
-            setUser(updatedUser);
-          }
-        } catch (error) {
-          console.error("Erro ao renovar token:", error);
-          if (error.response?.status === 401 || error.response?.status === 403) {
-            await authService.logout();
-            setUser(null);
-          }
-        }
-      } else {
-        await authService.logout();
-        setUser(null);
-      }
+					const updatedUser = await authService.getUser();
+					if (updatedUser) {
+						setUser(updatedUser);
+					}
+				} catch (error) {
+					console.error("Erro ao renovar token:", error);
+					if (error.response?.status === 401 || error.response?.status === 403) {
+						await authService.logout();
+						setUser(null);
+					}
+				}
+			} else {
+				await authService.logout();
+				setUser(null);
+			}
 
-      if (isInitialLoad) {
-        isInitialLoad = false;
-        setLoading(false);
-      }
-    });
+			if (isInitialLoad) {
+				isInitialLoad = false;
+				setLoading(false);
+			}
+		});
 
-    return () => unsubscribe();
-  }, []);
+		return () => unsubscribe();
+	}, []);
 
-  const login = async idToken => {
-    try {
-      const userData = await authService.login(idToken);
+	const login = async idToken => {
+		try {
+			const userData = await authService.login(idToken);
 
-      if (!userData?.role) {
-        await logout();
-        return { success: false, error: "Usuário não possui permissões" };
-      }
+			if (!userData?.role) {
+				await logout();
+				return { success: false, error: "Usuário não possui permissões" };
+			}
 
-      const roles = Array.isArray(userData.role) ? userData.role : [userData.role];
-      const isAdmin = roles.includes("ADMIN");
+			const roles = Array.isArray(userData.role) ? userData.role : [userData.role];
+			const isAdmin = roles.includes("ADMIN");
 
-      if (!isAdmin) {
-        await logout();
-        return { success: false, error: "Apenas administradores podem acessar" };
-      }
+			if (!isAdmin) {
+				await logout();
+				return { success: false, error: "Apenas administradores podem acessar" };
+			}
 
-      setUser(userData);
-      return { success: true };
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      return { success: false, error: error.message };
-    }
-  };
+			setUser(userData);
+			return { success: true };
+		} catch (error) {
+			console.error("Erro ao fazer login:", error);
+			return { success: false, error: error.message };
+		}
+	};
 
-  const logout = async () => {
-    setUser(null);
-    setFirebaseUser(null);
-    await authService.logout();
-  };
+	const logout = async () => {
+		setUser(null);
+		setFirebaseUser(null);
+		await authService.logout();
+	};
 
-  const isAuthenticated = async () => {
-    const hasToken = await authService.isAuthenticated();
-    return !!(user && hasToken);
-  };
+	const isAuthenticated = async () => {
+		const hasToken = await authService.isAuthenticated();
+		return !!(user && hasToken);
+	};
 
-  const value = {
-    user,
-    loading,
-    firebaseUser,
-    login,
-    logout,
-    isAuthenticated,
-  };
+	const value = {
+		user,
+		loading,
+		firebaseUser,
+		login,
+		logout,
+		isAuthenticated,
+	};
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth deve ser usado dentro de AuthProvider");
-  }
-  return context;
+	const context = useContext(AuthContext);
+	if (!context) {
+		throw new Error("useAuth deve ser usado dentro de AuthProvider");
+	}
+	return context;
 };
 ```
 
@@ -1989,105 +1966,105 @@ import { useAuth } from "../context/AuthContext";
 
 // Configura Google Sign-In
 GoogleSignin.configure({
-  webClientId: "SEU_WEB_CLIENT_ID", // Do Firebase Console
+	webClientId: "SEU_WEB_CLIENT_ID", // Do Firebase Console
 });
 
 export default function LoginScreen({ navigation }) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { login } = useAuth();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+	const { login } = useAuth();
 
-  const handleGoogleSignIn = async () => {
-    setError("");
-    setLoading(true);
+	const handleGoogleSignIn = async () => {
+		setError("");
+		setLoading(true);
 
-    try {
-      // Garante logout anterior
-      if (auth().currentUser) {
-        await auth().signOut();
-      }
+		try {
+			// Garante logout anterior
+			if (auth().currentUser) {
+				await auth().signOut();
+			}
 
-      // Obtém ID token do Google
-      await GoogleSignin.hasPlayServices();
-      const { idToken } = await GoogleSignin.signIn();
+			// Obtém ID token do Google
+			await GoogleSignin.hasPlayServices();
+			const { idToken } = await GoogleSignin.signIn();
 
-      // Cria credencial do Firebase
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+			// Cria credencial do Firebase
+			const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-      // Faz login no Firebase
-      const result = await auth().signInWithCredential(googleCredential);
-      const firebaseIdToken = await result.user.getIdToken();
+			// Faz login no Firebase
+			const result = await auth().signInWithCredential(googleCredential);
+			const firebaseIdToken = await result.user.getIdToken();
 
-      // Envia para AuthContext
-      const loginResult = await login(firebaseIdToken);
+			// Envia para AuthContext
+			const loginResult = await login(firebaseIdToken);
 
-      if (loginResult.success) {
-        navigation.replace("Dashboard");
-      } else {
-        setError(loginResult.error || "Erro ao fazer login");
-      }
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      setError("Erro ao fazer login. Tente novamente.");
-    } finally {
-      setLoading(false);
-    }
-  };
+			if (loginResult.success) {
+				navigation.replace("Dashboard");
+			} else {
+				setError(loginResult.error || "Erro ao fazer login");
+			}
+		} catch (error) {
+			console.error("Erro ao fazer login:", error);
+			setError("Erro ao fazer login. Tente novamente.");
+		} finally {
+			setLoading(false);
+		}
+	};
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Entrar na sua conta</Text>
+	return (
+		<View style={styles.container}>
+			<Text style={styles.title}>Entrar na sua conta</Text>
 
-      <TouchableOpacity
-        style={[styles.button, loading && styles.buttonDisabled]}
-        onPress={handleGoogleSignIn}
-        disabled={loading}>
-        {loading ? (
-          <ActivityIndicator color="#fff" />
-        ) : (
-          <Text style={styles.buttonText}>Entrar com Google</Text>
-        )}
-      </TouchableOpacity>
+			<TouchableOpacity
+				style={[styles.button, loading && styles.buttonDisabled]}
+				onPress={handleGoogleSignIn}
+				disabled={loading}>
+				{loading ? (
+					<ActivityIndicator color="#fff" />
+				) : (
+					<Text style={styles.buttonText}>Entrar com Google</Text>
+				)}
+			</TouchableOpacity>
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
-    </View>
-  );
+			{error ? <Text style={styles.error}>{error}</Text> : null}
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    backgroundColor: "#f5f5f5",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 30,
-  },
-  button: {
-    backgroundColor: "#4285f4",
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 5,
-    minWidth: 200,
-    alignItems: "center",
-  },
-  buttonDisabled: {
-    opacity: 0.6,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  error: {
-    color: "#d32f2f",
-    marginTop: 10,
-    textAlign: "center",
-  },
+	container: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		padding: 20,
+		backgroundColor: "#f5f5f5",
+	},
+	title: {
+		fontSize: 24,
+		fontWeight: "bold",
+		marginBottom: 30,
+	},
+	button: {
+		backgroundColor: "#4285f4",
+		paddingHorizontal: 30,
+		paddingVertical: 15,
+		borderRadius: 5,
+		minWidth: 200,
+		alignItems: "center",
+	},
+	buttonDisabled: {
+		opacity: 0.6,
+	},
+	buttonText: {
+		color: "#fff",
+		fontSize: 16,
+		fontWeight: "bold",
+	},
+	error: {
+		color: "#d32f2f",
+		marginTop: 10,
+		textAlign: "center",
+	},
 });
 ```
 
@@ -2113,46 +2090,41 @@ import { ActivityIndicator, View } from "react-native";
 const Stack = createNativeStackNavigator();
 
 function AppNavigator() {
-  const { isAuthenticated, loading, user } = useAuth();
+	const { isAuthenticated, loading, user } = useAuth();
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+	if (loading) {
+		return (
+			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+				<ActivityIndicator size="large" />
+			</View>
+		);
+	}
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {user ? (
-          <Stack.Screen name="Dashboard" component={DashboardScreen} />
-        ) : (
-          <Stack.Screen name="Login" component={LoginScreen} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator screenOptions={{ headerShown: false }}>
+				{user ? (
+					<Stack.Screen name="Dashboard" component={DashboardScreen} />
+				) : (
+					<Stack.Screen name="Login" component={LoginScreen} />
+				)}
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
 
 export default function App() {
-  return (
-    <PaperProvider>
-      <AuthProvider>
-        <AppNavigator />
-      </AuthProvider>
-    </PaperProvider>
-  );
+	return (
+		<PaperProvider>
+			<AuthProvider>
+				<AppNavigator />
+			</AuthProvider>
+		</PaperProvider>
+	);
 }
 ```
 
 </details>
-
-</details>
-
-<details>
-<summary>📄 Checklist de Implementação</summary>
 
 ## 6. Checklist de Implementação
 
@@ -2211,8 +2183,6 @@ export default function App() {
 - [ ] Implementar rate limiting
 - [ ] Validar roles e permissões
 - [ ] Revisar logs de segurança
-
-</details>
 
 ## 🎯 Conclusão
 
