@@ -48,7 +48,7 @@ O **UberHub Mentorias** é uma plataforma completa de mentorias desenvolvida com
 
 ---
 
-## ✨ Características Principais
+## ✨ Características Principais {#caracter%C3%ADsticas-principais}
 
 ### Para Mentorados
 
@@ -78,7 +78,7 @@ O **UberHub Mentorias** é uma plataforma completa de mentorias desenvolvida com
 
 ---
 
-## 🏗️ Arquitetura
+## 🏗️ Arquitetura {#arquitetura}
 
 O sistema utiliza uma **arquitetura de microsserviços** com as seguintes características:
 
@@ -273,7 +273,7 @@ expo start
 
 ---
 
-## ⚙️ Configuração
+## ⚙️ Configuração {#configura%C3%A7%C3%A3o}
 
 ### Variáveis de Ambiente - Backend
 

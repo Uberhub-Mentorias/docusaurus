@@ -67,9 +67,9 @@ Aplicativo de Mentorias UberHub
 
 [**5\. Protótipos de tela**](#5.-prot%C3%B3tipos-de-tela)
 
-<a id="1.-introdução"></a>
+<a id="1.-introdu%C3%A7%C3%A3o"></a>
 
-# **1\. Introdução** {#1.-introdução}
+# **1\. Introdução** {#1.-introdu%C3%A7%C3%A3o}
 
 ## **1.1. Objetivos deste documento** {#1.1.-objetivos-deste-documento}
 
@@ -91,6 +91,8 @@ O sistema permite:
 
 O sistema é desenvolvido utilizando arquitetura de microsserviços, com backend em Spring Boot e aplicativos mobile em React Native.
 
+<a id="1.3-defini%C3%A7%C3%B5es-acr%C3%B4nimos-e-abrevia%C3%A7%C3%B5es"></a>
+
 ## **1.3 Definições, acrônimos e abreviações** {#1.3-definições-acrônimos-e-abreviações}
 
 | Palavra / Sigla | Definição                                                                            |
@@ -109,6 +111,8 @@ O sistema é desenvolvido utilizando arquitetura de microsserviços, com backend
 | Tags            | Categorias/áreas de conhecimento utilizadas para classificar mentores e solicitações |
 | Trilhas         | Conjunto de tags relacionadas que definem áreas de especialidade                     |
 
+<a id="1.4-refer%C3%AAncias"></a>
+
 ## **1.4 Referências** {#1.4-referências}
 
 | Material                   | Referência                                                                                                |
@@ -119,13 +123,15 @@ O sistema é desenvolvido utilizando arquitetura de microsserviços, com backend
 | Fluxos e Jornadas          | Documento "FLUXOS-JORNADAS-OPERACOES.md" - Descreve as jornadas dos usuários                              |
 | Mockups                    | Arquivos "Mockup Baixa Fidelidade" - Protótipos de interface do sistema                                   |
 
-<a id="2.-visão-geral-do-sistema"></a>
+<a id="2.-vis%C3%A3o-geral-do-sistema"></a>
 
-# **2\. Visão Geral do Sistema** {#2.-visão-geral-do-sistema}
+# **2\. Visão Geral do Sistema** {#2.-vis%C3%A3o-geral-do-sistema}
 
 ## **2.1. Nome do Produto** {#2.1.-nome-do-produto}
 
 **UberHub Mentorias**
+
+<a id="2.2.-prop%C3%B3sito-do-produto"></a>
 
 ## **2.2. Propósito do Produto** {#2.2.-propósito-do-produto}
 
@@ -187,6 +193,8 @@ O produto visa:
 | RF17 | Permitir que administradores suspendam/reativem usuários                      | Média      |
 | RF18 | Permitir que administradores aprovem/reprovem solicitações de troca de mentor | Média      |
 
+<a id="3.2-requisitos-de-qualidade-n%C3%A3o-funcionais"></a>
+
 ## **3.2 Requisitos de Qualidade (Não Funcionais)** {#3.2-requisitos-de-qualidade-não-funcionais}
 
 | Id.   | Categoria(s)     | Descrição                                                                                                                                      |
@@ -205,6 +213,8 @@ O produto visa:
 | RNF12 | Código Aberto    | O código do sistema será publicado no GitHub sob licença de código aberto                                                                      |
 | RNF13 | Infraestrutura   | A arquitetura deve priorizar ferramentas gratuitas (MongoDB Atlas Free Tier, etc.) para minimizar custos                                       |
 | RNF14 | Observabilidade  | O sistema deve implementar logging adequado para rastreamento de operações                                                                     |
+
+<a id="4.-requisitos-funcionais"></a>
 
 <a id="4.-requisitos-funcionais"></a>
 
@@ -1453,8 +1463,11 @@ flowchart TD
 ---
 
 <a id="5.-protótipos-de-tela"></a>
+<a id="5.-prot%C3%B3tipos-de-tela"></a>
 
-# **5\. Protótipos de tela** {#5.-protótipos-de-tela}
+<a id="5.-prot%C3%B3tipos-de-tela"></a>
+
+# **5\. Protótipos de tela** {#5.-prot%C3%B3tipos-de-tela}
 
 Um protótipo de tela, também conhecido como mockup de tela, é uma representação visual de como uma interface de usuário (UI) deve parecer. Ele é usado para visualizar a estrutura, o layout e a funcionalidade de uma interface de usuário antes que o desenvolvimento real comece.
 

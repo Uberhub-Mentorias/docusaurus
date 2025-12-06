@@ -40,7 +40,7 @@
     - [Interceptor de Requisição (Request Interceptor)](#1-interceptor-de-requisição-request-interceptor)
     - [Interceptor de Resposta (Response Interceptor)](#2-interceptor-de-resposta-response-interceptor)
   - [Uso de `onIdTokenChanged`](#uso-de-onidtokenchanged)
-  - [Gerenciamento de Estado](#gerenciamento-de-estado)
+  - [Gerenciamento de Estado](#gerenciamento-de-estado-na-implementação)
   - [Integração entre Interceptors e AuthContext](#integração-entre-interceptors-e-authcontext)
 - [Detalhes de Implementação](#-detalhes-de-implementação)
   - [Variáveis de Estado](#variáveis-de-estado)
@@ -208,7 +208,7 @@ O sistema restaura sessões de forma transparente quando o navegador é reaberto
 3. **Rate limiting**: Implementar para prevenir abuso
 4. **Validação de email**: Verificar se email está verificado no Firebase
 
-## 🛠️ Configuração Necessária
+## 🛠️ Configuração Necessária {#configura%C3%A7%C3%A3o-necess%C3%A1ria}
 
 ### Backend
 
@@ -1127,6 +1127,8 @@ sequenceDiagram
 
 ## 🔧 Detalhes Técnicos
 
+<a id="gerenciamento-de-estado"></a>
+
 ### Entendendo Erros 401 em Detalhes
 
 #### Cenários Comuns de Erro 401
@@ -1418,6 +1420,8 @@ O sistema utiliza `onIdTokenChanged` para detectar mudanças no ID token do Fire
 - ✅ Mais preciso: dispara exatamente quando o token é renovado
 - ✅ Mais simples: menos código, menos pontos de falha
 - ✅ Segue práticas recomendadas do Firebase
+
+<a id="gerenciamento-de-estado"></a>
 
 ### Variáveis Compartilhadas via Context API
 
@@ -1895,6 +1899,8 @@ export const authService = {
 - **Abstração**: Esconde detalhes de implementação (localStorage, axios)
 - **Testabilidade**: Fácil mockar serviços em testes
 - **Reutilização**: Pode ser usado em diferentes contextos
+
+<a id="gerenciamento-de-estado-na-implementação"></a>
 
 ### Gerenciamento de Estado na Implementação
 

@@ -1,6 +1,5 @@
+# Guia Completo: CI/CD e GitHub 
 <a id="topo"></a>
-
-# 🔄 Guia Completo: CI/CD e GitHub
 
 > **Documentação completa de configuração e melhores práticas**
 
@@ -16,21 +15,17 @@
 - [GitHub Actions (CI/CD)](#github-actions-cicd)
 - [Dependabot](#dependabot)
 - [Branch Protection](#branch-protection)
-- [O que é `.gitattributes`?](#o-que-é-gitattributes)
+- [O que é `.gitattributes`?](#o-que-%C3%A9-gitattributes)
 - [Templates para Issues e Pull Requests](#templates-para-issues-e-pull-requests)
 - [Pre-commit Hooks](#pre-commit-hooks)
 - [CODEOWNERS](#codeowners)
-- [Versionamento Semântico](#versionamento-semântico)
+- [Versionamento Semântico](#versionamento-sem%C3%A2ntico)
 - [Estrutura de Branches](#estrutura-de-branches)
 - [Badges no README](#badges-no-readme)
-- [Documentação de Deploy](#documentação-de-deploy)
+- [Documentação de Deploy](#documenta%C3%A7%C3%A3o-de-deploy)
 - [CHANGELOG.md](#changelogmd)
-- [Revisar e Consolidar Remotes](#revisar-e-consolidar-remotes)
-- [Referências](#referências)
 
 ---
-
-<a id="visão-geral"></a>
 
 ## Visão Geral
 
@@ -207,15 +202,14 @@ Ver seção [Badges no README](#badges-no-readme)
 
 ---
 
-# 📚 Referências Detalhadas
+## 📚 Referências Detalhadas
 
 > _Documentação completa de cada tópico abordado no checklist_
 
 ---
 
-<a id="github-actions-cicd"></a>
-
-## GitHub Actions (CI/CD) **[⬆️](#topo)**
+## GitHub Actions (CI/CD) 
+[⬆️](#topo)
 
 ### 📖 O que é CI/CD
 
@@ -456,9 +450,9 @@ cd backend/auth-service && mvn test
 
 ---
 
+## Dependabot 
 <a id="dependabot"></a>
-
-## Dependabot **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### 📖 O que é Dependabot
 
@@ -523,9 +517,9 @@ O Dependabot categoriza atualizações em três tipos (usando [Semantic Versioni
 
 ---
 
+## Branch Protection 
 <a id="branch-protection"></a>
-
-## Branch Protection **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### ⚙️ Como Configurar Branch Protection
 
@@ -632,7 +626,6 @@ git push origin test-branch
 
 Entrar no GitHub/Pull Requests e criar um Pull Request a partir da branch test-branch para a branch main.
 
-
 3. **Resultado esperado:**
    - O botão "Merge" deve estar desabilitado até que:
      - ✅ Pelo menos 1 revisão seja aprovada
@@ -689,9 +682,9 @@ git push origin sua-branch
 
 ---
 
+## O que é `.gitattributes`? 
 <a id="o-que-é-gitattributes"></a>
-
-## O que é `.gitattributes`? **[⬆️](#topo)**
+[⬆️](#topo)
 
 O `.gitattributes` é um arquivo de configuração do Git que define atributos para arquivos e padrões. Ele resolve problemas de line endings (CRLF/LF), identifica arquivos binários e controla como o Git trata diferentes tipos de arquivo.
 
@@ -929,9 +922,9 @@ git check-attr -a nome-do-arquivo.js
 
 ---
 
+## Templates para Issues e Pull Requests 
 <a id="templates-para-issues-e-pull-requests"></a>
-
-## Templates para Issues e Pull Requests **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### O que são Templates?
 
@@ -1341,9 +1334,9 @@ Após criar os templates:
 
 ---
 
+## Pre-commit Hooks 
 <a id="pre-commit-hooks"></a>
-
-## Pre-commit Hooks **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### O que são Pre-commit Hooks?
 
@@ -1388,14 +1381,14 @@ npx husky add .husky/pre-commit "npx lint-staged"
 
 ```json
 {
-	"scripts": {
-		"prepare": "husky install"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
-		"*.{json,md,yml,yaml}": ["prettier --write"],
-		"*.{js,jsx,ts,tsx,json,md}": ["git add"]
-	}
+ "scripts": {
+  "prepare": "husky install"
+ },
+ "lint-staged": {
+  "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.{json,md,yml,yaml}": ["prettier --write"],
+  "*.{js,jsx,ts,tsx,json,md}": ["git add"]
+ }
 }
 ```
 
@@ -1478,23 +1471,23 @@ npm install --save-dev husky lint-staged
 
 ```json
 {
-	"name": "seu-projeto",
-	"version": "1.0.0",
-	"scripts": {
-		"prepare": "husky install"
-	},
-	"devDependencies": {
-		"husky": "^8.0.0",
-		"lint-staged": "^15.0.0",
-		"eslint": "^8.0.0",
-		"prettier": "^3.0.0"
-	},
-	"lint-staged": {
-		"*.{js,jsx}": ["eslint --fix", "prettier --write"],
-		"*.{ts,tsx}": ["eslint --fix", "prettier --write"],
-		"*.{json,md,yml,yaml}": ["prettier --write"],
-		"*.{js,jsx,ts,tsx,json,md}": ["git add"]
-	}
+ "name": "seu-projeto",
+ "version": "1.0.0",
+ "scripts": {
+  "prepare": "husky install"
+ },
+ "devDependencies": {
+  "husky": "^8.0.0",
+  "lint-staged": "^15.0.0",
+  "eslint": "^8.0.0",
+  "prettier": "^3.0.0"
+ },
+ "lint-staged": {
+  "*.{js,jsx}": ["eslint --fix", "prettier --write"],
+  "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.{json,md,yml,yaml}": ["prettier --write"],
+  "*.{js,jsx,ts,tsx,json,md}": ["git add"]
+ }
 }
 ```
 
@@ -1555,22 +1548,22 @@ npm install --save-dev @commitlint/cli @commitlint/config-conventional
 
 ```javascript
 module.exports = {
-	extends: ["@commitlint/config-conventional"],
-	rules: {
-		"type-enum": [
-			2,
-			"always",
-			[
-				"feat", // Nova feature
-				"fix", // Correção de bug
-				"docs", // Documentação
-				"style", // Formatação
-				"refactor", // Refatoração
-				"test", // Testes
-				"chore", // Manutenção
-			],
-		],
-	},
+ extends: ["@commitlint/config-conventional"],
+ rules: {
+  "type-enum": [
+   2,
+   "always",
+   [
+    "feat", // Nova feature
+    "fix", // Correção de bug
+    "docs", // Documentação
+    "style", // Formatação
+    "refactor", // Refatoração
+    "test", // Testes
+    "chore", // Manutenção
+   ],
+  ],
+ },
 };
 ```
 
@@ -1582,28 +1575,28 @@ module.exports = {
 
 ```json
 {
-	"name": "mentorias-frontend",
-	"version": "1.0.0",
-	"scripts": {
-		"prepare": "husky install",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-		"lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml,yaml}\""
-	},
-	"devDependencies": {
-		"husky": "^8.0.0",
-		"lint-staged": "^15.0.0",
-		"eslint": "^8.57.0",
-		"prettier": "^3.2.0",
-		"@typescript-eslint/eslint-plugin": "^6.0.0",
-		"@typescript-eslint/parser": "^6.0.0"
-	},
-	"lint-staged": {
-		"*.{js,jsx}": ["eslint --fix", "prettier --write"],
-		"*.{ts,tsx}": ["eslint --fix", "prettier --write"],
-		"*.{json,md,yml,yaml}": ["prettier --write"],
-		"*.{js,jsx,ts,tsx,json,md}": ["git add"]
-	}
+ "name": "mentorias-frontend",
+ "version": "1.0.0",
+ "scripts": {
+  "prepare": "husky install",
+  "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+  "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+  "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml,yaml}\""
+ },
+ "devDependencies": {
+  "husky": "^8.0.0",
+  "lint-staged": "^15.0.0",
+  "eslint": "^8.57.0",
+  "prettier": "^3.2.0",
+  "@typescript-eslint/eslint-plugin": "^6.0.0",
+  "@typescript-eslint/parser": "^6.0.0"
+ },
+ "lint-staged": {
+  "*.{js,jsx}": ["eslint --fix", "prettier --write"],
+  "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.{json,md,yml,yaml}": ["prettier --write"],
+  "*.{js,jsx,ts,tsx,json,md}": ["git add"]
+ }
 }
 ```
 
@@ -1771,9 +1764,9 @@ Os hooks serão executados automaticamente em cada commit.
 
 ---
 
+## CODEOWNERS 
 <a id="codeowners"></a>
-
-## CODEOWNERS **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### O que é CODEOWNERS?
 
@@ -2159,9 +2152,9 @@ tsconfig.json @frontend-lead @backend-lead
 
 ---
 
-<a id="versionamento-semântico"></a>
-
-## Versionamento Semântico **[⬆️](#topo)**
+## Versionamento Semântico 
+<a id="versionamento-sem%C3%A2ntico"></a>
+[⬆️](#topo)
 
 ### O que é Versionamento Semântico?
 
@@ -2293,7 +2286,7 @@ Informações adicionais (não afetam ordenação):
 ```json
 // package.json (web, mentorApp, mentoradoApp)
 {
-	"version": "0.1.0"
+ "version": "0.1.0"
 }
 ```
 
@@ -3190,9 +3183,9 @@ echo -e "${YELLOW}💡 Não esqueça de criar o GitHub Release manualmente${NC}"
 
 ---
 
+## Estrutura de Branches 
 <a id="estrutura-de-branches"></a>
-
-## Estrutura de Branches **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### O que é Estrutura de Branches?
 
@@ -3579,9 +3572,9 @@ main
 
 ---
 
+## Badges no README 
 <a id="badges-no-readme"></a>
-
-## Badges no README **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### O que são Badges?
 
@@ -3705,7 +3698,7 @@ Mostram estatísticas do repositório:
 
 ##### 1. Acesse
 
-Acesse: https://shields.io/
+Acesse: [shields.io/](https://shields.io/)
 
 ##### 2. Escolha o tipo de badge
 
@@ -3921,9 +3914,9 @@ Alguns badges são atualizados automaticamente:
 
 ---
 
-<a id="documentação-de-deploy"></a>
-
-## Documentação de Deploy **[⬆️](#topo)**
+## Documentação de Deploy 
+<a id="documenta%C3%A7%C3%A3o-de-deploy"></a>
+[⬆️](#topo)
 
 ### Por que Documentar o Processo de Deploy?
 
@@ -4058,6 +4051,7 @@ FIREBASE_API_KEY=your-prod-key
    ```
 
 4. Iniciar aplicação:
+
    ```bash
    npm run dev
    ```
@@ -4124,6 +4118,7 @@ O deploy em staging é automático via GitHub Actions quando código é mergeado
    ```
 
 7. Verificar status:
+
    ```bash
    pm2 status
    # ou
@@ -4277,6 +4272,7 @@ O deploy em staging é automático via GitHub Actions quando código é mergeado
    ```
 
 4. **Deploy no servidor:**
+
    ```bash
    ssh servidor
    docker pull registry.mentorias.com/backend:v1.2.0
@@ -4519,14 +4515,6 @@ git pull origin main
 npm run build -- --force
 ```
 
-## Contatos
-
-- **DevOps**: devops@mentorias.com
-- **Emergência**: +55 11 99999-9999
-- **Slack**: #deploy-alerts
-
-````
-
 ### Resumo
 
 - **Documentação de deploy** é essencial para reprodutibilidade e segurança
@@ -4539,9 +4527,9 @@ npm run build -- --force
 
 ---
 
+## CHANGELOG.md 
 <a id="changelogmd"></a>
-
-## CHANGELOG.md **[⬆️](#topo)**
+[⬆️](#topo)
 
 ### O que é CHANGELOG.md?
 
@@ -4679,9 +4667,9 @@ Correções de vulnerabilidades de segurança.
 
 ```json
 {
-	"scripts": {
-		"release": "standard-version"
-	}
+ "scripts": {
+  "release": "standard-version"
+ }
 }
 ```
 
@@ -4718,358 +4706,3 @@ O `standard-version` automaticamente:
 - Mantenha **atualizado** a cada release
 - Use ferramentas como **standard-version** para automatizar
 - **Integre com GitHub Releases** para facilitar comunicação
-
----
-
-<a id="revisar-e-consolidar-remotes"></a>
-
-## Revisar e Consolidar Remotes **[⬆️](#topo)**
-
-### O que são Git Remotes?
-
-Remotes são referências a repositórios Git remotos. Eles permitem que você trabalhe com repositórios hospedados em servidores (GitHub, GitLab, etc.) além do seu repositório local.
-
-### Por que Revisar e Consolidar Remotes?
-
-1. **Organização**: Evita confusão com múltiplos remotes
-2. **Segurança**: Remove remotes não autorizados ou obsoletos
-3. **Consistência**: Garante que todos usam os mesmos remotes
-4. **Performance**: Reduz overhead de remotes desnecessários
-5. **Clareza**: Facilita entender de onde vem o código
-
-### Verificar Remotes Configurados
-
-**Listar todos os remotes:**
-
-```bash
-# Listar remotes com URLs
-git remote -v
-
-# Saída exemplo:
-# origin    https://github.com/usuario/mentorias-frontend.git (fetch)
-# origin    https://github.com/usuario/mentorias-frontend.git (push)
-# upstream  https://github.com/original/mentorias-frontend.git (fetch)
-# upstream  https://github.com/original/mentorias-frontend.git (push)
-```
-
-**Ver detalhes de um remote específico:**
-
-```bash
-# Ver URL do remote
-git remote get-url origin
-
-# Ver todas as informações
-git remote show origin
-```
-
-### Tipos de Remotes Comuns
-
-#### 1. Origin (Principal)
-
-O remote principal do repositório, geralmente o seu fork ou repositório principal.
-
-```bash
-# Configurar origin
-git remote add origin https://github.com/usuario/mentorias-frontend.git
-
-# Ou alterar URL existente
-git remote set-url origin https://github.com/usuario/mentorias-frontend.git
-```
-
-#### 2. Upstream
-
-O repositório original (quando você tem um fork).
-
-```bash
-# Adicionar upstream
-git remote add upstream https://github.com/original/mentorias-frontend.git
-```
-
-### Problemas Comuns com Remotes
-
-#### Problema 1: Múltiplos Remotes Duplicados
-
-**Situação:** Vários remotes apontando para o mesmo repositório.
-
-**Solução:**
-
-```bash
-# Verificar remotes
-git remote -v
-
-# Remover remotes duplicados
-git remote remove remote-duplicado
-
-# Manter apenas origin
-git remote remove upstream  # Se não for necessário
-```
-
-#### Problema 2: URLs Incorretas
-
-**Situação:** Remote apontando para URL errada ou obsoleta.
-
-**Solução:**
-
-```bash
-# Verificar URL atual
-git remote get-url origin
-
-# Atualizar URL
-git remote set-url origin https://github.com/usuario/mentorias-frontend.git
-
-# Verificar se foi atualizado
-git remote -v
-```
-
-#### Problema 3: Mistura de HTTPS e SSH
-
-**Situação:** Alguns remotes usando HTTPS, outros SSH.
-
-**Solução:**
-
-**Converter para SSH (recomendado para desenvolvedores):**
-
-```bash
-# Converter origin de HTTPS para SSH
-git remote set-url origin git@github.com:usuario/mentorias-frontend.git
-```
-
-**Converter para HTTPS (mais simples para iniciantes):**
-
-```bash
-# Converter origin de SSH para HTTPS
-git remote set-url origin https://github.com/usuario/mentorias-frontend.git
-```
-
-### Consolidar Remotes
-
-#### Passo a Passo
-
-##### 1. Verificar remotes atuais
-
-```bash
-git remote -v
-```
-
-##### 2. Identificar remotes necessários
-
-- **origin**: Sempre necessário (repositório principal)
-- **upstream**: Necessário apenas se você tem um fork
-- **outros**: Avaliar se são realmente necessários
-
-##### 3. Remover remotes desnecessários
-
-```bash
-# Remover remote específico
-git remote remove nome-do-remote
-
-# Exemplo: remover remote de backup antigo
-git remote remove backup
-```
-
-##### 4. Atualizar URLs se necessário
-
-```bash
-# Atualizar URL do origin
-git remote set-url origin https://github.com/usuario/mentorias-frontend.git
-```
-
-##### 5. Verificar configuração final
-
-```bash
-git remote -v
-```
-
-### Configuração Recomendada
-
-#### Para Projeto Próprio (Sem Fork)
-
-```bash
-# Apenas origin
-git remote -v
-# origin    https://github.com/usuario/mentorias-frontend.git (fetch)
-# origin    https://github.com/usuario/mentorias-frontend.git (push)
-```
-
-#### Para Fork de Projeto
-
-```bash
-# Origin (seu fork) e upstream (original)
-git remote -v
-# origin    https://github.com/seu-usuario/mentorias-frontend.git (fetch)
-# origin    https://github.com/seu-usuario/mentorias-frontend.git (push)
-# upstream  https://github.com/original/mentorias-frontend.git (fetch)
-# upstream  https://github.com/original/mentorias-frontend.git (push)
-```
-
-### Comandos Úteis
-
-#### Adicionar Remote
-
-```bash
-# Adicionar novo remote
-git remote add nome https://github.com/usuario/repo.git
-
-# Adicionar upstream (exemplo)
-git remote add upstream https://github.com/original/repo.git
-```
-
-#### Remover Remote
-
-```bash
-# Remover remote
-git remote remove nome
-
-# Exemplo
-git remote remove upstream
-```
-
-#### Renomear Remote
-
-```bash
-# Renomear remote
-git remote rename nome-antigo nome-novo
-
-# Exemplo: renomear origin para main-repo
-git remote rename origin main-repo
-```
-
-#### Atualizar URL do Remote
-
-```bash
-# Atualizar URL
-git remote set-url nome nova-url
-
-# Exemplo: atualizar origin
-git remote set-url origin https://github.com/usuario/mentorias-frontend.git
-```
-
-#### Verificar Conexão
-
-```bash
-# Testar conexão com remote
-git remote show origin
-
-# Ou fazer fetch para testar
-git fetch origin
-```
-
-### Documentar Remotes
-
-**Adicionar no README.md ou CONTRIBUTING.md:**
-
-```markdown
-## Configuração de Remotes
-
-Este projeto usa os seguintes remotes:
-
-- **origin**: Repositório principal
-
-  - URL: `https://github.com/usuario/mentorias-frontend.git`
-  - Uso: Push e pull do código principal
-
-- **upstream**: Repositório original (se aplicável)
-  - URL: `https://github.com/original/mentorias-frontend.git`
-  - Uso: Sincronizar com mudanças do projeto original
-```
-
-### Troubleshooting
-
-#### Problema: Remote não encontrado
-
-**Erro:** `fatal: 'origin' does not appear to be a git repository`
-
-**Solução:**
-
-```bash
-# Verificar se remote existe
-git remote -v
-
-# Se não existir, adicionar
-git remote add origin https://github.com/usuario/repo.git
-```
-
-#### Problema: Erro de autenticação
-
-**Erro:** `Permission denied (publickey)` ou `Authentication failed`
-
-**Solução:**
-
-**Para SSH:**
-
-```bash
-# Verificar chave SSH
-ssh -T git@github.com
-
-# Se não funcionar, configurar chave SSH ou usar HTTPS
-```
-
-**Para HTTPS:**
-
-```bash
-# Usar token de acesso pessoal
-git remote set-url origin https://TOKEN@github.com/usuario/repo.git
-
-# Ou configurar credenciais
-git config --global credential.helper store
-```
-
-### Boas Práticas
-
-1. **Mantenha apenas remotes necessários**: Remova remotes não utilizados
-2. **Use nomes descritivos**: `origin`, `upstream`, não `remote1`, `remote2`
-3. **Documente remotes**: Explique no README quais remotes são usados
-4. **Padronize URLs**: Use HTTPS ou SSH consistentemente
-5. **Revise periodicamente**: Verifique remotes a cada poucos meses
-6. **Use origin como principal**: Mantenha `origin` como remote principal
-7. **Atualize URLs obsoletas**: Se repositório mudou de local, atualize
-
-### Checklist: Revisar Remotes
-
-Antes de considerar remotes consolidados:
-
-- [ ] Listou todos os remotes: `git remote -v`
-- [ ] Identificou remotes necessários vs desnecessários
-- [ ] Removeu remotes duplicados ou não utilizados
-- [ ] Verificou URLs estão corretas
-- [ ] Padronizou formato de URL (HTTPS ou SSH)
-- [ ] Testou conexão com cada remote: `git fetch <remote>`
-- [ ] Documentou remotes no README ou CONTRIBUTING.md
-- [ ] Atualizou scripts que referenciam remotes
-
-### Resumo
-
-- **Remotes** são referências a repositórios Git remotos
-- **Revise periodicamente** para manter organização
-- **Mantenha apenas remotes necessários** (geralmente apenas `origin`)
-- **Padronize URLs** (HTTPS ou SSH)
-- **Documente remotes** no README ou CONTRIBUTING.md
-- **Use `git remote -v`** para verificar configuração atual
-- **Remova remotes duplicados** ou não utilizados
-
----
-
-<a id="referências"></a>
-
-## Referências **[⬆️](#topo)**
-
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Dependabot Documentation](https://docs.github.com/en/code-security/dependabot)
-- [GitHub Branch Protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
-- [Setup Java Action](https://github.com/actions/setup-java)
-- [Setup Node Action](https://github.com/actions/setup-node)
-- [Codecov Action](https://github.com/codecov/codecov-action)
-- [Matrix Strategy](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs)
-- [Caching Dependencies](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
-
----
-
-**Última atualização:** 29/11/2025
-
-```
-
-```
-
-```
-
-```
