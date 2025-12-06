@@ -5,7 +5,6 @@ title: Documentos Originais
 sidebar_label: Início
 ---
 
-
 Esta seção contém os documentos originais do projeto UberHub Mentorias, organizados em suas categorias originais.
 
 ### 🔐 Autenticação
