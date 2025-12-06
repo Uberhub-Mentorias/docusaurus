@@ -129,6 +129,8 @@ Não exposto no API Gateway. Chamado apenas pelo Mentorship Service.
 
 ---
 
+<a id="admin-service"></a>
+
 ## ⚙️ Admin Service
 
 **URL Completa:** `http://localhost:8085/api/v1` | **Porta:** `8085`

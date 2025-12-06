@@ -1,4 +1,4 @@
-# Especificação de Endpoints 
+# Especificação de Endpoints
 
 **Projeto:** Aplicativo de Mentorias UberHub  
 **Data de Atualização:** 20 de Novembro de 2025  
@@ -481,6 +481,7 @@ Este índice permite navegar diretamente para o código de implementação de ca
 ### Processos Internos
 
 **RF-MDO-13 - Rotina de Expiração Automática:**
+
 - **Tipo:** Job/Scheduler interno (não é endpoint)
 - **Descrição:** Rotina que verifica mentorias com status `pending_match` ou `matched` que foram criadas há mais de 7 dias e não foram agendadas. Essas mentorias são automaticamente marcadas como `expired`.
 - **Frequência:** Executada periodicamente (ex: diariamente)
@@ -699,4 +700,3 @@ Este documento incorpora os seguintes ajustes identificados na análise comparat
 **Projeto:** UberHub Mentorias - IFTM Campus Uberlândia Centro  
 **Disciplina:** Projeto Aplicação para Dispositivos Móveis  
 **Versão:** 2.0 - Consolidado com Análise de Requisitos
-

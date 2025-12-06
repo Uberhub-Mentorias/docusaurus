@@ -17,7 +17,7 @@
 - [Considerações de Segurança](#-considerações-de-segurança)
   - [Boas Práticas Implementadas](#boas-práticas-implementadas)
   - [Pontos de Atenção](#pontos-de-atenção)
-- [Configuração Necessária](#-configuração-necessária)
+- [Configuração Necessária](#configuração-necessária)
   - [Backend](#backend)
   - [Frontend](#frontend)
 - [Fluxos de Autenticação](#-fluxos-de-autenticação)

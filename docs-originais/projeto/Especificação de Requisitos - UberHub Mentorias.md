@@ -67,6 +67,8 @@ Aplicativo de Mentorias UberHub
 
 [**5\. Protótipos de tela**](#5.-prot%C3%B3tipos-de-tela)
 
+<a id="1.-introdução"></a>
+
 # **1\. Introdução** {#1.-introdução}
 
 ## **1.1. Objetivos deste documento** {#1.1.-objetivos-deste-documento}
@@ -117,6 +119,8 @@ O sistema é desenvolvido utilizando arquitetura de microsserviços, com backend
 | Fluxos e Jornadas          | Documento "FLUXOS-JORNADAS-OPERACOES.md" - Descreve as jornadas dos usuários                              |
 | Mockups                    | Arquivos "Mockup Baixa Fidelidade" - Protótipos de interface do sistema                                   |
 
+<a id="2.-visão-geral-do-sistema"></a>
+
 # **2\. Visão Geral do Sistema** {#2.-visão-geral-do-sistema}
 
 ## **2.1. Nome do Produto** {#2.1.-nome-do-produto}
@@ -155,6 +159,8 @@ O produto visa:
 | Mentorado     | Solicitar mentorias, avaliar mentores, gerenciar histórico | Usuário que busca orientação e desenvolvimento profissional. Deve possuir voucher válido para solicitar mentorias.             |
 | Mentor        | Criar perfil, gerenciar mentorias, fornecer feedback       | Profissional experiente que oferece orientação. Deve ter perfil aprovado pelo administrador para ser elegível ao matchmaking.  |
 | Administrador | Gerenciar mentores, usuários, vouchers, analytics          | Responsável pela gestão completa do sistema, incluindo aprovação de mentores, geração de vouchers e monitoramento do programa. |
+
+<a id="3.-requisitos"></a>
 
 # **3\. Requisitos** {#3.-requisitos}
 
@@ -199,6 +205,8 @@ O produto visa:
 | RNF12 | Código Aberto    | O código do sistema será publicado no GitHub sob licença de código aberto                                                                      |
 | RNF13 | Infraestrutura   | A arquitetura deve priorizar ferramentas gratuitas (MongoDB Atlas Free Tier, etc.) para minimizar custos                                       |
 | RNF14 | Observabilidade  | O sistema deve implementar logging adequado para rastreamento de operações                                                                     |
+
+<a id="4.-requisitos-funcionais"></a>
 
 # **4\. Requisitos Funcionais** {#4.-requisitos-funcionais}
 
@@ -1443,6 +1451,8 @@ flowchart TD
 - RN75: A descrição da tag é opcional mas recomendada
 
 ---
+
+<a id="5.-protótipos-de-tela"></a>
 
 # **5\. Protótipos de tela** {#5.-protótipos-de-tela}
 

@@ -13,15 +13,15 @@
 
 ## Índice
 
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Características Principais](#-características-principais)
-- [Arquitetura](#-arquitetura)
-- [Tecnologias](#-tecnologias)
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Características Principais](#características-principais)
+- [Arquitetura](#arquitetura)
+- [Tecnologias](#tecnologias)
 - [Pré-requisitos](#-pré-requisitos)
 - [Instalação](#-instalação)
   - [Backend (Microserviços)](#backend-microserviços)
   - [Mobile (Aplicativos)](#mobile-aplicativos)
-- [Configuração](#-configuração)
+- [Configuração](#configuração)
 - [Executando o Projeto](#-executando-o-projeto)
 - [Documentação](#-documentação)
 - [Deploy](#-deploy)
@@ -204,14 +204,14 @@ curl http://localhost:8080/actuator/health
 
 **Serviços disponíveis:**
 
-- API Gateway: http://localhost:8080
-- Auth Service: http://localhost:8081
-- Profile Service: http://localhost:8082
-- Matchmaking Service: http://localhost:8083 (interno)
-- Mentorship Service: http://localhost:8084
-- Admin Service: http://localhost:8085
+- API Gateway: [http://localhost:8080](http://localhost:8080)
+- Auth Service: [http://localhost:8081](http://localhost:8081)
+- Profile Service: [http://localhost:8082](http://localhost:8082)
+- Matchmaking Service: [http://localhost:8083](http://localhost:8083) (interno)
+- Mentorship Service: [http://localhost:8084](http://localhost:8084)
+- Admin Service: [http://localhost:8085](http://localhost:8085)
 - MongoDB: mongodb://localhost:27017
-- Mongo Express: http://localhost:8086
+- Mongo Express: [http://localhost:8086](http://localhost:8086)
 
 #### Opção 2: Build Individual
 
@@ -306,12 +306,12 @@ Edite `app.json` em cada aplicativo:
 
 ```json
 {
-	"expo": {
-		"extra": {
-			"API_BASE_URL": "http://10.0.2.2:8080",
-			"ENV": "development"
-		}
-	}
+ "expo": {
+  "extra": {
+   "API_BASE_URL": "http://10.0.2.2:8080",
+   "ENV": "development"
+  }
+ }
 }
 ```
 
@@ -319,7 +319,7 @@ Edite `app.json` em cada aplicativo:
 
 - **Android Emulator**: `http://10.0.2.2:8080`
 - **iOS Simulator**: `http://localhost:8080`
-- **Dispositivo físico**: `http://<SEU_IP_NA_REDE>:8080`
+- **Dispositivo físico**: `http://SEU_IP_NA_REDE:8080` (substitua SEU_IP_NA_REDE pelo seu IP)
 - **Produção**: `https://api-gateway-production.up.railway.app`
 
 ---
@@ -401,12 +401,33 @@ Content-Type: application/json
 | NOTIFICATIONS.md   | Sistema de notificações push |
 | DEEP_LINKING.md    | Deep linking e navegação     |
 
-### API Documentation (Swagger UI)
+### API Documentation (Swagger UI) - localhost
 
-- Auth Service: http://localhost:8081/swagger-ui.html
-- Profile Service: http://localhost:8082/swagger-ui.html
-- Mentorship Service: http://localhost:8084/swagger-ui.html
-- Admin Service: http://localhost:8085/swagger-ui.html
+| Serviço | URL |
+|---------|-----|
+| Auth Service        | http://localhost:8081/swagger-ui.html |
+| Profile Service     | http://localhost:8082/swagger-ui.html |
+| Mentorship Service  | http://localhost:8084/swagger-ui.html |
+| Admin Service       | http://localhost:8085/swagger-ui.html |
+
+### API Documentation (Swagger UI) - Heroku
+
+| Serviço | URL |
+|---------|-----|
+| Auth Service        | https://mentorias-auth-service-e42a31f301f5.herokuapp.com/swagger-ui.html         |
+| Profile Service     | https://mentorias-profile-service-7c1073700f9d.herokuapp.com/swagger-ui.html      |
+| Mentorship Service  | https://mentorias-mentorship-service-cf43e78b862a.herokuapp.com/swagger-ui.html   |
+| Admin Service       | https://mentorias-admin-service-486e18361fbc.herokuapp.com/swagger-ui.html        |
+| Matchmaking Service | https://mentorias-matchmaking-service-d7516fb4891c.herokuapp.com/swagger-ui.html  |
+
+### HEALTH CHECK - Heroku - Produção
+| Serviço | URL |
+|---------|-----|
+| Auth Service        | https://mentorias-api-gateway-10fcbc088ede.herokuapp.com/api/v1/auth/health         |
+| Profile Service     | https://mentorias-api-gateway-10fcbc088ede.herokuapp.com/api/v1/profiles/health     |
+| Mentorship Service  | https://mentorias-api-gateway-10fcbc088ede.herokuapp.com/api/v1/mentorships/health  |
+| Admin Service       | https://mentorias-api-gateway-10fcbc088ede.herokuapp.com/api/v1/admin/health        |
+| Matchmaking Service | https://mentorias-api-gateway-10fcbc088ede.herokuapp.com/api/v1/matchmaking/health  |
 
 ---
 
@@ -610,7 +631,7 @@ Ver CONTRIBUTING.md para mais detalhes.
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está licenciado sob a Licença MIT.
 
 ```
 Copyright (c) 2025 IFTM Campus Uberlândia Centro - UberHub Mentorias
@@ -636,9 +657,7 @@ Copyright (c) 2025 IFTM Campus Uberlândia Centro - UberHub Mentorias
 
 ## 📧 Contato
 
-- **Repositório**: [github.com/angoti/mentorias-starter](https://github.com/angoti/mentorias-starter)
 - **Issues**: [github.com/angoti/mentorias-starter/issues](https://github.com/angoti/mentorias-starter/issues)
-- **Discussões**: [github.com/angoti/mentorias-starter/discussions](https://github.com/angoti/mentorias-starter/discussions)
 
 ---
 

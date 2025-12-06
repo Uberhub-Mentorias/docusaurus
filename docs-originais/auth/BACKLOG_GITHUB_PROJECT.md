@@ -2,7 +2,7 @@
 
 ## Sumário
 
-- [Dados Gerais do Backlog](#-dados-gerais-do-backlog)
+- [Dados Gerais do Backlog](#dados-gerais-do-backlog)
   - [Visão Geral](#visão-geral)
   - [Estatísticas](#estatísticas)
   - [Estimativa Total](#estimativa-total)
