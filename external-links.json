@@ -1,0 +1,97 @@
+[
+  {
+    "text": "Firebase Console",
+    "url": "https://console.firebase.google.com/",
+    "file": "docs\\autenticacao\\configuracao-completa.md"
+  },
+  {
+    "text": "Firebase Console",
+    "url": "https://console.firebase.google.com/",
+    "file": "docs\\autenticacao\\sha1-android.md"
+  },
+  {
+    "text": "nodejs.org",
+    "url": "https://nodejs.org/",
+    "file": "docs\\guias-rapidos\\desenvolvedor.md"
+  },
+  {
+    "text": "git-scm.com",
+    "url": "https://git-scm.com/",
+    "file": "docs\\guias-rapidos\\desenvolvedor.md"
+  },
+  {
+    "text": "code.visualstudio.com",
+    "url": "https://code.visualstudio.com/",
+    "file": "docs\\guias-rapidos\\desenvolvedor.md"
+  },
+  {
+    "text": "Abra uma Issue no GitHub",
+    "url": "https://github.com/uberhub-mentorias/docusaurus/issues",
+    "file": "docs\\intro.md"
+  },
+  {
+    "text": "React Documentation",
+    "url": "https://react.dev/",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "React Native Documentation",
+    "url": "https://reactnative.dev/",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Firebase Documentation",
+    "url": "https://firebase.google.com/docs",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Expo Documentation",
+    "url": "https://docs.expo.dev/",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "React - Rocketseat",
+    "url": "https://www.rocketseat.com.br/discover",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Começar a usar o Firebase Studio",
+    "url": "https://firebase.google.com/codelabs/firebase-studio-intro?hl=pt-br#0",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Codelab do Cloud Firestore para Android",
+    "url": "https://firebase.google.com/codelabs/firestore-android?hl=pt-br#0",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Codelab do Firebase para Android:crie o Friendly Chat",
+    "url": "https://firebase.google.com/codelabs/firebase-android?hl=pt-br#0",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Codelab da Web do Cloud Firestore",
+    "url": "https://firebase.google.com/codelabs/firestore-web?hl=pt-br#0",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Introdução ao Firebase para Web",
+    "url": "https://firebase.google.com/codelabs/firebase-get-to-know-web?hl=pt-br#0",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Usar o FCM e as Mensagens no app para enviar mensagens aos usuários",
+    "url": "https://firebase.google.com/codelabs/fcm-and-fiam?hl=pt-br#0",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "Codelabs do FCM",
+    "url": "https://firebase.google.com/docs/cloud-messaging/codelab?hl=pt-br",
+    "file": "docs\\roteiro-estudos.md"
+  },
+  {
+    "text": "GitHub Issues do Projeto",
+    "url": "https://github.com/uberhub-mentorias/docusaurus/issues",
+    "file": "docs\\roteiro-estudos.md"
+  }
+]

@@ -71,8 +71,30 @@ const config = {
 		],
 	],
 
-	themes: ["@docusaurus/theme-mermaid"],
+	themes: [
+		"@docusaurus/theme-mermaid",
+		[
+			require.resolve("@easyops-cn/docusaurus-search-local"),
+			{
+				hashed: true,
+				language: ["pt", "en"], // idiomas da sua documentação
+				highlightSearchTermsOnTargetPage: true,
+				explicitSearchResultPath: true,
+			},
+		],
+	],
+	
 	markdown: { mermaid: true },
+
+	headTags: [
+		{
+			tagName: 'meta',
+			attributes: {
+				name: 'algolia-site-verification',
+				content: '15C6D64EC874356A',
+			},
+		},
+	],
 
 	themeConfig:
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
