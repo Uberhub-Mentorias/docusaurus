@@ -1,6 +1,6 @@
-# 📋 Backlog - GitHub Project
+# Backlog - GitHub Project
 
-## 📑 Sumário
+## Sumário
 
 - [Dados Gerais do Backlog](#-dados-gerais-do-backlog)
   - [Visão Geral](#visão-geral)
@@ -25,7 +25,7 @@
 
 ---
 
-## 📊 Dados Gerais do Backlog
+## Dados Gerais do Backlog
 
 ### Visão Geral
 
