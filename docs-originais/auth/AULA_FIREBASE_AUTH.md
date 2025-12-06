@@ -1,4 +1,4 @@
-# 🎓 Aula: Arquitetura de Autenticação Dupla | Firebase + Backend Microserviços
+# Aula: Arquitetura de Autenticação Dupla | Firebase + Backend Microserviços
 
 ```mermaid
 graph TB
