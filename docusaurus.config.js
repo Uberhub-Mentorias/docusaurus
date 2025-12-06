@@ -204,8 +204,26 @@ const config = {
 							},
 						],
 					},
+					{
+						title: "Equipe",
+						items: [
+							{
+								label: "Professor Edson Angoti Jr",
+								href: "https://github.com/angoti",
+							},
+							{
+								label: "Professor Lucas Montanheiro",
+								href: "https://github.com/lucasmontanheiro",
+							},
+						],
+					},
 				],
 				copyright: `Copyright © ${new Date().getFullYear()} IFTM - Instituto Federal do Triângulo Mineiro. Built with Docusaurus.`,
+				logo: {
+					alt: "IFTM Logo",
+					src: "img/logo.png",
+
+				},
 			},
 			prism: {
 				theme: prismThemes.github,

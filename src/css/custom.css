@@ -6,11 +6,18 @@
 
 /* You can override the default Infima variables here. */
 
+.footer__logo {
+	margin-top: 1rem;
+	max-width: 40px;
+	height: auto;
+	opacity: 1 !important;
+}
+
 /* Estilo customizado para o item Quick Start */
 .navbar-item-quickstart {
-  /* Seus estilos aqui */
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
+	/* Seus estilos aqui */
+	border-radius: 4px;
+	padding: 0.5rem 1rem;
 	font-size: 1.5rem;
 }
 
@@ -19,11 +26,11 @@
 } */
 
 .navbar__inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-		align-items: center;
-    width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
 }
 
 :root {
