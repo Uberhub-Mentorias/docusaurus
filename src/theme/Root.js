@@ -64,6 +64,54 @@ export default function Root({ children }) {
 		};
 	}, []);
 
+	// Adicionar tooltips nos itens do menu
+	React.useEffect(() => {
+		const addTooltips = () => {
+			// Mapeamento de labels para tooltips
+			const tooltips = {
+				Documentação: "Acesse a documentação completa do projeto",
+				"📁 Docs Originais": "Documentação original do projeto",
+				"🚀": "Guia rápido de início",
+				"🗺️": "Mapa do conhecimento do projeto",
+				"📖": "Roteiro de estudos recomendado",
+				GitHub: "Acesse o repositório no GitHub",
+			};
+
+			// Adicionar tooltips aos links da navbar
+			const navbarLinks = document.querySelectorAll(".navbar__item a, .navbar__link");
+			navbarLinks.forEach(link => {
+				const text = link.textContent.trim();
+				const tooltip = tooltips[text];
+
+				if (tooltip) {
+					// Remover title nativo para evitar tooltip duplicada
+					link.removeAttribute("title");
+					// Adicionar apenas data-tooltip para a tooltip customizada
+					link.setAttribute("data-tooltip", tooltip);
+				}
+			});
+		};
+
+		// Tentar adicionar tooltips após um delay
+		setTimeout(addTooltips, 500);
+
+		// Observar mudanças no DOM para adicionar tooltips em elementos dinâmicos
+		const observer = new MutationObserver(() => {
+			setTimeout(addTooltips, 100);
+		});
+
+		if (document.body) {
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true,
+			});
+		}
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
+
 	React.useEffect(() => {
 		console.log("[Root] Componente Root carregado");
 

@@ -13,7 +13,7 @@ import Link from '@docusaurus/Link';
 
 ---
 
-## 🎯 Qual é seu objetivo?
+## Qual é seu objetivo?
 
 <div className="row">
   <div className="col col--6">
@@ -95,7 +95,7 @@ import Link from '@docusaurus/Link';
 
 ---
 
-## 📋 Pré-requisitos Gerais
+## Pré-requisitos Gerais
 
 Antes de começar, certifique-se de ter:
 
@@ -108,13 +108,13 @@ Antes de começar, certifique-se de ter:
 
 ---
 
-## 🗺️ Não sabe por onde começar?
+## Não sabe por onde começar?
 
 Explore o **[Mapa do Conhecimento](/docs/mapa-conhecimento)** - uma visualização estilo "metrô" que mostra todos os conteúdos e suas conexões!
 
 ---
 
-## 📚 Documentação Completa
+## Documentação Completa
 
 Se você precisa de informações mais detalhadas, explore:
 

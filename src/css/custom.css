@@ -5,6 +5,27 @@
  */
 
 /* You can override the default Infima variables here. */
+
+/* Estilo customizado para o item Quick Start */
+.navbar-item-quickstart {
+  /* Seus estilos aqui */
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+	font-size: 1.5rem;
+}
+
+/* .navbar-item-quickstart:hover {
+  background-color: #e0e0e0;
+} */
+
+.navbar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+		align-items: center;
+    width: 100%;
+}
+
 :root {
 	--ifm-color-primary: #2e8555;
 	--ifm-color-primary-dark: #29784c;
@@ -17,7 +38,6 @@
 	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 	/* Garantir navbar branca no modo claro */
 	--ifm-navbar-background-color: #ffffff;
-
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -63,9 +83,125 @@
 /* Garantir que a navbar seja branca no modo claro */
 .navbar {
 	background-color: #ffffff !important;
+	min-height: 80px; /* Altura mínima para acomodar logo maior */
+	align-items: center; /* Centraliza verticalmente todos os elementos */
+	padding: 0.5rem 1rem; /* Espaçamento interno */
 }
 
 /* No modo escuro, usar a cor padrão do tema */
 [data-theme="dark"] .navbar {
 	background-color: var(--ifm-background-surface-color) !important;
+}
+
+/* Ajustar tamanho do logo */
+.navbar__logo {
+	height: 60px; /* Tamanho do logo */
+	width: auto; /* Mantém proporção */
+	margin-right: 0.5rem; /* Espaço entre logo e título */
+}
+
+/* Garantir que o container do logo e título fique alinhado */
+.navbar__brand {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+/* Ajustar título ao lado do logo */
+.navbar__title {
+	margin: 0;
+	line-height: 1.2;
+}
+
+/* Garantir que os itens do menu fiquem alinhados verticalmente */
+.navbar__items {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+/* Ajustar itens individuais */
+.navbar__item {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+/* ============================================
+   TOOLTIPS PARA ITENS DO MENU
+   ============================================ */
+
+/* Tooltip customizado - desabilitar tooltip nativo do navegador */
+.navbar__link[data-tooltip],
+.navbar__item a[data-tooltip] {
+	position: relative;
+}
+
+/* Remover tooltip nativo quando há data-tooltip */
+.navbar__link[data-tooltip][title],
+.navbar__item a[data-tooltip][title] {
+	pointer-events: auto;
+}
+
+.navbar__link[data-tooltip]:hover::after,
+.navbar__item a[data-tooltip]:hover::after {
+	content: attr(data-tooltip);
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 8px;
+	padding: 8px 12px;
+	background-color: #1f2937;
+	color: #ffffff;
+	border-radius: 6px;
+	font-size: 0.8125rem;
+	white-space: nowrap;
+	z-index: 1000;
+	pointer-events: none;
+	opacity: 0;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	animation: tooltipFadeIn 0.2s ease-in-out forwards;
+	font-weight: 500;
+	line-height: 1.4;
+}
+
+.navbar__link[data-tooltip]:hover::before,
+.navbar__item a[data-tooltip]:hover::before {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 2px;
+	border: 6px solid transparent;
+	border-bottom-color: #1f2937;
+	z-index: 1001;
+	pointer-events: none;
+	opacity: 0;
+	animation: tooltipFadeIn 0.2s ease-in-out forwards;
+}
+
+@keyframes tooltipFadeIn {
+	from {
+		opacity: 0;
+		transform: translateX(-50%) translateY(-5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+}
+
+/* Tooltip no modo escuro */
+[data-theme="dark"] .navbar__link[data-tooltip]:hover::after,
+[data-theme="dark"] .navbar__item a[data-tooltip]:hover::after {
+	background-color: #374151;
+	color: #f9fafb;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .navbar__link[data-tooltip]:hover::before,
+[data-theme="dark"] .navbar__item a[data-tooltip]:hover::before {
+	border-bottom-color: #374151;
 }

@@ -83,15 +83,15 @@ const config = {
 			},
 		],
 	],
-	
+
 	markdown: { mermaid: true },
 
 	headTags: [
 		{
-			tagName: 'meta',
+			tagName: "meta",
 			attributes: {
-				name: 'algolia-site-verification',
-				content: '15C6D64EC874356A',
+				name: "algolia-site-verification",
+				content: "15C6D64EC874356A",
 			},
 		},
 	],
@@ -115,14 +115,14 @@ const config = {
 				title: "UberHub Mentorias",
 				logo: {
 					alt: "UberHub Logo",
-					src: "img/logo.svg",
+					src: "img/Uberhub_Mentorias_icon_compressed-removebg-preview.png",
 				},
 				items: [
 					{
 						type: "docSidebar",
 						sidebarId: "docsSidebar",
 						position: "left",
-						label: "📚 Documentação",
+						label: "Documentação",
 					},
 					{
 						to: "/docs-originais/intro",
@@ -131,18 +131,21 @@ const config = {
 					},
 					{
 						to: "/docs/guias-rapidos/inicio",
-						label: "🚀 Quick Start",
+						label: "🚀",
 						position: "left",
+						className: "navbar-item-quickstart",
 					},
 					{
 						to: "/docs/mapa-conhecimento",
-						label: "🗺️ Mapa do Conhecimento",
+						label: "🗺️",
 						position: "left",
+						className: "navbar-item-quickstart",
 					},
 					{
 						to: "/docs/roteiro-estudos",
-						label: "📖 Roteiro de Estudos",
+						label: "📖",
 						position: "left",
+						className: "navbar-item-quickstart",
 					},
 					{
 						href: "https://github.com/uberhub-mentorias/docusaurus",

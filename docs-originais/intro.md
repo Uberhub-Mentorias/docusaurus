@@ -5,11 +5,8 @@ title: Documentos Originais
 sidebar_label: Início
 ---
 
-# 📁 Documentos Originais
 
 Esta seção contém os documentos originais do projeto UberHub Mentorias, organizados em suas categorias originais.
-
-## 📂 Conteúdo
 
 ### 🔐 Autenticação
 Documentos relacionados ao fluxo de autenticação com Firebase, configuração e implementação.
