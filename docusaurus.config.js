@@ -222,7 +222,6 @@ const config = {
 				logo: {
 					alt: "IFTM Logo",
 					src: "img/logo.png",
-
 				},
 			},
 			prism: {
@@ -232,7 +231,7 @@ const config = {
 			},
 			tableOfContents: {
 				minHeadingLevel: 2,
-				maxHeadingLevel: 4,
+				maxHeadingLevel: 3,
 			},
 		}),
 };

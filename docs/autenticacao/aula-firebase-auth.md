@@ -5,13 +5,11 @@ sidebar_label: 🎓 Aula Completa
 sidebar_position: 2
 ---
 
-# 🎓 Aula: Arquitetura de Autenticação Dupla
-
-> Tutorial completo de implementação do Firebase + Backend JWT
+# Autenticação Google
 
 ---
 
-## 📚 Índice
+## Índice
 
 1. [Fundamentos Teóricos](#fundamentos-teóricos)
 2. [Implementação React Web](#implementação-react-web)
