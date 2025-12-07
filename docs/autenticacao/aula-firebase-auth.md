@@ -94,132 +94,35 @@ Crie `src/config/firebase.js`:
 <summary>📄 Ver código completo: firebase.js</summary>
 
 ```javascript
-// src/config/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
+// Configuração do Firebase
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+ apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+ authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+ projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+ storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+ messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+ appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
+// Inicializa Firebase
 const app = initializeApp(firebaseConfig);
+
+// Inicializa Auth
 export const auth = getAuth(app);
 
+// Configura Google Provider
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
-  prompt: "select_account", // Força seleção de conta
+ prompt: "select_account", // Força seleção de conta
 });
 ```
 
 </details>
 
-### 3. AuthContext
-
-```javascript
-// src/context/AuthContext.js
-import { createContext, useContext, useEffect, useState } from "react";
-import { onIdTokenChanged } from "firebase/auth";
-import { auth } from "../config/firebase";
-
-const AuthContext = createContext(null);
-
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        const idToken = await firebaseUser.getIdToken();
-        // Renova tokens JWT...
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  return (
-    <AuthContext.Provider value={{ user, loading }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-export const useAuth = () => useContext(AuthContext);
-```
-
-### 4. Página de Login
-
-```javascript
-// src/pages/Login.js
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../config/firebase";
-
-export default function Login() {
-  const handleGoogleSignIn = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const idToken = await result.user.getIdToken();
-      // Envia para backend...
-    } catch (error) {
-      console.error("Erro:", error);
-    }
-  };
-
-  return (
-    <button onClick={handleGoogleSignIn}>
-      Entrar com Google
-    </button>
-  );
-}
-```
-
-> Teste a página de login no navegador: http://localhost:5173/login
-
-### 5. Criar Rota Protegida
-
-Crie `src/components/ProtectedRoute.js`:
-
-<details>
-<summary>📄 Ver código completo: ProtectedRoute.js</summary>
-
-```javascript
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-
-export default function ProtectedRoute({ children }) {
-  const { isAuthenticated, loading, user } = useAuth();
-
- if (loading) {
-   return <div>Carregando...</div>;
- }
-
- if (!isAuthenticated()) {
-   return <Navigate to="/login" replace />;
- }
-
- // Verifica se é admin
- const roles = Array.isArray(user?.role) ? user.role : [user?.role];
- const isAdmin = roles.includes("ADMIN");
-
- if (!isAdmin) {
-   return <Navigate to="/login?error=admin_required" replace />;
- }
-
- return children;
-}
-```
-
-</details>
-
-### 6. Configurar App.js
+### 3. Página principal - App.js
 
 Atualize `src/App.js`:
 
@@ -227,27 +130,59 @@ Atualize `src/App.js`:
 <summary>📄 Ver código completo: App.js</summary>
 
 ```javascript
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import "./App.css";
+import { useEffect, useState } from "react";
+import { onIdTokenChanged, signInWithPopup, signOut } from "firebase/auth";
+import { auth, googleProvider } from "./config/firebase";
 
 function App() {
+ const [user, setUser] = useState(null);
+
+ useEffect(() => {
+  const unsubscribe = onIdTokenChanged(auth, async firebaseUser => {
+   if (firebaseUser) {
+    setUser(firebaseUser);
+   } else {
+    setUser(null);
+   }
+  });
+  return () => unsubscribe();
+ }, []);
+
+ const isAuthenticated = !!user;
+
+ const handleGoogleSignIn = async () => {
+  try {
+   const result = await signInWithPopup(auth, googleProvider);
+   console.log(result);
+  } catch (error) {
+   console.error("Erro:", error);
+  }
+ };
+
+ const handleLogout = async () => {
+  try {
+   await signOut(auth);
+  } catch (error) {
+   console.error("Erro:", error);
+  }
+ };
+
  return (
-   <BrowserRouter>
-    <Routes>
-     <Route path="/login" element={<Login />} />
-     <Route
-      path="/"
-      element={
-       <ProtectedRoute>
-        <Dashboard />
-       </ProtectedRoute>
-      }
-     />
-     <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-   </BrowserRouter>
+  <div>
+   <h1>Uberhub Mentorias</h1>
+   {isAuthenticated ? (
+    <div>
+     <h1>Usuário autenticado</h1>
+     <button onClick={handleLogout}>Sair</button>
+    </div>
+   ) : (
+    <div>
+     <h1>Usuário não autenticado</h1>
+     <button onClick={handleGoogleSignIn}>Entrar com Google</button>
+    </div>
+   )}
+  </div>
  );
 }
 
@@ -256,7 +191,7 @@ export default App;
 
 </details>
 
-### 7. Testar Implementação
+### 4. Testar Implementação
 
 1. **Inicie o servidor de desenvolvimento**:
 
