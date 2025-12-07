@@ -183,6 +183,8 @@ export default function Login() {
 }
 ```
 
+> Teste a página de login no navegador: http://localhost:5173/login
+
 ### 5. Criar Rota Protegida
 
 Crie `src/components/ProtectedRoute.js`:

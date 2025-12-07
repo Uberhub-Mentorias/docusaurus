@@ -240,7 +240,7 @@ api.interceptors.response.use(
 
 ### 3.1 Fluxo Completo (Passo a Passo)
 
-#### Passo 1: Usuário Clica em "Entrar com Google"
+**Passo 1: Usuário Clica em "Entrar com Google"**
 
 ```text
 Usuário → Clica no botão → Frontend inicia processo
@@ -252,7 +252,7 @@ Usuário → Clica no botão → Frontend inicia processo
 - Firebase abre popup do Google
 - Usuário seleciona conta e autoriza
 
-#### Passo 2: Firebase Retorna ID Token
+**Passo 2: Firebase Retorna ID Token**
 
 ```text
 Firebase → Valida com Google → Retorna ID Token
@@ -264,7 +264,7 @@ Firebase → Valida com Google → Retorna ID Token
 - Firebase gera ID token
 - Frontend recebe o token
 
-#### Passo 3: Frontend Envia ID Token para Backend
+**Passo 3: Frontend Envia ID Token para Backend**
 
 ```text
 Frontend → POST /auth/login {idToken} → Backend
@@ -275,7 +275,7 @@ Frontend → POST /auth/login {idToken} → Backend
 - Frontend envia ID token para seu backend
 - Backend precisa validar esse token
 
-#### Passo 4: Backend Valida ID Token
+**Passo 4: Backend Valida ID Token**
 
 ```text
 Backend → Firebase Admin SDK → Valida ID Token
@@ -287,7 +287,7 @@ Backend → Firebase Admin SDK → Valida ID Token
 - Verifica se o token é válido
 - Obtém dados do usuário (email, nome, etc.)
 
-#### Passo 5: Backend Cria/Atualiza Usuário
+**Passo 5: Backend Cria/Atualiza Usuário**
 
 ```text
 Backend → MongoDB → Salva/Atualiza usuário
@@ -299,7 +299,7 @@ Backend → MongoDB → Salva/Atualiza usuário
 - Se não existe, cria novo usuário
 - Se existe, atualiza dados
 
-#### Passo 6: Backend Gera Tokens JWT
+**Passo 6: Backend Gera Tokens JWT**
 
 ```text
 Backend → Gera accessToken + refreshToken → Retorna ao Frontend
@@ -312,7 +312,7 @@ Backend → Gera accessToken + refreshToken → Retorna ao Frontend
   - **refreshToken**: Token de longa duração (7-30 dias)
 - Envia ambos ao frontend
 
-#### Passo 7: Frontend Armazena Tokens
+**Passo 7: Frontend Armazena Tokens**
 
 ```text
 Frontend → localStorage → Salva tokens
@@ -324,7 +324,7 @@ Frontend → localStorage → Salva tokens
 - Salva também dados do usuário
 - Estado de autenticação é atualizado
 
-#### Passo 8: Frontend Usa Tokens em Requisições
+**Passo 8: Frontend Usa Tokens em Requisições**
 
 ```text
 Frontend → Adiciona token no header → Backend valida → Retorna dados
@@ -446,7 +446,7 @@ yarn add firebase axios
 
 ### 4.3 Configuração do Firebase
 
-#### Obter Credenciais do Firebase
+**Obter Credenciais do Firebase**
 
 1. Acesse [Firebase Console](https://console.firebase.google.com/)
 2. Crie um projeto ou selecione existente
@@ -455,7 +455,7 @@ yarn add firebase axios
 5. Vá em **Project Settings** → **General**
 6. Copie as credenciais do app web
 
-#### Criar Arquivo de Configuração
+**Criar Arquivo de Configuração**
 
 Crie `src/config/firebase.js`:
 
@@ -491,7 +491,7 @@ googleProvider.setCustomParameters({
 
 </details>
 
-#### Criar Arquivo `.env`
+**Criar Arquivo `.env`**
 
 Crie `.env` na raiz do projeto:
 
@@ -504,7 +504,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=seu-sender-id
 VITE_FIREBASE_APP_ID=seu-app-id
 ```
 
-### 4.4 Criar Serviço de API
+**Criar Serviço de API**
 
 Crie `src/services/api.js`:
 
@@ -696,7 +696,7 @@ export default api;
 
 </details>
 
-### 4.5 Criar AuthContext
+**Criar AuthContext**
 
 Crie `src/context/AuthContext.js`:
 
@@ -837,7 +837,7 @@ export const useAuth = () => {
 
 </details>
 
-### 4.6 Criar Página de Login
+**Criar Página de Login**
 
 Crie `src/pages/Login.js`:
 
@@ -913,7 +913,7 @@ export default function Login() {
 
 </details>
 
-### 4.7 Criar Rota Protegida
+**Criar Rota Protegida**
 
 Crie `src/components/ProtectedRoute.js`:
 
@@ -949,7 +949,7 @@ export default function ProtectedRoute({ children }) {
 
 </details>
 
-### 4.8 Configurar App.js
+**Configurar App.js**
 
 Atualize `src/App.js`:
 
@@ -989,7 +989,7 @@ export default App;
 
 </details>
 
-### 4.9 Testar Implementação
+**Testar Implementação**
 
 1. **Inicie o servidor de desenvolvimento**:
 
@@ -1066,7 +1066,7 @@ npm install react-native-safe-area-context
 >
 > **Atenção**: Habilitar o provedor de login do Google no Firebase Console, embora este codelab habilite o provedor de login e-mail e senha.
 
-#### 5.3.1 google-services.json
+**5.3.1 google-services.json**
 
 Após criar o projeto no Firebase Console, faça o download do arquivo `google-services.json` e coloque na raiz do projeto.
 
@@ -1101,7 +1101,7 @@ Crie ou atualize `/app.json`:
 
 > **Nota**: No arquivo acima, o <span style={{color:"red", fontWeight:"bold"}}>package</span> deve corresponder ao package name configurado no Firebase Console (Configurações do projeto → Seus aplicativos → Android).
 
-#### O que é o Babel e por que precisamos do `babel.config.js`?
+**O que é o Babel e por que precisamos do `babel.config.js`?**
 
 O **Babel** é um transpilador JavaScript que converte código JavaScript moderno (ES6+, JSX, TypeScript) em código compatível com versões mais antigas do JavaScript, permitindo que você use recursos modernos mesmo em ambientes que não os suportam nativamente.
 
@@ -1114,7 +1114,7 @@ No contexto do React Native com Expo, o Babel é essencial para:
 
 O arquivo `babel.config.js` configura quais transformações o Babel deve aplicar ao seu código.
 
-#### Explicação do código
+**Explicação do código**
 
 ```javascript
 module.exports = function babelConfig(api) {
@@ -1323,7 +1323,7 @@ export { GoogleAuthProvider } from "firebase/auth";
 
 </details>
 
-#### 5.7 Exemplo de uso no App.js
+### 5.7 Exemplo de uso no App.js
 
 Atualize `/App.js`:
 
@@ -1547,7 +1547,7 @@ const styles = StyleSheet.create({
 
 </details>
 
-#### 5.8 Adicionar `.env` ao `.gitignore`
+### 5.8 Adicionar `.env` ao `.gitignore`
 
 Certifique-se de que `/.gitignore` inclui:
 
@@ -1563,7 +1563,7 @@ Certifique-se de que `/.gitignore` inclui:
 npx expo run:android
 ```
 
-#### O que este comando faz?
+**O que este comando faz?**
 
 O comando `npx expo run:android` é usado para criar e executar um **Development Build** do seu aplicativo React Native no Android. Este é um processo diferente do Expo Go tradicional e é necessário quando você usa bibliotecas nativas (como `@react-native-firebase/auth`).
 
@@ -1596,7 +1596,7 @@ O comando `npx expo run:android` é usado para criar e executar um **Development
 
 O serviço `api.js` é um **cliente HTTP centralizado** que gerencia todas as comunicações entre o aplicativo React Native e o backend. Ele implementa funcionalidades essenciais de autenticação e segurança de forma automática e transparente.
 
-#### Funções principais do serviço
+**Funções principais do serviço**
 
 1. **Cliente Axios configurado**: Cria uma instância do Axios com URL base e headers padrão configurados
 2. **Interceptador de Requisições (Request Interceptor)**:
@@ -1616,7 +1616,7 @@ O serviço `api.js` é um **cliente HTTP centralizado** que gerencia todas as co
    - `getToken()`: Retorna o token JWT atual
    - `getUser()`: Retorna os dados do usuário armazenados localmente
 
-#### Por que este serviço é importante
+**Por que este serviço é importante**
 
 - **Autenticação automática**: Você não precisa adicionar o token manualmente em cada requisição
 - **Renovação transparente**: Tokens expirados são renovados automaticamente sem interromper o fluxo do usuário
@@ -1624,7 +1624,7 @@ O serviço `api.js` é um **cliente HTTP centralizado** que gerencia todas as co
 - **Manutenibilidade**: Facilita mudanças futuras na estratégia de autenticação
 - **Experiência do usuário**: O usuário não percebe quando tokens são renovados em background
 
-#### Fluxo de uso típico
+**Fluxo de uso típico**
 
 ```javascript
 // Em qualquer componente ou serviço
@@ -1778,7 +1778,7 @@ export default api;
 
 O `AuthContext` é um **gerenciador de estado global de autenticação** que utiliza o React Context API para compartilhar informações de autenticação entre todos os componentes da aplicação, sem precisar passar props manualmente (prop drilling).
 
-#### Para que serve o AuthContext?
+**Para que serve o AuthContext?**
 
 1. **Estado global de autenticação**: Mantém o estado do usuário autenticado (`user`), estado de carregamento (`loading`) e usuário do Firebase (`firebaseUser`) acessível em qualquer componente
 2. **Sincronização automática**: Monitora mudanças no Firebase Auth através do `onIdTokenChanged` e sincroniza automaticamente os tokens JWT com o backend
@@ -1787,7 +1787,7 @@ O `AuthContext` é um **gerenciador de estado global de autenticação** que uti
 5. **Validação de permissões**: Verifica se o usuário possui as permissões necessárias (ex: role ADMIN) antes de permitir acesso
 6. **Funções centralizadas**: Fornece métodos `login()`, `logout()` e `isAuthenticated()` que podem ser usados em qualquer componente através do hook `useAuth()`
 
-#### Fluxo de funcionamento:
+**Fluxo de funcionamento:**
 
 ```
 1. App inicia → AuthProvider monta
@@ -1799,7 +1799,7 @@ O `AuthContext` é um **gerenciador de estado global de autenticação** que uti
 5. Componentes usam useAuth() para acessar estado e funções
 ```
 
-#### Benefícios:
+**Benefícios:**
 
 - **Evita prop drilling**: Não precisa passar `user`, `login`, `logout` como props por vários níveis
 - **Código mais limpo**: Componentes apenas chamam `const { user, login } = useAuth()`
@@ -1807,7 +1807,7 @@ O `AuthContext` é um **gerenciador de estado global de autenticação** que uti
 - **Reutilizável**: Qualquer componente pode acessar o estado de autenticação facilmente
 - **Manutenibilidade**: Toda lógica de autenticação fica centralizada em um único lugar
 
-#### Exemplo de uso em componentes:
+**Exemplo de uso em componentes:**
 
 ```javascript
 // Em qualquer componente
