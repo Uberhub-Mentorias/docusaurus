@@ -58,18 +58,18 @@ const config = {
 		],
 	],
 
-	plugins: [
-		[
-			"@docusaurus/plugin-content-docs",
-			{
-				id: "docs-originais",
-				path: "docs-originais",
-				routeBasePath: "docs-originais",
-				sidebarPath: "./sidebarsOriginais.js",
-				editUrl: "https://github.com/uberhub-mentorias/docusaurus/tree/main/",
-			},
-		],
-	],
+	// plugins: [
+	// 	[
+	// 		"@docusaurus/plugin-content-docs",
+	// 		{
+	// 			id: "docs-originais",
+	// 			path: "docs-originais",
+	// 			routeBasePath: "docs-originais",
+	// 			sidebarPath: "./sidebarsOriginais.js",
+	// 			editUrl: "https://github.com/uberhub-mentorias/docusaurus/tree/main/",
+	// 		},
+	// 	],
+	// ],
 
 	themes: [
 		"@docusaurus/theme-mermaid",
@@ -124,11 +124,11 @@ const config = {
 						position: "left",
 						label: "Documentação",
 					},
-					{
-						to: "/docs-originais/intro",
-						label: "📁 Docs Originais",
-						position: "left",
-					},
+					// {
+					// 	to: "/docs-originais/intro",
+					// 	label: "📁 Docs Originais",
+					// 	position: "left",
+					// },
 					{
 						to: "/docs/guias-rapidos/inicio",
 						label: "🚀",
