@@ -15,9 +15,8 @@ sidebar_position: 2
 
 ```bash
 # No diretório do projeto React
-npm install firebase axios
-# ou
-yarn add firebase axios
+npm install firebase axios react-router-dom
+
 ```
 
 ### 2. Configuração do Firebase

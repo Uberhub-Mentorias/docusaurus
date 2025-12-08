@@ -15,7 +15,16 @@ const sidebars = {
 				id: "autenticacao/aula-firebase-auth",
 			},
 			items: [],
-		},		
+		},
+		{
+			type: "category",
+			label: "Diagranas de Sequencia UML da Autenticação",
+			link: {
+				type: "doc",
+				id: "autenticacao/FIREBASE_AUTH_FLOW",
+			},
+			items: [],
+		},
 		{
 			type: "doc",
 			id: "intro",
