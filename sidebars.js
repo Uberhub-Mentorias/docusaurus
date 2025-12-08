@@ -8,6 +8,15 @@
 const sidebars = {
 	docsSidebar: [
 		{
+			type: "category",
+			label: "Autenticação",
+			link: {
+				type: "doc",
+				id: "autenticacao/aula-firebase-auth",
+			},
+			items: [],
+		},		
+		{
 			type: "doc",
 			id: "intro",
 			label: "🏠 Início",

@@ -23,19 +23,7 @@ Você precisa configurar SHA1 para:
 
 ## 🔑 Passo 1: Obter SHA1 de Debug
 
-### Usando Expo
-
-```bash
-cd mentorApp  # ou mentoradoApp
-npx expo credentials:manager
-```
-
-Selecione:
-1. Android
-2. credentials.json (build credentials)
-3. Copie o SHA1 fingerprint exibido
-
-### Usando Android Studio / Gradle
+### Usando Gradle
 
 ```bash
 cd android
