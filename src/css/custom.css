@@ -90,7 +90,7 @@
 /* Garantir que a navbar seja branca no modo claro */
 .navbar {
 	background-color: #ffffff !important;
-	min-height: 80px; /* Altura mínima para acomodar logo maior */
+	min-height: 60px; /* Altura mínima para acomodar logo maior */
 	align-items: center; /* Centraliza verticalmente todos os elementos */
 	padding: 0.5rem 1rem; /* Espaçamento interno */
 }
@@ -102,7 +102,7 @@
 
 /* Ajustar tamanho do logo */
 .navbar__logo {
-	height: 60px; /* Tamanho do logo */
+	height: 50px; /* Tamanho do logo */
 	width: auto; /* Mantém proporção */
 	margin-right: 0.5rem; /* Espaço entre logo e título */
 }
