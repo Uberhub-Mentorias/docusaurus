@@ -701,8 +701,6 @@ const styles = StyleSheet.create({
 });
 ```
 
-> **Nota**: Este exemplo usa um componente `Botao` customizado. Você pode substituir por `Button` do React Native ou criar seu próprio componente seguindo o padrão Material Design.
-
 </details>
 
 #### 6.2 Adicionar `.env` ao `.gitignore`
