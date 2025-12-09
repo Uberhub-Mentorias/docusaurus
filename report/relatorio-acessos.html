@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de Acessos - Portal Docusaurus</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 40px;
+    }
+    
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card h3 {
+      font-size: 0.9em;
+      opacity: 0.9;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .stat-card .value {
+      font-size: 2.5em;
+      font-weight: bold;
+    }
+    
+    .stat-card .description {
+      font-size: 0.85em;
+      opacity: 0.8;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    
+    .section {
+      margin-bottom: 40px;
+    }
+    
+    .section h2 {
+      color: #667eea;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
+    }
+    
+    .section-description {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+      padding: 12px;
+      background: #f5f5f5;
+      border-left: 4px solid #667eea;
+      border-radius: 4px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    th {
+      background: #667eea;
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+    
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    tr:hover {
+      background: #f5f5f5;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+    
+    .badge-primary {
+      background: #667eea;
+      color: white;
+    }
+    
+    .badge-success {
+      background: #10b981;
+      color: white;
+    }
+    
+    .badge-info {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .time-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .time-stat-card {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+    }
+    
+    .time-stat-card h3 {
+      color: #667eea;
+      margin-bottom: 8px;
+      font-size: 1.1em;
+    }
+    
+    .time-stat-card .value {
+      font-size: 2em;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    
+    .time-stat-card .description {
+      color: #666;
+      font-size: 0.9em;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #eee;
+      color: #666;
+    }
+    
+    .navigation-path {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-left: 4px solid #667eea;
+    }
+    
+    .navigation-path-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eee;
+    }
+    
+    .navigation-path-header h3 {
+      color: #667eea;
+      font-size: 1.1em;
+      margin: 0;
+    }
+    
+    .navigation-path-info {
+      display: flex;
+      gap: 15px;
+      font-size: 0.9em;
+      color: #666;
+    }
+    
+    .navigation-path-info span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .navigation-path-sequence {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .navigation-path-page {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-size: 0.9em;
+      font-weight: 500;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .navigation-path-arrow {
+      color: #667eea;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    
+    .navigation-path-empty {
+      color: #999;
+      font-style: italic;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .events-section {
+      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      border-left: 4px solid #667eea;
+    }
+    
+    .events-section h2 {
+      color: #667eea;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+    
+    .events-intro {
+      color: #666;
+      margin-bottom: 25px;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+    
+    .event-type {
+      background: white;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-left: 3px solid #667eea;
+    }
+    
+    .event-type h3 {
+      color: #667eea;
+      margin-bottom: 8px;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .event-type-code {
+      background: #667eea;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+    
+    .event-type-description {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    
+    .event-type-details {
+      color: #777;
+      font-size: 0.9em;
+      font-style: italic;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Relatório de Acessos ao Portal</h1>
+    <p class="subtitle">Gerado em 07/12/2025, 02:02:26</p>
+    
+    <div class="events-section">
+      <h2>📋 Sobre Eventos</h2>
+      <div class="events-intro">
+        <p>
+          O sistema de rastreamento registra diferentes tipos de eventos que ocorrem durante a navegação dos usuários no portal. 
+          Cada evento representa uma ação específica realizada pelo visitante e contém informações como timestamp, página acessada, 
+          informações do navegador e endereço IP. Entender os tipos de eventos ajuda a interpretar melhor as estatísticas apresentadas neste relatório.
+        </p>
+      </div>
+      
+      <div class="event-type">
+        <h3>
+          <span class="event-type-code">page_view</span>
+          Visualização de Página
+        </h3>
+        <div class="event-type-description">
+          <strong>Quando ocorre:</strong> Registrado sempre que uma página do portal é carregada ou visualizada pelo usuário.
+        </div>
+        <div class="event-type-description">
+          <strong>O que representa:</strong> Este é o evento mais comum e indica que o usuário acessou uma página específica do portal. 
+          É registrado automaticamente quando a página é carregada, seja através de navegação direta, cliques em links internos, 
+          ou ao usar os botões de voltar/avançar do navegador.
+        </div>
+        <div class="event-type-details">
+          <strong>Dados incluídos:</strong> URL da página, título, caminho (pathname), referrer (página de origem), informações do navegador e IP.
+        </div>
+      </div>
+      
+      <div class="event-type">
+        <h3>
+          <span class="event-type-code">page_exit</span>
+          Saída de Página
+        </h3>
+        <div class="event-type-description">
+          <strong>Quando ocorre:</strong> Registrado quando o usuário sai de uma página, seja fechando a aba, navegando para outra página, 
+          ou fechando o navegador completamente.
+        </div>
+        <div class="event-type-description">
+          <strong>O que representa:</strong> Indica o término da visualização de uma página. Este evento é importante porque inclui 
+          o <strong>tempo de permanência na página</strong> (timeOnPage), medido em segundos desde o último page_view até a saída.
+        </div>
+        <div class="event-type-details">
+          <strong>Dados incluídos:</strong> Todas as informações do page_view, mais o campo <code>timeOnPage</code> (tempo em segundos).
+        </div>
+      </div>
+      
+      <div class="event-type">
+        <h3>
+          <span class="event-type-code">page_hidden</span>
+          Página Ocultada
+        </h3>
+        <div class="event-type-description">
+          <strong>Quando ocorre:</strong> Registrado quando a aba do navegador perde o foco, ou seja, quando o usuário muda para outra aba, 
+          minimiza a janela, ou o navegador fica em segundo plano.
+        </div>
+        <div class="event-type-description">
+          <strong>O que representa:</strong> Indica que o usuário ainda está com a página aberta, mas não está visualizando ativamente. 
+          Este evento também inclui o tempo de permanência até o momento em que a página foi ocultada.
+        </div>
+        <div class="event-type-details">
+          <strong>Dados incluídos:</strong> Todas as informações do page_view, mais o campo <code>timeOnPage</code> até o momento da ocultação.
+        </div>
+      </div>
+      
+      <div class="event-type">
+        <h3>
+          <span class="event-type-code">page_visible</span>
+          Página Visível
+        </h3>
+        <div class="event-type-description">
+          <strong>Quando ocorre:</strong> Registrado quando a aba do navegador volta a ter foco, ou seja, quando o usuário retorna para a aba, 
+          restaura a janela, ou o navegador volta ao primeiro plano.
+        </div>
+        <div class="event-type-description">
+          <strong>O que representa:</strong> Indica que o usuário voltou a visualizar a página após ter a ocultado. 
+          O sistema reinicia a contagem de tempo quando este evento ocorre, permitindo medir o engajamento real do usuário.
+        </div>
+        <div class="event-type-details">
+          <strong>Dados incluídos:</strong> Todas as informações padrão do evento, sem tempo de permanência (pois é um evento de retorno).
+        </div>
+      </div>
+      
+      <div class="event-type">
+        <h3>
+          <span class="event-type-code">internal_link_click</span>
+          Clique em Link Interno
+        </h3>
+        <div class="event-type-description">
+          <strong>Quando ocorre:</strong> Registrado quando o usuário clica em um link que aponta para outra página dentro do próprio portal Docusaurus.
+        </div>
+        <div class="event-type-description">
+          <strong>O que representa:</strong> Indica navegação interna no portal, mostrando como os usuários se movem entre as diferentes seções 
+          e páginas da documentação. Ajuda a entender os padrões de navegação e quais links são mais utilizados.
+        </div>
+        <div class="event-type-details">
+          <strong>Dados incluídos:</strong> Todas as informações padrão, mais o campo <code>internalPath</code> com o caminho da página de destino.
+        </div>
+      </div>
+      
+      <div class="event-type">
+        <h3>
+          <span class="event-type-code">external_link_click</span>
+          Clique em Link Externo
+        </h3>
+        <div class="event-type-description">
+          <strong>Quando ocorre:</strong> Registrado quando o usuário clica em um link que aponta para um site externo ao portal Docusaurus.
+        </div>
+        <div class="event-type-description">
+          <strong>O que representa:</strong> Indica que o usuário está saindo do portal para acessar conteúdo externo. 
+          Este evento é útil para entender quais recursos externos são mais acessados e podem indicar interesse em tópicos relacionados.
+        </div>
+        <div class="event-type-details">
+          <strong>Dados incluídos:</strong> Todas as informações padrão, mais o campo <code>externalUrl</code> com a URL completa do destino externo.
+        </div>
+      </div>
+      
+      <div class="events-intro" style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #eee;">
+        <p style="margin-bottom: 10px;"><strong>💡 Importante:</strong></p>
+        <ul style="color: #666; line-height: 1.8; padding-left: 20px;">
+          <li>Todos os eventos são registrados com um <strong>timestamp</strong> preciso (tanto do servidor quanto do cliente)</li>
+          <li>Cada evento está associado a uma <strong>sessão única</strong> (sessionId), permitindo rastrear a jornada completa de um usuário</li>
+          <li>Os eventos <code>page_exit</code> e <code>page_hidden</code> incluem o tempo de permanência, usado para calcular o tempo médio na página</li>
+          <li>Os eventos de clique em links ajudam a entender os padrões de navegação e interesse do usuário</li>
+          <li>O sistema evita registrar múltiplos <code>page_view</code> para a mesma página na mesma sessão, garantindo dados mais precisos</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Sessões Únicas</h3>
+        <div class="value">104</div>
+        <div class="description">
+          Número total de sessões de usuários únicas registradas. Cada sessão representa uma visita única ao portal, identificada por um ID de sessão único.
+        </div>
+      </div>
+      <div class="stat-card">
+        <h3>IPs Únicos</h3>
+        <div class="value">23</div>
+        <div class="description">
+          Número de endereços IP únicos que acessaram o portal. Cada IP representa um dispositivo ou rede diferente, ajudando a identificar visitantes distintos.
+        </div>
+      </div>
+      <div class="stat-card">
+        <h3>Tempo Médio na Página</h3>
+        <div class="value">81s</div>
+        <div class="description">
+          Tempo médio que os usuários permanecem em cada página antes de navegar para outra ou sair. Calculado a partir dos eventos de saída de página registrados.
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>⏱️ Acessos por Período</h2>
+      <div class="section-description">
+        Estatísticas de acessos nos últimos períodos de tempo. Esses dados ajudam a entender os padrões de uso do portal e identificar picos de atividade.
+      </div>
+      <div class="time-stats">
+        <div class="time-stat-card">
+          <h3>Última Hora</h3>
+          <div class="value">0</div>
+          <div class="description">
+            Total de eventos de acesso registrados na última hora. Inclui visualizações de página, saídas e outros eventos de interação.
+          </div>
+        </div>
+        <div class="time-stat-card">
+          <h3>Últimas 5 Horas</h3>
+          <div class="value">76</div>
+          <div class="description">
+            Total de eventos de acesso registrados nas últimas 5 horas. Fornece uma visão de curto prazo da atividade do portal.
+          </div>
+        </div>
+        <div class="time-stat-card">
+          <h3>Últimas 24 Horas</h3>
+          <div class="value">532</div>
+          <div class="description">
+            Total de eventos de acesso registrados nas últimas 24 horas. Oferece uma visão diária completa da atividade do portal.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>📄 Páginas Mais Acessadas</h2>
+      <div class="section-description">
+        Lista das páginas mais visitadas do portal, excluindo diretórios (pastas). Mostra apenas páginas de conteúdo real, ordenadas por número de visualizações. A coluna "Sessões Únicas" indica quantas sessões diferentes acessaram cada página.
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Página</th>
+            <th>Visualizações</th>
+            <th>Sessões Únicas</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td><code>/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH</code></td>
+              <td><span class="badge badge-primary">1259</span></td>
+              <td><span class="badge badge-success">10</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT</code></td>
+              <td><span class="badge badge-primary">450</span></td>
+              <td><span class="badge badge-success">3</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs/autenticacao/firebase-auth-flow</code></td>
+              <td><span class="badge badge-primary">345</span></td>
+              <td><span class="badge badge-success">11</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs/mapa-conhecimento</code></td>
+              <td><span class="badge badge-primary">170</span></td>
+              <td><span class="badge badge-success">16</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs-originais/intro</code></td>
+              <td><span class="badge badge-primary">98</span></td>
+              <td><span class="badge badge-success">18</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs/roteiro-estudos</code></td>
+              <td><span class="badge badge-primary">94</span></td>
+              <td><span class="badge badge-success">13</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs/autenticacao/aula-firebase-auth</code></td>
+              <td><span class="badge badge-primary">86</span></td>
+              <td><span class="badge badge-success">11</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs/backlog/epico-1-setup</code></td>
+              <td><span class="badge badge-primary">73</span></td>
+              <td><span class="badge badge-success">4</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs/autenticacao/sha1-android</code></td>
+              <td><span class="badge badge-primary">63</span></td>
+              <td><span class="badge badge-success">5</span></td>
+            </tr>
+          
+            <tr>
+              <td><code>/docusaurus/docs/guias-rapidos/inicio</code></td>
+              <td><span class="badge badge-primary">55</span></td>
+              <td><span class="badge badge-success">14</span></td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="section">
+      <h2>🔗 Top 10 Sessões</h2>
+      <div class="section-description">
+        As 10 sessões mais ativas do portal, ordenadas por número de eventos. Cada sessão representa uma visita de um usuário. A duração é calculada desde o primeiro até o último evento da sessão. A coluna "Páginas Visitadas" mostra quantas páginas diferentes foram acessadas durante a sessão.
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID da Sessão</th>
+            <th>Eventos</th>
+            <th>Páginas Visitadas</th>
+            <th>Duração</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+              <tr>
+                <td><code>session_1764989157949_3qo5g3xd...</code></td>
+                <td><span class="badge badge-primary">1577</span></td>
+                <td><span class="badge badge-success">24</span></td>
+                <td>77 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764876378064_cvw39aym...</code></td>
+                <td><span class="badge badge-primary">316</span></td>
+                <td><span class="badge badge-success">9</span></td>
+                <td>23 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764852507803_lw1usrhe...</code></td>
+                <td><span class="badge badge-primary">254</span></td>
+                <td><span class="badge badge-success">8</span></td>
+                <td>1439 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764888533407_fcff9o08...</code></td>
+                <td><span class="badge badge-primary">178</span></td>
+                <td><span class="badge badge-success">8</span></td>
+                <td>247 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764959592138_kswzt1ps...</code></td>
+                <td><span class="badge badge-primary">160</span></td>
+                <td><span class="badge badge-success">14</span></td>
+                <td>142 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764877965886_t9dre71l...</code></td>
+                <td><span class="badge badge-primary">144</span></td>
+                <td><span class="badge badge-success">5</span></td>
+                <td>69 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1765056486920_f1ama9zg...</code></td>
+                <td><span class="badge badge-primary">133</span></td>
+                <td><span class="badge badge-success">12</span></td>
+                <td>101 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764880178808_io3tn38p...</code></td>
+                <td><span class="badge badge-primary">121</span></td>
+                <td><span class="badge badge-success">3</span></td>
+                <td>12 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764849914800_snfj5vbq...</code></td>
+                <td><span class="badge badge-primary">121</span></td>
+                <td><span class="badge badge-success">4</span></td>
+                <td>54 min</td>
+              </tr>
+            
+              <tr>
+                <td><code>session_1764975625326_15og43bw...</code></td>
+                <td><span class="badge badge-primary">98</span></td>
+                <td><span class="badge badge-success">28</span></td>
+                <td>51 min</td>
+              </tr>
+            
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="section">
+      <h2>🗺️ Percursos de Navegação</h2>
+      <div class="section-description">
+        Esta seção mostra o percurso completo de navegação dos usuários dentro do portal. Cada percurso representa a sequência de páginas visitadas por uma sessão, mostrando como os usuários navegam pelo portal. Os percursos são ordenados pelo número de páginas visitadas, mostrando primeiro as sessões mais ativas. Esta análise ajuda a entender os padrões de navegação, identificar quais páginas são mais acessadas em sequência e descobrir possíveis pontos de saída ou áreas de maior interesse.
+      </div>
+      
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #1</h3>
+              <div class="navigation-path-info">
+                <span>📅 04/12/2025, 18:05</span>
+                <span>⏱️ 20 min</span>
+                <span>📄 49 páginas</span>
+                <span>🔢 72 eventos</span>
+                <span>🌐 IP: 177.191.116.4</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1764882343522_hbp7jwli0...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    1. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/microservicos">
+                    2. /docusaurus/docs/arquitetura/microservicos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/endpoints">
+                    3. /docusaurus/docs/arquitetura/endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    4. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    5. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    6. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    7. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/requisitos/especificacao">
+                    8. /docusaurus/docs/requisitos/especificacao
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    9. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT">
+                    10. /docusaurus/docs-originais/auth/BACKLOG_GITHUB_PRO...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/PADROES_CODIGO_GUIA_COMPLETO">
+                    11. /docusaurus/docs-originais/auth/PADROES_CODIGO_GUI...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT">
+                    12. /docusaurus/docs-originais/auth/BACKLOG_GITHUB_PRO...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_COMPLETO">
+                    13. /docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Endpoints">
+                    14. /docusaurus/docs-originais/projeto/Endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Especifica%C3%A7%C3%A3o%20de%20Requisitos%20-%20UberHub%20Mentorias">
+                    15. /docusaurus/docs-originais/projeto/Especifica%C3%A...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Arquitetura%20v2">
+                    16. /docusaurus/docs-originais/projeto/Arquitetura%20v...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Endpoints">
+                    17. /docusaurus/docs-originais/projeto/Endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Especifica%C3%A7%C3%A3o%20de%20Requisitos%20-%20UberHub%20Mentorias">
+                    18. /docusaurus/docs-originais/projeto/Especifica%C3%A...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/FLUXOS-JORNADAS-OPERACOES">
+                    19. /docusaurus/docs-originais/projeto/FLUXOS-JORNADAS...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Especifica%C3%A7%C3%A3o%20de%20Requisitos%20-%20UberHub%20Mentorias">
+                    20. /docusaurus/docs-originais/projeto/Especifica%C3%A...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    21. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW">
+                    22. /docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    23. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_CONFIGURACAO_COMPLETA">
+                    24. /docusaurus/docs-originais/auth/FIREBASE_CONFIGURA...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    25. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    26. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    27. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    28. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    29. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW">
+                    30. /docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    31. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    32. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs">
+                    33. /docusaurus/docs
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    34. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    35. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    36. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    37. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    38. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/sha1-android">
+                    39. /docusaurus/docs/autenticacao/sha1-android
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    40. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    41. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    42. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/sha1-android">
+                    43. /docusaurus/docs/autenticacao/sha1-android
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    44. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    45. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    46. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    47. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    48. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs">
+                    49. /docusaurus/docs
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #2</h3>
+              <div class="navigation-path-info">
+                <span>📅 05/12/2025, 23:45</span>
+                <span>⏱️ 77 min</span>
+                <span>📄 48 páginas</span>
+                <span>🔢 1577 eventos</span>
+                <span>🌐 IP: 177.191.112.78</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1764989157949_3qo5g3xdy...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/audiovisual/lista-videos">
+                    1. /docusaurus/docs/audiovisual/lista-videos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    2. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    3. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/github-project">
+                    4. /docusaurus/docs/backlog/github-project
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    5. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-2-core">
+                    6. /docusaurus/docs/backlog/epico-2-core
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    7. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    8. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    9. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    10. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/dependencias-temporais">
+                    11. /docusaurus/docs/arquitetura/dependencias-temporai...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    12. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/dependencias-temporais">
+                    13. /docusaurus/docs/arquitetura/dependencias-temporai...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    14. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    15. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/endpoints">
+                    16. /docusaurus/docs/arquitetura/endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    17. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    18. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    19. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Endpoints">
+                    20. /docusaurus/docs-originais/projeto/Endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Especifica%C3%A7%C3%A3o%20de%20Requisitos%20-%20UberHub%20Mentorias">
+                    21. /docusaurus/docs-originais/projeto/Especifica%C3%A...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/FLUXOS-JORNADAS-OPERACOES">
+                    22. /docusaurus/docs-originais/projeto/FLUXOS-JORNADAS...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/DEPENDENCIAS-TEMPORAIS-FLUXOS">
+                    23. /docusaurus/docs-originais/projeto/DEPENDENCIAS-TE...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    24. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/DEPENDENCIAS-TEMPORAIS-FLUXOS">
+                    25. /docusaurus/docs-originais/projeto/DEPENDENCIAS-TE...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    26. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Arquitetura%20v2">
+                    27. /docusaurus/docs-originais/projeto/Arquitetura%20v...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Especifica%C3%A7%C3%A3o%20de%20Requisitos%20-%20UberHub%20Mentorias">
+                    28. /docusaurus/docs-originais/projeto/Especifica%C3%A...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/FLUXOS-JORNADAS-OPERACOES">
+                    29. /docusaurus/docs-originais/projeto/FLUXOS-JORNADAS...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/DEPENDENCIAS-TEMPORAIS-FLUXOS">
+                    30. /docusaurus/docs-originais/projeto/DEPENDENCIAS-TE...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_COMPLETO">
+                    31. /docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT">
+                    32. /docusaurus/docs-originais/auth/BACKLOG_GITHUB_PRO...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/PADROES_CODIGO_GUIA_COMPLETO">
+                    33. /docusaurus/docs-originais/auth/PADROES_CODIGO_GUI...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/Plano%20-%20implementa%C3%A7%C3%A3o%20autentica%C3%A7%C3%A3o%20web%20e%20mobile">
+                    34. /docusaurus/docs-originais/auth/Plano%20-%20implem...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    35. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_CONFIGURACAO_COMPLETA">
+                    36. /docusaurus/docs-originais/auth/FIREBASE_CONFIGURA...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    37. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    38. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT">
+                    39. /docusaurus/docs-originais/auth/BACKLOG_GITHUB_PRO...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/github-project">
+                    40. /docusaurus/docs/backlog/github-project
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    41. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/github-project">
+                    42. /docusaurus/docs/backlog/github-project
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    43. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/github-project">
+                    44. /docusaurus/docs/backlog/github-project
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    45. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/github-project">
+                    46. /docusaurus/docs/backlog/github-project
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    47. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT">
+                    48. /docusaurus/docs-originais/auth/BACKLOG_GITHUB_PRO...
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #3</h3>
+              <div class="navigation-path-info">
+                <span>📅 05/12/2025, 20:00</span>
+                <span>⏱️ 51 min</span>
+                <span>📄 42 páginas</span>
+                <span>🔢 98 eventos</span>
+                <span>🌐 IP: 200.131.117.2</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1764975625326_15og43bwg...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    1. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/dependencias-temporais">
+                    2. /docusaurus/docs/arquitetura/dependencias-temporai...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/admin">
+                    3. /docusaurus/docs/guias-rapidos/admin
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/mentor">
+                    4. /docusaurus/docs/guias-rapidos/mentor
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/desenvolvedor">
+                    5. /docusaurus/docs/guias-rapidos/desenvolvedor
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/admin">
+                    6. /docusaurus/docs/guias-rapidos/admin
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/microservicos">
+                    7. /docusaurus/docs/arquitetura/microservicos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    8. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Arquitetura%20v2">
+                    9. /docusaurus/docs-originais/projeto/Arquitetura%20v...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/ci-cd-guia">
+                    10. /docusaurus/docs/devops/ci-cd-guia
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    11. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    12. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    13. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    14. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    15. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Especifica%C3%A7%C3%A3o%20de%20Requisitos%20-%20UberHub%20Mentorias">
+                    16. /docusaurus/docs-originais/projeto/Especifica%C3%A...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/DEPENDENCIAS-TEMPORAIS-FLUXOS">
+                    17. /docusaurus/docs-originais/projeto/DEPENDENCIAS-TE...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_COMPLETO">
+                    18. /docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    19. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/github-project">
+                    20. /docusaurus/docs/backlog/github-project
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/requisitos/especificacao">
+                    21. /docusaurus/docs/requisitos/especificacao
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    22. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/admin">
+                    23. /docusaurus/docs/guias-rapidos/admin
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/desenvolvedor">
+                    24. /docusaurus/docs/guias-rapidos/desenvolvedor
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    25. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    26. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    27. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/microservicos">
+                    28. /docusaurus/docs/arquitetura/microservicos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/endpoints">
+                    29. /docusaurus/docs/arquitetura/endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    30. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/dependencias-temporais">
+                    31. /docusaurus/docs/arquitetura/dependencias-temporai...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/ci-cd-guia">
+                    32. /docusaurus/docs/devops/ci-cd-guia
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    33. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    34. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    35. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/sha1-android">
+                    36. /docusaurus/docs/autenticacao/sha1-android
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/github-actions">
+                    37. /docusaurus/docs/devops/github-actions
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/dependabot">
+                    38. /docusaurus/docs/devops/dependabot
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/branch-protection">
+                    39. /docusaurus/docs/devops/branch-protection
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/padroes-codigo">
+                    40. /docusaurus/docs/devops/padroes-codigo
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/github-project">
+                    41. /docusaurus/docs/backlog/github-project
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    42. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #4</h3>
+              <div class="navigation-path-info">
+                <span>📅 06/12/2025, 18:28</span>
+                <span>⏱️ 101 min</span>
+                <span>📄 24 páginas</span>
+                <span>🔢 133 eventos</span>
+                <span>🌐 IP: 177.191.116.103</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1765056486920_f1ama9zgu...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    1. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    2. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    3. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    4. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    5. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    6. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    7. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    8. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    9. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    10. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    11. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    12. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    13. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    14. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Endpoints">
+                    15. /docusaurus/docs-originais/projeto/Endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    16. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/Plano%20-%20implementa%C3%A7%C3%A3o%20autentica%C3%A7%C3%A3o%20web%20e%20mobile">
+                    17. /docusaurus/docs-originais/auth/Plano%20-%20implem...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT">
+                    18. /docusaurus/docs-originais/auth/BACKLOG_GITHUB_PRO...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_COMPLETO">
+                    19. /docusaurus/docs-originais/auth/CI_CD_GITHUB_GUIA_...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/BACKLOG_GITHUB_PROJECT">
+                    20. /docusaurus/docs-originais/auth/BACKLOG_GITHUB_PRO...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/PADROES_CODIGO_GUIA_COMPLETO">
+                    21. /docusaurus/docs-originais/auth/PADROES_CODIGO_GUI...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/projeto/Arquitetura%20v2">
+                    22. /docusaurus/docs-originais/projeto/Arquitetura%20v...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/ci-cd-guia">
+                    23. /docusaurus/docs/devops/ci-cd-guia
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/devops/github-actions">
+                    24. /docusaurus/docs/devops/github-actions
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #5</h3>
+              <div class="navigation-path-info">
+                <span>📅 04/12/2025, 19:48</span>
+                <span>⏱️ 247 min</span>
+                <span>📄 24 páginas</span>
+                <span>🔢 178 eventos</span>
+                <span>🌐 IP: 200.131.117.2</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1764888533407_fcff9o08f...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    1. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    2. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    3. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    4. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    5. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW">
+                    6. /docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    7. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/Plano%20-%20implementa%C3%A7%C3%A3o%20autentica%C3%A7%C3%A3o%20web%20e%20mobile">
+                    8. /docusaurus/docs-originais/auth/Plano%20-%20implem...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    9. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    10. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    11. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    12. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    13. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    14. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    15. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    16. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    17. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    18. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    19. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    20. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    21. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    22. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    23. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    24. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #6</h3>
+              <div class="navigation-path-info">
+                <span>📅 05/12/2025, 15:33</span>
+                <span>⏱️ 142 min</span>
+                <span>📄 23 páginas</span>
+                <span>🔢 160 eventos</span>
+                <span>🌐 IP: 177.191.114.250</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1764959592138_kswzt1pss...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    1. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/endpoints">
+                    2. /docusaurus/docs/arquitetura/endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    3. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    4. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    5. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    6. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/sha1-android">
+                    7. /docusaurus/docs/autenticacao/sha1-android
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    8. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    9. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    10. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    11. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    12. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/microservicos">
+                    13. /docusaurus/docs/arquitetura/microservicos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/endpoints">
+                    14. /docusaurus/docs/arquitetura/endpoints
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    15. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    16. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/requisitos/especificacao">
+                    17. /docusaurus/docs/requisitos/especificacao
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/requisitos/casos-uso">
+                    18. /docusaurus/docs/requisitos/casos-uso
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/requisitos/regras-negocio">
+                    19. /docusaurus/docs/requisitos/regras-negocio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    20. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    21. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    22. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/endpoints">
+                    23. /docusaurus/docs/arquitetura/endpoints
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #7</h3>
+              <div class="navigation-path-info">
+                <span>📅 06/12/2025, 15:41</span>
+                <span>⏱️ 41 min</span>
+                <span>📄 17 páginas</span>
+                <span>🔢 33 eventos</span>
+                <span>🌐 IP: 177.191.116.103</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1765046462298_zyvqchgkx...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    1. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    2. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    3. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    4. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    5. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    6. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    7. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW">
+                    8. /docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_CONFIGURACAO_COMPLETA">
+                    9. /docusaurus/docs-originais/auth/FIREBASE_CONFIGURA...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/CONFIGURAR_SHA1_ANDROID">
+                    10. /docusaurus/docs-originais/auth/CONFIGURAR_SHA1_AN...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/Plano%20-%20implementa%C3%A7%C3%A3o%20autentica%C3%A7%C3%A3o%20web%20e%20mobile">
+                    11. /docusaurus/docs-originais/auth/Plano%20-%20implem...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW">
+                    12. /docusaurus/docs-originais/auth/FIREBASE_AUTH_FLOW
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH">
+                    13. /docusaurus/docs-originais/auth/AULA_FIREBASE_AUTH
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/auth/FIREBASE_CONFIGURACAO_COMPLETA">
+                    14. /docusaurus/docs-originais/auth/FIREBASE_CONFIGURA...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    15. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/mapa-conhecimento">
+                    16. /docusaurus/docs/mapa-conhecimento
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    17. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #8</h3>
+              <div class="navigation-path-info">
+                <span>📅 04/12/2025, 16:26</span>
+                <span>⏱️ 23 min</span>
+                <span>📄 16 páginas</span>
+                <span>🔢 316 eventos</span>
+                <span>🌐 IP: 177.191.116.4</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1764876378064_cvw39aymf...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/desenvolvedor">
+                    1. /docusaurus/docs/guias-rapidos/desenvolvedor
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/inicio">
+                    2. /docusaurus/docs/guias-rapidos/inicio
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/guias-rapidos/desenvolvedor">
+                    3. /docusaurus/docs/guias-rapidos/desenvolvedor
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    4. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    5. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/fluxos-jornadas">
+                    6. /docusaurus/docs/arquitetura/fluxos-jornadas
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    7. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    8. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    9. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    10. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    11. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    12. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs-originais/intro">
+                    13. /docusaurus/docs-originais/intro
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/audiovisual/lista-videos">
+                    14. /docusaurus/docs/audiovisual/lista-videos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/arquitetura/visao-geral">
+                    15. /docusaurus/docs/arquitetura/visao-geral
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/firebase-auth-flow">
+                    16. /docusaurus/docs/autenticacao/firebase-auth-flow
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #9</h3>
+              <div class="navigation-path-info">
+                <span>📅 06/12/2025, 14:49</span>
+                <span>⏱️ 1 min</span>
+                <span>📄 11 páginas</span>
+                <span>🔢 21 eventos</span>
+                <span>🌐 IP: 177.191.116.103</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1765043377331_fll5dq4jw...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug">
+                    1. /docusaurus/__docusaurus/debug
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/metadata">
+                    2. /docusaurus/__docusaurus/debug/metadata
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/registry">
+                    3. /docusaurus/__docusaurus/debug/registry
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/routes">
+                    4. /docusaurus/__docusaurus/debug/routes
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/content">
+                    5. /docusaurus/__docusaurus/debug/content
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/globalData">
+                    6. /docusaurus/__docusaurus/debug/globalData
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/content">
+                    7. /docusaurus/__docusaurus/debug/content
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/globalData">
+                    8. /docusaurus/__docusaurus/debug/globalData
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/content">
+                    9. /docusaurus/__docusaurus/debug/content
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/routes">
+                    10. /docusaurus/__docusaurus/debug/routes
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/__docusaurus/debug/registry">
+                    11. /docusaurus/__docusaurus/debug/registry
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+          <div class="navigation-path">
+            <div class="navigation-path-header">
+              <h3>Percurso #10</h3>
+              <div class="navigation-path-info">
+                <span>📅 06/12/2025, 14:32</span>
+                <span>⏱️ 8 min</span>
+                <span>📄 10 páginas</span>
+                <span>🔢 50 eventos</span>
+                <span>🌐 IP: 177.191.116.103</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong>ID da Sessão:</strong> <code style="font-size: 0.85em;">session_1765042377907_5w1ynttf7...</code>
+            </div>
+            
+              <div class="navigation-path-sequence">
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    1. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    2. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    3. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/backlog/epico-1-setup">
+                    4. /docusaurus/docs/backlog/epico-1-setup
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    5. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/sha1-android">
+                    6. /docusaurus/docs/autenticacao/sha1-android
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/configuracao-completa">
+                    7. /docusaurus/docs/autenticacao/configuracao-complet...
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/roteiro-estudos">
+                    8. /docusaurus/docs/roteiro-estudos
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/aula-firebase-auth">
+                    9. /docusaurus/docs/autenticacao/aula-firebase-auth
+                  </div>
+                  <span class="navigation-path-arrow">→</span>
+                
+                  <div class="navigation-path-page" title="/docusaurus/docs/autenticacao/sha1-android">
+                    10. /docusaurus/docs/autenticacao/sha1-android
+                  </div>
+                  
+                
+              </div>
+            
+          </div>
+        
+    </div>
+    
+    <div class="footer">
+      <p>Relatório gerado automaticamente pelo sistema de rastreamento do portal Docusaurus</p>
+    </div>
+  </div>
+</body>
+</html>
