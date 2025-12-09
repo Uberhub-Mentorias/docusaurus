@@ -1,4 +1,5 @@
 # Autenticação Dupla: Firebase + Backend Microserviços
+
 <a id="topo"></a>
 
 ---
@@ -18,6 +19,7 @@
 ---
 
 ## 1. Visão Geral do Sistema
+
 [⬆️](#topo)
 
 ### 1.1 O que é este Sistema?
@@ -61,6 +63,7 @@ Este documento descreve a implementação de um **sistema de autenticação em d
 ---
 
 ## 2. Fundamentos Teóricos
+
 [⬆️](#topo)
 
 ### 2.1 Autenticação vs Autorização
@@ -159,6 +162,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 ```
 
 **1. Header** (Cabeçalho):
+
 ```json
 {
   "alg": "HS256",  // Algoritmo de assinatura
@@ -167,6 +171,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 ```
 
 **2. Payload** (Carga útil):
+
 ```json
 {
   "sub": "user_id",
@@ -179,6 +184,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 ```
 
 **3. Signature** (Assinatura):
+
 ```text
 HMACSHA256(
   base64UrlEncode(header) + "." + base64UrlEncode(payload),
@@ -316,6 +322,7 @@ api.interceptors.response.use(
 ---
 
 ## 3. Arquitetura e Separação de Responsabilidades
+
 [⬆️](#topo)
 
 ### 3.1 Diagrama da Arquitetura
@@ -484,6 +491,7 @@ api.interceptors.response.use(
 ---
 
 ## 4. Fluxo Completo de Autenticação
+
 [⬆️](#topo)
 
 ### 4.1 Diagrama de Sequência
@@ -552,6 +560,7 @@ sequenceDiagram
 #### **Passo 1: Usuário Clica em "Entrar com Google"**
 
 **Frontend:**
+
 ```javascript
 const handleLogin = async () => {
   try {
@@ -575,6 +584,7 @@ const handleLogin = async () => {
 ```
 
 **O que acontece:**
+
 - Firebase Auth SDK abre popup do Google
 - Usuário vê tela de login/seleção de conta do Google
 - Usuário autoriza o aplicativo
@@ -586,6 +596,7 @@ const handleLogin = async () => {
 #### **Passo 2: Firebase Retorna ID Token**
 
 **Resposta do Firebase:**
+
 ```javascript
 {
   user: {
@@ -603,6 +614,7 @@ const handleLogin = async () => {
 ```
 
 **Conteúdo do ID Token (decodificado):**
+
 ```json
 {
   "iss": "https://securetoken.google.com/seu-projeto",
@@ -630,6 +642,7 @@ const handleLogin = async () => {
 #### **Passo 3: Frontend Envia ID Token para Backend**
 
 **Frontend:**
+
 ```javascript
 // Envia ID Token para backend
 const response = await axios.post('/api/v1/auth/login', {
@@ -640,6 +653,7 @@ const { accessToken, refreshToken, user } = response.data;
 ```
 
 **Requisição HTTP:**
+
 ```http
 POST /api/v1/auth/login HTTP/1.1
 Host: seu-backend.com
@@ -655,6 +669,7 @@ Content-Type: application/json
 #### **Passo 4: Backend Valida ID Token**
 
 **Backend (Node.js + Firebase Admin SDK):**
+
 ```javascript
 const admin = require('firebase-admin');
 
@@ -684,6 +699,7 @@ app.post('/auth/login', async (req, res) => {
 ```
 
 **O que o Firebase Admin SDK verifica:**
+
 - ✅ Assinatura do token (verifica que foi emitido pelo Firebase)
 - ✅ Expiração (valida que não expirou)
 - ✅ Audiência (verifica que é para seu projeto)
@@ -694,6 +710,7 @@ app.post('/auth/login', async (req, res) => {
 #### **Passo 5: Backend Cria/Atualiza Usuário**
 
 **Backend:**
+
 ```javascript
 // 3. Busca ou cria usuário no banco de dados
 let user = await User.findOne({ firebaseUid });
@@ -722,6 +739,7 @@ if (!user) {
 ```
 
 **Estrutura do usuário no MongoDB:**
+
 ```javascript
 {
   _id: ObjectId("..."),
@@ -745,6 +763,7 @@ if (!user) {
 #### **Passo 6: Backend Gera Tokens JWT**
 
 **Backend:**
+
 ```javascript
 const jwt = require('jsonwebtoken');
 
@@ -784,6 +803,7 @@ res.json({
 ```
 
 **Resposta HTTP:**
+
 ```json
 {
   "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
@@ -803,6 +823,7 @@ res.json({
 #### **Passo 7: Frontend Armazena Tokens**
 
 **Frontend:**
+
 ```javascript
 // Salva tokens no localStorage
 localStorage.setItem('token', accessToken);
@@ -818,6 +839,7 @@ navigate('/dashboard');
 ```
 
 **localStorage após login:**
+
 ```javascript
 {
   "token": "eyJhbGciOiJIUzI1NiI...",
@@ -831,6 +853,7 @@ navigate('/dashboard');
 #### **Passo 8: Frontend Usa Tokens em Requisições**
 
 **Request Interceptor (automático):**
+
 ```javascript
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
@@ -842,6 +865,7 @@ api.interceptors.request.use(config => {
 ```
 
 **Exemplo de requisição:**
+
 ```javascript
 // O código não precisa adicionar token manualmente!
 const response = await api.get('/api/users/me');
@@ -849,6 +873,7 @@ console.log(response.data);
 ```
 
 **Requisição HTTP enviada:**
+
 ```http
 GET /api/users/me HTTP/1.1
 Host: seu-backend.com
@@ -856,6 +881,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiI...
 ```
 
 **Backend valida o token:**
+
 ```javascript
 const authMiddleware = async (req, res, next) => {
   try {
@@ -902,6 +928,7 @@ useEffect(() => {
 ```
 
 **Vantagens:**
+
 - ✅ Totalmente automático
 - ✅ Não requer intervenção do usuário
 - ✅ Sincronizado com Firebase
@@ -912,6 +939,7 @@ useEffect(() => {
 #### **Cenário 2: Erro 401 → Renovação com Refresh Token**
 
 **Response Interceptor:**
+
 ```javascript
 api.interceptors.response.use(
   response => response,
@@ -950,6 +978,7 @@ api.interceptors.response.use(
 ```
 
 **Fluxo visual:**
+
 ```text
 Requisição → 401 Unauthorized
     │
@@ -969,6 +998,7 @@ Requisição → 401 Unauthorized
 #### **Cenário 3: Navegador Reaberto**
 
 **Problema:**
+
 - Usuário fechou o navegador
 - Tokens JWT expiraram enquanto navegador estava fechado
 - Ao reabrir, tokens não são mais válidos
@@ -1004,6 +1034,7 @@ onIdTokenChanged(auth, async (firebaseUser) => {
 ```
 
 **Timeline:**
+
 ```text
 t=0s    Usuário reabre navegador
 t=0.1s  Frontend restaura user do localStorage (para UI)
@@ -1047,6 +1078,7 @@ const handleLogout = async () => {
 ```
 
 **Por que fazer logout do Firebase também?**
+
 - Remove sessão do Firebase Auth
 - Previne renovação automática indesejada
 - Garante que `onIdTokenChanged` não dispare com usuário antigo
@@ -1055,6 +1087,7 @@ const handleLogout = async () => {
 ---
 
 ## 5. Implementação Frontend
+
 [⬆️](#topo)
 
 ### 5.1 Estrutura de Arquivos
@@ -1091,6 +1124,7 @@ frontend/
 ### 5.2 Configuração do Firebase
 
 **`config/firebase.js`:**
+
 ```javascript
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
@@ -1119,6 +1153,7 @@ googleProvider.setCustomParameters({
 ```
 
 **`.env`:**
+
 ```env
 VITE_FIREBASE_API_KEY=AIzaSyC...
 VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
@@ -1132,6 +1167,7 @@ VITE_API_BASE_URL=http://localhost:3000/api/v1
 ### 5.3 Serviço de API com Interceptors
 
 **`services/api.js`:**
+
 ```javascript
 import axios from 'axios';
 import { auth } from '../config/firebase';
@@ -1308,6 +1344,7 @@ export default api;
 ### 5.4 Context API para Autenticação
 
 **`context/AuthContext.jsx`:**
+
 ```javascript
 import { createContext, useContext, useEffect, useState } from 'react';
 import { onIdTokenChanged } from 'firebase/auth';
@@ -1419,6 +1456,7 @@ export const useAuth = () => {
 ### 5.5 Página de Login
 
 **`pages/Login.jsx`:**
+
 ```javascript
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -1514,6 +1552,7 @@ export default function Login() {
 ### 5.6 Rota Protegida
 
 **`components/ProtectedRoute.jsx`:**
+
 ```javascript
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -1542,6 +1581,7 @@ export default function ProtectedRoute({ children }) {
 ```
 
 **Uso no App:**
+
 ```javascript
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -1576,6 +1616,7 @@ export default App;
 ---
 
 ## 6. Implementação Backend
+
 [⬆️](#topo)
 
 ### 6.1 Estrutura de Arquivos
@@ -1612,6 +1653,7 @@ backend/
 ### 6.2 Configuração do Firebase Admin SDK
 
 **`config/firebase.js`:**
+
 ```javascript
 const admin = require('firebase-admin');
 
@@ -1631,6 +1673,7 @@ exports.auth = admin.auth();
 ```
 
 **`.env`:**
+
 ```env
 FIREBASE_CREDENTIALS_JSON={"type":"service_account","project_id":"...","private_key":"...","client_email":"..."}
 
@@ -1646,6 +1689,7 @@ NODE_ENV=development
 ### 6.3 Model de Usuário
 
 **`models/User.js`:**
+
 ```javascript
 const mongoose = require('mongoose');
 
@@ -1699,6 +1743,7 @@ module.exports = mongoose.model('User', userSchema);
 ### 6.4 Controller de Autenticação
 
 **`controllers/authController.js`:**
+
 ```javascript
 const jwt = require('jsonwebtoken');
 const { auth: firebaseAuth } = require('../config/firebase');
@@ -1889,6 +1934,7 @@ exports.logout = async (req, res) => {
 ### 6.5 Middleware de Autenticação
 
 **`middleware/auth.js`:**
+
 ```javascript
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
@@ -1965,6 +2011,7 @@ exports.authorize = (...allowedRoles) => {
 ### 6.6 Rotas
 
 **`routes/auth.js`:**
+
 ```javascript
 const express = require('express');
 const router = express.Router();
@@ -1983,6 +2030,7 @@ module.exports = router;
 ```
 
 **`routes/users.js`:**
+
 ```javascript
 const express = require('express');
 const router = express.Router();
@@ -2013,6 +2061,7 @@ module.exports = router;
 ```
 
 **`server.js`:**
+
 ```javascript
 const express = require('express');
 const cors = require('cors');
@@ -2053,6 +2102,7 @@ app.listen(PORT, () => {
 ---
 
 ## 7. Funcionalidades Avançadas
+
 [⬆️](#topo)
 
 ### 7.1 Tratamento Inteligente de Erros 401
@@ -2120,6 +2170,7 @@ if (error.response?.status === 401 && !originalRequest._retry) {
 ```
 
 **Garante:**
+
 - Cada requisição tenta renovar apenas uma vez
 - Evita loops infinitos de tentativas
 - Falha de forma controlada
@@ -2203,6 +2254,7 @@ t=2s     Tokens JWT salvos no localStorage
 ```
 
 **Vantagens:**
+
 - ✅ UI responde instantaneamente (nome/foto do user)
 - ✅ Previne requisições antes dos tokens estarem prontos
 - ✅ Renovação transparente para o usuário
@@ -2244,6 +2296,7 @@ O sistema mantém **3 fontes de estado** sincronizadas:
 #### Como a Sincronização Funciona
 
 **Cenário 1: Login**
+
 ```javascript
 Firebase Auth login
     │
@@ -2260,6 +2313,7 @@ Interceptors leem localStorage ◄─┘
 ```
 
 **Cenário 2: Navegador reaberto**
+
 ```javascript
 Firebase Auth restaura sessão
     │
@@ -2275,6 +2329,7 @@ Interceptors usam novos tokens ◄─┘
 ```
 
 **Cenário 3: Logout**
+
 ```javascript
 Firebase Auth logout
     │
@@ -2292,6 +2347,7 @@ Interceptors não encontram token ◄─┘
 #### Renovação Proativa (via `onIdTokenChanged`)
 
 **Como funciona:**
+
 ```javascript
 // Firebase renova ID Token automaticamente a cada ~1h
 // onIdTokenChanged detecta e renova JWT ANTES de expirar
@@ -2306,6 +2362,7 @@ onIdTokenChanged(auth, async (firebaseUser) => {
 ```
 
 **Vantagens:**
+
 - ✅ Tokens sempre válidos
 - ✅ Requisições nunca falham por expiração
 - ✅ Melhor experiência do usuário
@@ -2314,6 +2371,7 @@ onIdTokenChanged(auth, async (firebaseUser) => {
 #### Renovação Reativa (via Interceptor 401)
 
 **Como funciona:**
+
 ```javascript
 // Token já expirou → Requisição falha com 401
 // Interceptor detecta e tenta renovar
@@ -2331,6 +2389,7 @@ api.interceptors.response.use(
 ```
 
 **Vantagens:**
+
 - ✅ Backup quando renovação proativa falha
 - ✅ Funciona mesmo sem Firebase (com refreshToken)
 - ✅ Trata casos edge (navegador reaberto, etc.)
@@ -2382,6 +2441,7 @@ useEffect(() => {
 ```
 
 **Benefícios:**
+
 - ✅ Estado restaurado instantaneamente após hot reload
 - ✅ Desenvolvimento mais fluido
 - ✅ Menos relogins necessários
@@ -2390,6 +2450,7 @@ useEffect(() => {
 ---
 
 ## 8. Segurança e Boas Práticas
+
 [⬆️](#topo)
 
 ### 8.1 Princípios de Segurança
@@ -2558,6 +2619,7 @@ const enrollMFA = async (user, phoneNumber) => {
 **Recomendações de armazenamento por tipo de aplicação:**
 
 **Para Web Apps (React):**
+
 ```javascript
 // ❌ EVITAR: localStorage (vulnerável a XSS)
 localStorage.setItem('token', token);
@@ -2580,6 +2642,7 @@ const api = axios.create({
 ```
 
 **Para Mobile Apps (React Native):**
+
 ```javascript
 // ✅ RECOMENDADO: SecureStore / Keychain
 import * as SecureStore from 'expo-secure-store';
@@ -2617,6 +2680,7 @@ const refreshToken = jwt.sign(payload, secret, { expiresIn: '7d' });
 ```
 
 **Por quê?**
+
 - Se token for roubado, expira rapidamente
 - Limita janela de exploração
 - Refresh token pode ser revogado
@@ -2630,6 +2694,7 @@ const decodedToken = await firebaseAuth.verifyIdToken(idToken);
 ```
 
 **Por quê?**
+
 - Frontend pode ser manipulado
 - Tokens podem ser forjados no cliente
 - Backend é a fonte da verdade
@@ -2644,6 +2709,7 @@ if (process.env.NODE_ENV === 'production' && req.protocol !== 'https') {
 ```
 
 **Por quê?**
+
 - Tokens trafegam em headers HTTP
 - HTTP é texto plano (inseguro)
 - HTTPS criptografa toda comunicação
@@ -2659,6 +2725,7 @@ const secret = "meu_secret_123";
 ```
 
 **Por quê?**
+
 - Secrets no código são visíveis no GitHub
 - Dificulta rotação de secrets
 - Expõe aplicação a ataques
@@ -2675,6 +2742,7 @@ if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
 ```
 
 **Por quê?**
+
 - Previne injection attacks
 - Garante integridade dos dados
 - Protege banco de dados
@@ -2694,6 +2762,7 @@ app.post('/auth/login', loginLimiter, authController.login);
 ```
 
 **Por quê?**
+
 - Previne brute force
 - Protege contra DDoS
 - Reduz abuso da API
@@ -2712,6 +2781,7 @@ app.post('/auth/login', loginLimiter, authController.login);
 | **Mobile** | Funciona bem | Pode ter limitações |
 
 **Recomendação para este projeto:**
+
 - ✅ Use **localStorage** para access token (apps SPA/mobile)
 - ✅ Considere **httpOnly cookies** para refresh token (web)
 - ✅ Sempre use **HTTPS**
@@ -2776,12 +2846,14 @@ console.error(`Failed login: ${email} - ${error.message}`);
 #### 🔒 XSS (Cross-Site Scripting)
 
 **Problema:**
+
 ```javascript
 // ❌ VULNERÁVEL
 <div dangerouslySetInnerHTML={{__html: user.name}} />
 ```
 
 **Solução:**
+
 ```javascript
 // ✅ SEGURO
 <div>{user.name}</div>  // React escapa automaticamente
@@ -2790,12 +2862,14 @@ console.error(`Failed login: ${email} - ${error.message}`);
 #### 🔒 SQL/NoSQL Injection
 
 **Problema:**
+
 ```javascript
 // ❌ VULNERÁVEL
 User.find({ email: req.body.email });  // Se email for um objeto malicioso
 ```
 
 **Solução:**
+
 ```javascript
 // ✅ SEGURO
 User.find({ email: String(req.body.email) });  // Força string
@@ -2805,11 +2879,13 @@ User.find({ email: String(req.body.email) });  // Força string
 #### 🔒 JWT Attacks
 
 **Problemas comuns:**
+
 - Algoritmo None attack
 - Weak secrets
 - Token sem expiração
 
 **Soluções:**
+
 ```javascript
 // ✅ Usa algoritmo forte
 jwt.sign(payload, secret, { algorithm: 'HS256' });
@@ -2827,6 +2903,7 @@ jwt.verify(token, secret, { algorithms: ['HS256'] });
 ---
 
 ## 9. Configuração e Deploy
+
 [⬆️](#topo)
 
 ### 9.1 Obtendo Credenciais do Firebase
@@ -2850,7 +2927,7 @@ jwt.verify(token, secret, { algorithms: ['HS256'] });
 
 1. Clique no ícone de engrenagem → **Configurações do projeto**
 2. Role até **Seus aplicativos**
-3. Clique no ícone **</>** (Web)
+3. Clique no ícone **`</>`** (Web)
 4. Registre o app com um nome
 5. Copie as credenciais:
 
@@ -2884,6 +2961,7 @@ VITE_FIREBASE_APP_ID=1:123456789:web:abc123
 4. Um arquivo JSON será baixado
 
 **Conteúdo do arquivo:**
+
 ```json
 {
   "type": "service_account",
@@ -2933,6 +3011,7 @@ vercel
 ```
 
 **Variáveis de ambiente necessárias:**
+
 ```
 VITE_FIREBASE_API_KEY
 VITE_FIREBASE_AUTH_DOMAIN
@@ -3029,6 +3108,7 @@ MONGODB_URI=mongodb+srv://usuario:senha@cluster.mongodb.net/nome-banco?retryWrit
 ### 9.6 Checklist Final de Deploy
 
 **Frontend:**
+
 - [ ] Build de produção funciona (`npm run build`)
 - [ ] Variáveis de ambiente configuradas
 - [ ] API_BASE_URL aponta para backend em produção
@@ -3036,6 +3116,7 @@ MONGODB_URI=mongodb+srv://usuario:senha@cluster.mongodb.net/nome-banco?retryWrit
 - [ ] HTTPS funcionando
 
 **Backend:**
+
 - [ ] Todas variáveis de ambiente configuradas
 - [ ] MONGODB_URI configurado (MongoDB Atlas)
 - [ ] FIREBASE_CREDENTIALS_JSON configurado
@@ -3046,18 +3127,21 @@ MONGODB_URI=mongodb+srv://usuario:senha@cluster.mongodb.net/nome-banco?retryWrit
 - [ ] Rate limiting implementado
 
 **Firebase:**
+
 - [ ] Authentication habilitado
 - [ ] Google provider configurado
 - [ ] Domínios autorizados incluem frontend em produção
 - [ ] Service Account criado e chave baixada
 
 **Banco de Dados:**
+
 - [ ] MongoDB Atlas cluster criado
 - [ ] Usuário do banco criado
 - [ ] IP do backend adicionado ao Network Access
 - [ ] Connection string funcionando
 
 **Segurança:**
+
 - [ ] HTTPS em frontend e backend
 - [ ] Secrets não commitados no GitHub
 - [ ] `.env` no `.gitignore`
@@ -3079,6 +3163,7 @@ Este sistema implementa autenticação moderna com:
 ### Próximos Passos
 
 **Para aprofundar:**
+
 1. Implemente revogação de tokens (blacklist)
 2. Adicione autenticação multifator (MFA)
 3. Implemente auditoria de acessos
@@ -3086,6 +3171,7 @@ Este sistema implementa autenticação moderna com:
 5. Adicione testes automatizados
 
 **Para expandir:**
+
 1. Adicione outros provedores OAuth (Facebook, GitHub)
 2. Implemente sistema de permissões granular
 3. Adicione API de recuperação de senha
@@ -3170,4 +3256,3 @@ Este sistema implementa autenticação moderna com:
 **Versão:** 2.0
 **Autor:** Documentação Técnica - Sistema de Autenticação Dupla
 **Status:** ✅ Pronto para produção
-
