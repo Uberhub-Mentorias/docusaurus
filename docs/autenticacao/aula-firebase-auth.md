@@ -713,17 +713,25 @@ Certifique-se de que `/.gitignore` inclui:
 .env.*.local
 ```
 
-### 7. Configurar SHA1 no Android
+### 7. Criar Development Build
+
+```bash
+npx expo prebuild
+```
+
+Um **Development Build** é uma versão do seu aplicativo React Native compilada especificamente para testes e desenvolvimento, incluindo todas as dependências nativas (como Firebase, notificações, módulos específicos do dispositivo, etc.).
+
+Com o Expo Go, você só pode usar módulos que já vêm pré-compilados no app do Expo. Já com o Development Build, seu app é compilado com todas as configurações, permissões e bibliotecas nativas que você adicionou, permitindo testar funcionalidades nativas que não estão disponíveis no Expo Go.
+
+### 8. Configurar SHA1 no Android
 
 > Siga as instruções do [Configurar SHA1 no Android](/docs/autenticacao/sha1-android)
 
-### 8.Executar o projeto Android
+### 9.Executar o projeto Android
 
 ```bash
 npx expo run:android
 ```
-
-#### 7.1 O que este comando faz?
 
 O comando `npx expo run:android` é usado para criar e executar um **Development Build** do seu aplicativo React Native no Android. Este é um processo diferente do Expo Go tradicional e é necessário quando você usa bibliotecas nativas (como `@react-native-firebase/auth`).
 
