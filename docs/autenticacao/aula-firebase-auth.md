@@ -593,12 +593,6 @@ O comando `npx expo run:android` é usado para criar e executar um **Development
 - [ ] Configurar variáveis de ambiente
 - [ ] Instalar dependências
 
-### ✅ Web
-
-- [ ] Configurar Firebase Client SDK
-- [ ] Criar serviço de API com interceptors
-- [ ] Criar página de Login
-
 ### ✅ Mobile
 
 - [ ] Configurar `google-services.json`
