@@ -9,187 +9,9 @@ sidebar_position: 2
 
 ---
 
-## Implementação React Web
-
-### 1.Instalação de Dependências
-
-```bash
-# No diretório do projeto React
-npm install firebase axios react-router-dom
-
-```
-
-### 2. Configuração do Firebase
-
-#### Obter Credenciais do Firebase
-
-1. Acesse [Firebase Console](https://console.firebase.google.com/)
-2. Crie um projeto ou selecione existente
-3. Vá em **Authentication** → **Sign-in method**
-4. Habilite **Google** como provedor
-5. Vá em **Project Settings** → **General**
-6. Copie as credenciais do app web
-
-#### Criar Arquivo `.env`
-
-Crie `.env` na raiz do projeto:
-
-```env
-VITE_FIREBASE_API_KEY=sua-api-key
-VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=seu-projeto-id
-VITE_FIREBASE_STORAGE_BUCKET=seu-projeto.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=seu-sender-id
-VITE_FIREBASE_APP_ID=seu-app-id
-```
-
-#### Criar Arquivo de Configuração
-
-Crie `src/config/firebase.js`:
-
-<details>
-<summary>📄 Ver código completo: firebase.js</summary>
-
-```javascript
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-
-// Configuração do Firebase
-const firebaseConfig = {
- apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
- authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
- projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
- storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
- messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
- appId: import.meta.env.VITE_FIREBASE_APP_ID,
-};
-
-// Inicializa Firebase
-const app = initializeApp(firebaseConfig);
-
-// Inicializa Auth
-export const auth = getAuth(app);
-
-// Configura Google Provider
-export const googleProvider = new GoogleAuthProvider();
-googleProvider.setCustomParameters({
- prompt: "select_account", // Força seleção de conta
-});
-```
-
-</details>
-
-### 3. Página principal - App.js
-
-Atualize `src/App.js`:
-
-<details>
-<summary>📄 Ver código completo: App.js</summary>
-
-```javascript
-import "./App.css";
-import { useEffect, useState } from "react";
-import { onIdTokenChanged, signInWithPopup, signOut } from "firebase/auth";
-import { auth, googleProvider } from "./config/firebase";
-
-function App() {
- const [user, setUser] = useState(null);
-
- useEffect(() => {
-  const unsubscribe = onIdTokenChanged(auth, async firebaseUser => {
-   if (firebaseUser) {
-    setUser(firebaseUser);
-   } else {
-    setUser(null);
-   }
-  });
-  return () => unsubscribe();
- }, []);
-
- const isAuthenticated = !!user;
-
- const handleGoogleSignIn = async () => {
-  try {
-   const result = await signInWithPopup(auth, googleProvider);
-   console.log(result);
-  } catch (error) {
-   console.error("Erro:", error);
-  }
- };
-
- const handleLogout = async () => {
-  try {
-   await signOut(auth);
-  } catch (error) {
-   console.error("Erro:", error);
-  }
- };
-
- return (
-  <div>
-   <h1>Uberhub Mentorias</h1>
-   {isAuthenticated ? (
-    <div>
-     <h1>Usuário autenticado</h1>
-     <button onClick={handleLogout}>Sair</button>
-    </div>
-   ) : (
-    <div>
-     <h1>Usuário não autenticado</h1>
-     <button onClick={handleGoogleSignIn}>Entrar com Google</button>
-    </div>
-   )}
-  </div>
- );
-}
-
-export default App;
-```
-
-</details>
-
-### 4. Testar Implementação
-
-1. **Inicie o servidor de desenvolvimento**:
-
-   ```bash
-   npm run dev
-   ```
-
-2. **Teste o fluxo**:
-
-   - Acesse `/login`
-   - Clique em "Entrar com Google"
-   - Selecione uma conta
-   - Deve exibir 'Usuário autenticado'
-
-3. **Teste restauração de sessão**:
-   - Faça login
-   - Feche o navegador
-   - Reabra o navegador
-   - Deve continuar autenticado
-
-4. **Teste logout**:
-   - Clique em 'Sair'
-   - Deve exibir 'Usuário não autenticado'
-  
----
-
 ## Implementação React Native
 
-### 1. Diferenças entre Web e Mobile
-
-| Aspecto         | Web               | Mobile                                                   |
-| --------------- | ----------------- | -------------------------------------------------------- |
-| **Storage**     | `localStorage`    | `AsyncStorage`                                           |
-| **Popup**       | `signInWithPopup` | `@react-native-google-signin/google-signin` (SDK nativo) |
-| **Navegação**   | React Router      | React Navigation (opcional)                              |
-| **HTTP Client** | Axios             | Axios (opcional, para backend)                           |
-| **Auth Init**   | `getAuth()`       | `initializeAuth()` com persistência                      |
-
-> **Nota**: A implementação atual usa `@react-native-google-signin/google-signin` diretamente, que é mais robusta e nativa do que `signInWithRedirect`. Isso oferece melhor experiência do usuário e funciona tanto em desenvolvimento quanto em produção.
-
-### 2. Instalação de Dependências
+### 1. Instalação de Dependências
 
 > Após instalar as dependências, execute o comando: `npx expo-doctor` para verificar se todas as dependências estão instaladas corretamente.
 
@@ -219,7 +41,7 @@ npm install react-native-safe-area-context
 
 ```
 
-### 3. Configuração do Firebase
+### 2. Configuração do Firebase
 
 > **Nota**: Para configuração detalhada do Firebase no React Native, consulte o [Codelab: Autenticação Firebase - email e senha](https://angoti.github.io/expo-firebase-login/#1)
 >
@@ -231,7 +53,7 @@ Após criar o projeto no Firebase Console, faça o download do arquivo `google-s
 <!-- como refere ciar a imagem em /static/img -->
 ![Arquivo google-services.json na raiz do projeto](/img/google-services.json.png)
 
-### 4. Configurar Babel e app.json
+### 3. Configurar Babel e app.json
 
 Crie ou atualize `/app.json`:
 
@@ -320,7 +142,7 @@ module.exports = function babelConfig(api) {
 };
 ```
 
-### 5. Criar arquivo `.env`
+### 4. Criar arquivo `.env`
 
 Crie `/.env`:
 
@@ -340,7 +162,7 @@ Você encontra os valores das variáveis de ambiente no arquivo `google-services
 
 ![Apps da Web no Firebase Console](/img/firebase_config.png)
 
-### 6. Criar arquivo de configuração do Firebase
+### 5. Criar arquivo de configuração do Firebase
 
 Crie `/src/config/firebase.js`:
 
@@ -713,7 +535,7 @@ Certifique-se de que `/.gitignore` inclui:
 .env.*.local
 ```
 
-### 7. Criar Development Build
+### 6. Criar Development Build
 
 ```bash
 npx expo prebuild
@@ -723,11 +545,11 @@ Um **Development Build** é uma versão do seu aplicativo React Native compilada
 
 Com o Expo Go, você só pode usar módulos que já vêm pré-compilados no app do Expo. Já com o Development Build, seu app é compilado com todas as configurações, permissões e bibliotecas nativas que você adicionou, permitindo testar funcionalidades nativas que não estão disponíveis no Expo Go.
 
-### 8. Configurar SHA1 no Android
+### 7. Configurar SHA1 no Android
 
 > Siga as instruções do [Configurar SHA1 no Android](/docs/autenticacao/sha1-android)
 
-### 9.Executar o projeto Android
+### 8.Executar o projeto Android
 
 ```bash
 npx expo run:android
